@@ -1,13 +1,17 @@
 package fh.kl.wamomu;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,6 +29,8 @@ public class NavigationDrawer extends Activity {
     private DrawerLayout drawerLayout;
     private ListView drawerListView;
     private ActionBarDrawerToggle actionBarDrawerToggle;
+    final CharSequence[] items = {"Mahlzeit", "Messung"};
+
 
     Fragment changeFragment = null;
 
@@ -71,7 +77,10 @@ public class NavigationDrawer extends Activity {
         drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 
         drawerListView.setOnItemClickListener(new DrawerItemClickListener());
+
     }
+
+
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -95,7 +104,18 @@ public class NavigationDrawer extends Activity {
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-        return super.onOptionsItemSelected(item);
+        //return super.onOptionsItemSelected(item);
+
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.action_add:
+                add();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
@@ -119,4 +139,31 @@ public class NavigationDrawer extends Activity {
                 ft.commit();
         }
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_activity_actions, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    private void add()
+    {
+        System.out.println("add");
+        android.app.AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Hinzufügen").setItems(items,new DialogInterface.OnClickListener(){
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(NavigationDrawer.this,
+                        "Selected", Toast.LENGTH_LONG).show();
+            }
+
+        });
+
+        builder.show();
+
+
+    }
+
 }
