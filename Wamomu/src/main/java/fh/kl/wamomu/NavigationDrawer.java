@@ -81,7 +81,6 @@ public class NavigationDrawer extends Activity {
     }
 
 
-
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -126,19 +125,24 @@ public class NavigationDrawer extends Activity {
 
             drawerLayout.closeDrawer(drawerListView);
 
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-            if(position == 0){
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            if (position == 0) {
                 changeFragment = new UebersichtFragment();
-            }else if(position == 1){
+            } else if (position == 1) {
                 changeFragment = new MeasurementFragment();
-            }else if(position == 2){
+            } else if (position == 2) {
                 changeFragment = new MealsFragment();
+            } else if (position == 3) {
+                changeFragment = new SettingsFragment();
+            } else if (position == 4) {
+                changeFragment = new StatistikFragment();
             }
-                ft.replace(R.id.content_frame, changeFragment);
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                ft.commit();
+            ft.replace(R.id.content_frame, changeFragment);
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            ft.commit();
         }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
@@ -147,16 +151,25 @@ public class NavigationDrawer extends Activity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    private void add()
-    {
+    private void add() {
         System.out.println("add");
         android.app.AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Hinzufügen").setItems(items,new DialogInterface.OnClickListener(){
+        builder.setTitle("Hinzufügen").setItems(items, new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(NavigationDrawer.this,
-                        "Selected", Toast.LENGTH_LONG).show();
+                        "Selected + " + which, Toast.LENGTH_LONG).show();
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                if (which == 0) {
+                    changeFragment = new MealsFragment();
+                } else if (which == 1) {
+                    changeFragment = new MeasurementFragment();
+                }
+
+                ft.replace(R.id.content_frame, changeFragment);
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                ft.commit();
             }
 
         });
