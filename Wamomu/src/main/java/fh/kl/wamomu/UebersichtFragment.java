@@ -4,24 +4,31 @@ package fh.kl.wamomu;
  * Created by Thundernator on 04.11.13.
  */
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class UebersichtFragment extends Fragment {
 
+    private ListView overview_listview;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_rssitem_detail,
+        View view = inflater.inflate(R.layout.overview,
                 container, false);
-        return view;
-    }
+        String[] art =      new String[]{"Frühstück" , "Messung" , "Mittagessen" , "Messung" , "Abendessen" , "Messung"};
+        String[] gericht =  new String[]{"Nutellabrot" , "32 mg" , "Gulasch" , "50 mg" , "Salamibrot" , "30 mg"};
 
-    public void setText(String item) {
-        TextView view = (TextView) getView().findViewById(R.id.detailsText);
-        view.setText(item);
+        overview_listview = (ListView) view.findViewById(R.id.overview_listView);
+        Context context = getActivity();
+        OverviewArrayAdapter adapter = new OverviewArrayAdapter(context ,art,gericht);
+        overview_listview.setAdapter(adapter);
+
+        return view;
     }
 }
