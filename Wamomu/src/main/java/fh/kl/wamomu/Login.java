@@ -23,7 +23,7 @@ public class Login extends Activity {
         b_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Login.this,DrawerTest.class);
+                Intent i = new Intent(Login.this,DrawerTest2.class);
                 startActivity(i);
             }
         });

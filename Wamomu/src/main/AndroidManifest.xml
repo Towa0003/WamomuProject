@@ -24,21 +24,13 @@
         </activity>
 
         <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_messung"></activity>
-
-        <activity
             android:name=".Register"
             android:label="Register"></activity>
 
-        <activity
-            android:name=".Overview"
-            android:label="Overview"></activity>
-
 
         <activity
-            android:name=".DrawerTest"
-            android:label="DrawerTest"></activity>
+            android:name=".DrawerTest2"
+            android:label="DrawerTest2"></activity>
 
     </application>
 
