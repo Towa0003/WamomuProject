@@ -26,15 +26,18 @@ public class NavigationDrawer extends Activity {
     private ListView drawerListView;
     private ActionBarDrawerToggle actionBarDrawerToggle;
 
-    Fragment test = null;
+    Fragment changeFragment = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.navigation_drawer);
 
-
-        test = new UebersichtFragment();
+        changeFragment = new UebersichtFragment();
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.replace(R.id.content_frame, changeFragment);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.commit();
 
 
         // get list items from strings.xml
@@ -104,7 +107,14 @@ public class NavigationDrawer extends Activity {
             drawerLayout.closeDrawer(drawerListView);
 
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.content_frame, test);
+            if(position == 0){
+                changeFragment = new UebersichtFragment();
+            }else if(position == 1){
+                changeFragment = new MeasurementFragment();
+            }else if(position == 2){
+                changeFragment = new MealsFragment();
+            }
+                ft.replace(R.id.content_frame, changeFragment);
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 ft.commit();
         }

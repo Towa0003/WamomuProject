@@ -18,7 +18,6 @@ public class MealsFragment extends Fragment {
                 container, false);
 
         return view;
-
     }
 }
 
