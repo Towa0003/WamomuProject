@@ -29,7 +29,7 @@
 
 
         <activity
-            android:name=".DrawerTest2"
+            android:name=".NavigationDrawer"
             android:label="DrawerTest2"></activity>
 
     </application>
