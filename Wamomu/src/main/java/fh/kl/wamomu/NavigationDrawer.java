@@ -19,7 +19,7 @@ import android.widget.Toast;
 /**
  * Created by Thundernator on 04.11.13.
  */
-public class DrawerTest2 extends Activity {
+public class NavigationDrawer extends Activity {
 
     private String[] drawerListViewItems;
     private DrawerLayout drawerLayout;
@@ -31,7 +31,7 @@ public class DrawerTest2 extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.navigation_drawer);
 
 
         test = new UebersichtFragment();
@@ -99,7 +99,7 @@ public class DrawerTest2 extends Activity {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Toast.makeText(DrawerTest2.this, ((TextView) view).getText(), Toast.LENGTH_LONG).show();
+            Toast.makeText(NavigationDrawer.this, ((TextView) view).getText(), Toast.LENGTH_LONG).show();
 
             drawerLayout.closeDrawer(drawerListView);
 

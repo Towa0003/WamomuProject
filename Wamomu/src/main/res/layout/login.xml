@@ -27,7 +27,8 @@
         android:layout_gravity="center_horizontal"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name" />
+        android:text=""
+        android:hint="Username"/>
 
     <TextView
         android:id="@+id/textView2"
