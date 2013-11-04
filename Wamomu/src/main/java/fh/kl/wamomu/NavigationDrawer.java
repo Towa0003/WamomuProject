@@ -1,13 +1,17 @@
 package fh.kl.wamomu;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,16 +29,21 @@ public class NavigationDrawer extends Activity {
     private DrawerLayout drawerLayout;
     private ListView drawerListView;
     private ActionBarDrawerToggle actionBarDrawerToggle;
+    final CharSequence[] items = {"Mahlzeit", "Messung"};
 
-    Fragment test = null;
+
+    Fragment changeFragment = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.navigation_drawer);
 
-
-        test = new UebersichtFragment();
+        changeFragment = new UebersichtFragment();
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.replace(R.id.content_frame, changeFragment);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.commit();
 
 
         // get list items from strings.xml
@@ -68,7 +77,9 @@ public class NavigationDrawer extends Activity {
         drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 
         drawerListView.setOnItemClickListener(new DrawerItemClickListener());
+
     }
+
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -92,7 +103,18 @@ public class NavigationDrawer extends Activity {
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-        return super.onOptionsItemSelected(item);
+        //return super.onOptionsItemSelected(item);
+
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.action_add:
+                add();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
@@ -103,10 +125,58 @@ public class NavigationDrawer extends Activity {
 
             drawerLayout.closeDrawer(drawerListView);
 
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.content_frame, test);
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                ft.commit();
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            if (position == 0) {
+                changeFragment = new UebersichtFragment();
+            } else if (position == 1) {
+                changeFragment = new MeasurementFragment();
+            } else if (position == 2) {
+                changeFragment = new MealsFragment();
+            } else if (position == 3) {
+                changeFragment = new SettingsFragment();
+            } else if (position == 4) {
+                changeFragment = new StatistikFragment();
+            }
+            ft.replace(R.id.content_frame, changeFragment);
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            ft.commit();
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_activity_actions, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    private void add() {
+        System.out.println("add");
+        android.app.AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Hinzufügen").setItems(items, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(NavigationDrawer.this,
+                        "Selected + " + which, Toast.LENGTH_LONG).show();
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                if (which == 0) {
+                    changeFragment = new MealsFragment();
+                } else if (which == 1) {
+                    changeFragment = new MeasurementFragment();
+                }
+
+                ft.replace(R.id.content_frame, changeFragment);
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                ft.commit();
+            }
+
+        });
+
+        builder.show();
+
+
+    }
+
 }

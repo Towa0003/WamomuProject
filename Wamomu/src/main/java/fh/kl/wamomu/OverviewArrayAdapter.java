@@ -34,4 +34,5 @@ public class OverviewArrayAdapter extends ArrayAdapter<String> {
 
         return rowView;
     }
+
 }

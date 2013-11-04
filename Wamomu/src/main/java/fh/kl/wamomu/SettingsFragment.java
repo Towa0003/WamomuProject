@@ -9,12 +9,12 @@ import android.view.ViewGroup;
 /**
  * Created by Thundernator on 04.11.13.
  */
-public class MealsFragment extends Fragment {
+public class SettingsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.meals,
+        View view = inflater.inflate(R.layout.settings,
                 container, false);
 
         return view;
