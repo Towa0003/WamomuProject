@@ -19,6 +19,8 @@ public class MeasurementFragment extends Fragment {
 
         return view;
 
+
+
     }
 }
 
