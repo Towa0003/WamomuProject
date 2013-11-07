@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Created by Max on 07.11.13.
@@ -44,6 +45,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, final int childPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
+
+
         tempChild = (ArrayList<String>) Childtem.get(groupPosition);
         TextView text = null;
         if (convertView == null) {
@@ -58,6 +61,20 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                         Toast.LENGTH_SHORT).show();
             }
         });
+        //setText actual time
+        Calendar c = Calendar.getInstance();
+        int mHour = c.get(Calendar.HOUR);
+        int mMinute = c.get(Calendar.MINUTE);
+        int mYear = c.get(Calendar.YEAR);
+        int mMonth = c.get(Calendar.MONTH);
+        int mDate = c.get(Calendar.DATE);
+
+
+        TextView textView = (TextView) convertView.findViewById(R.id.time);
+        textView .setText(mHour +":"+ mMinute);
+
+        TextView DateView = (TextView) convertView.findViewById(R.id.date);
+        DateView .setText(mDate  +"."+ mMonth + "." + mYear);
         return convertView;
     }
 

@@ -3,12 +3,17 @@ package fh.kl.wamomu;
 import android.app.ExpandableListActivity;
 import android.content.Context;
 import android.os.Bundle;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by Max on 07.11.13.
@@ -33,6 +38,8 @@ public class ExpList extends ExpandableListActivity implements
                         this);
         getExpandableListView().setAdapter(mNewAdapter);
         expandbleLis.setOnChildClickListener(this);
+
+      
     }
 
     public void setGroupData() {
