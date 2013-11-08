@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +22,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     public ArrayList<Object> Childtem = new ArrayList<Object>();
     public LayoutInflater minflater;
     public Activity activity;
+
 
     public ExpandableListAdapter(ArrayList<String> grList, ArrayList<Object> childItem) {
         groupItem = grList;
@@ -61,6 +63,15 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                         Toast.LENGTH_SHORT).show();
             }
         });
+        //Hinzufügen-Button
+        Button add = (Button) convertView.findViewById(R.id.add);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), "Clicked On Add",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
         //setText actual time
         Calendar c = Calendar.getInstance();
         int mHour = c.get(Calendar.HOUR);
@@ -75,6 +86,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
         TextView DateView = (TextView) convertView.findViewById(R.id.date);
         DateView .setText(mDate  +"."+ mMonth + "." + mYear);
+
+
         return convertView;
     }
 

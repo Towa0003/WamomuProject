@@ -2,10 +2,12 @@ package fh.kl.wamomu;
 
 import android.app.ExpandableListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +22,7 @@ import java.util.Date;
  */
 public class ExpList extends ExpandableListActivity implements
         ExpandableListView.OnChildClickListener {
+    private Button add;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +42,7 @@ public class ExpList extends ExpandableListActivity implements
         getExpandableListView().setAdapter(mNewAdapter);
         expandbleLis.setOnChildClickListener(this);
 
+
       
     }
 
@@ -57,40 +61,31 @@ public class ExpList extends ExpandableListActivity implements
          * Add Data For TecthNology
          */
         ArrayList<String> child = new ArrayList<String>();
-        child.add("Java");
-        child.add("Drupal");
-        child.add(".Net Framework");
-        child.add("PHP");
+        child.add("Frühstück");
         childItem.add(child);
 
         /**
          * Add Data For Mobile
          */
         child = new ArrayList<String>();
-        child.add("Android");
-        child.add("Window Mobile");
-        child.add("iPHone");
-        child.add("Blackberry");
+        child.add("Mittagessen");
         childItem.add(child);
         /**
          * Add Data For Manufacture
          */
         child = new ArrayList<String>();
-        child.add("HTC");
-        child.add("Apple");
-        child.add("Samsung");
-        child.add("Nokia");
+        child.add("Abendessen");
+
         childItem.add(child);
         /**
          * Add Data For Extras
          */
         child = new ArrayList<String>();
-        child.add("Contact Us");
-        child.add("About Us");
-        child.add("Location");
-        child.add("Root Cause");
+        child.add("Sonstiges");
         childItem.add(child);
     }
+
+
 
     @Override
     public boolean onChildClick(ExpandableListView parent, View v,
