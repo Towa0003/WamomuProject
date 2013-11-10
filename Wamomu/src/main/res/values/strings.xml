@@ -41,5 +41,5 @@
     <string name="activity_statistik_x_title">Datum</string>
     <string name="activity_statistik_y_title">Menge</string>
 
-    <string name="machine_name">Maschine %0$2d</string>
+    <string name="legend_name">Messpunkte</string>
 </resources>

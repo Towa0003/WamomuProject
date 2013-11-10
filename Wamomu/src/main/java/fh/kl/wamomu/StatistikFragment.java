@@ -21,6 +21,11 @@ import org.achartengine.model.XYSeries;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
 /**
  * Created by Thundernator on 04.11.13.
  */
@@ -30,28 +35,30 @@ public class StatistikFragment extends Fragment {
     private FrameLayout fl_chartContainer;
 
     private Button b_addValue;
-    private EditText et_valueX;
-    private EditText et_valueY;
-
-    private int valueX;
-    private int valueY;
+    public EditText et_valueY;
+    private double valueY;
 
 
     Resources res;
     TypedArray menge;
-    String name0;
-    XYSeries series0;
+    String legend;
+    XYSeries series;
 
-    /*
-    todo # Array-list erstellen - vordefinierte daten reinschreiben - neue daten hinzufügen zur Laufzeit
-    todo # xy Labels ändern
-    todo # Datum anpassen, bzw. Werte dem aktuellen datum hinzufügen
-    todo # Messpunkte wenns geht clickable machen
-    todo # Wenn man reinzoomt -> Tage; rauszoomen -> Wochen; weiter Rauszoomen -> Monate auf X-Achse
-    todo # Punkte Schwarz färben bzw. je nach Messwert gut -> Grün / schlecht -> Rot
-    */
+    /////// Arraylist, wird evtl ausgelagert ////////
+    static List<Double> datum = new ArrayList<Double>();
+    static List<Double> werte = new ArrayList<Double>();
 
-    @Override
+        /*
+        # Array-list erstellen - vordefinierte daten reinschreiben - neue daten hinzufügen zur Laufzeit CHECK
+        # Datum anpassen, bzw. Werte dem aktuellen datum hinzufügen    CHECK
+        todo # Werte werden nicht überschrieben, sondern hintendrangehängehängt und neu neu gezeichnet
+        todo # xy Labels ändern
+        todo # Messpunkte wenns geht clickable machen
+        todo # Wenn man reinzoomt -> Tage; rauszoomen -> Wochen; weiter Rauszoomen -> Monate auf X-Achse
+        todo # Punkte Schwarz färben bzw. je nach Messwert gut -> Grün / schlecht -> Rot
+        */
+
+        @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.statistik,
@@ -60,27 +67,43 @@ public class StatistikFragment extends Fragment {
         fl_chartContainer = (FrameLayout) view.findViewById(R.id.chartContainerLineChart_frameLayout);
         b_addValue = (Button) view.findViewById(R.id.addValue_button);
 
-        et_valueX = (EditText) view.findViewById(R.id.valueX_editText);
         et_valueY = (EditText) view.findViewById(R.id.valueY_editText);
 
-
-        res = getResources();
-        menge = res.obtainTypedArray(R.array.menge);
-        name0 = getString(R.string.machine_name, 0);
-        series0 = new XYSeries(name0);
+        legend = getString(R.string.legend_name, 0);
+        series = new XYSeries(legend);
 
 
         b_addValue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                add();
+              add();
             }
         });
+
+          ///////////////// Vordefinierte Were für Arraylist ///////
+            datum.add(0, 01.01);
+            datum.add(1, 02.01);
+            datum.add(2, 03.01);
+            datum.add(3, 04.01);
+            datum.add(4, 05.01);
+            datum.add(5, 06.01);
+            datum.add(6, 07.01);
+
+            werte.add(0, 1.0);
+            werte.add(1, 2.0);
+            werte.add(2, 2.0);
+            werte.add(3, 3.0);
+            werte.add(4, 4.0);
+            werte.add(5, 2.0);
+            werte.add(6, 0.0);
+
+            chart = ChartFactory.getLineChartView(getActivity(), createDataSet(), createRenderer());
+            fl_chartContainer.addView(chart);
         return view;
     }
 
 
-    @Override
+   /* @Override
     public void onResume()
     {
         super.onResume();
@@ -92,15 +115,23 @@ public class StatistikFragment extends Fragment {
         }
         else
         {
-            chart.repaint();
+           // chart.repaint();
         }
-    }
+    }*/
 
     // Hinzufügen von Werten
     private void add(){
-        valueX = Integer.parseInt(et_valueX.toString());
-        valueY = Integer.parseInt(et_valueY.toString());
+        valueY = Double.parseDouble(et_valueY.getText().toString());
+        System.out.println("VALUE Y = " + valueY + " ");
+        System.out.println("Größe Liste: " + datum.size());
 
+        werte.add(werte.size(), valueY);
+
+
+        SimpleDateFormat df = new SimpleDateFormat("dd.MM", Locale.GERMANY);
+        String tag = df.format(new java.util.Date());
+        datum.add(datum.size(), Double.parseDouble(tag));
+        System.out.println("TAG.MONAT= " + tag);
     }
 
     private XYMultipleSeriesRenderer createRenderer()
@@ -113,13 +144,13 @@ public class StatistikFragment extends Fragment {
         // renderer.setChartTitle(getText(R.string.activity_line_chart_charttitle).toString()); // Titel setzen
 
         // axis
-        renderer.setAxisTitleTextSize(16);
+        renderer.setAxisTitleTextSize(40);      // Schriftgröße Titel Achsen
         renderer.setLabelsColor(Color.BLACK);
-        renderer.setLabelsTextSize(20);
+        renderer.setLabelsTextSize(40);         // Schriftgröße an Achsen
         renderer.setXTitle(getText(R.string.activity_statistik_x_title).toString());
         renderer.setYTitle(getText(R.string.activity_statistik_y_title).toString());
         renderer.setXAxisMin(0);
-        renderer.setXAxisMax(15);
+        renderer.setXAxisMax(10);
         renderer.setYAxisMin(0);
         renderer.setYAxisMax(10);
         renderer.setYLabelsAlign(Paint.Align.RIGHT);
@@ -128,17 +159,19 @@ public class StatistikFragment extends Fragment {
         renderer.setPanEnabled(true, false);
         renderer.setZoomEnabled(true,false);
 
-        TypedArray dates = getResources().obtainTypedArray(R.array.dates);
-        for (int i = 0; i < dates.length(); i++)
+        // Daten an die Achse schreiben
+        for (int i = 0; i < datum.size(); i++)
         {
-            renderer.addXTextLabel(i, dates.getString(i));
+
+            renderer.addXTextLabel(i, datum.get(i).toString());
+
         }
         renderer.setXLabelsAngle(90);
 
 
 
         // legend
-        renderer.setLegendTextSize(15);
+        renderer.setLegendTextSize(30);
         renderer.setLegendHeight(100);
 
         // points
@@ -162,16 +195,17 @@ public class StatistikFragment extends Fragment {
     }
 
     // Daten ins Diagramm schreiben
-    private XYMultipleSeriesDataset createDataSet()
-    {XYMultipleSeriesDataset dataSet = new XYMultipleSeriesDataset();
+    private XYMultipleSeriesDataset createDataSet(){
 
-        for (int i = 0; i < menge.length(); i++)
+        XYMultipleSeriesDataset dataSet = new XYMultipleSeriesDataset();
+
+        for (int i = 0; i < werte.size(); i++)
         {
-            double x = i*2;                 // x-achse
-            double y = menge.getInt(i, -1); // y-achse
-            series0.add(x, y);
+            double x = i;                 // x-achse
+            double y = werte.get(i); // y-achse
+            series.add(x, y);
         }
-        dataSet.addSeries(series0);
+        dataSet.addSeries(series);
 
         return dataSet;
     }

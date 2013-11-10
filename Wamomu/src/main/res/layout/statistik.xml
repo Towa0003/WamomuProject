@@ -11,13 +11,12 @@
 
     <FrameLayout
         android:id="@+id/chartContainerLineChart_frameLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+        android:layout_width="350dp"
+        android:layout_height="450dp"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true">
 
     </FrameLayout>
-
     <Button
         android:id="@+id/addValue_button"
         android:text="Wert Hinzufügen"
@@ -27,19 +26,12 @@
         android:layout_alignParentRight="true" />
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="X-Achse"
-        android:id="@+id/valueX_editText"
-        android:layout_below="@+id/chartContainerLineChart_frameLayout"
-        android:layout_alignParentLeft="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Y-Achse"
         android:id="@+id/valueY_editText"
-        android:layout_below="@+id/chartContainerLineChart_frameLayout"
-        android:layout_toRightOf="@+id/valueX_editText" />
+        android:hint="Y-Achse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:layout_below="@+id/chartContainerLineChart_frameLayout" />
+
 
 </RelativeLayout>
