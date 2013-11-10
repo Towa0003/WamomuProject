@@ -31,6 +31,9 @@
         <activity
             android:name=".NavigationDrawer"
             android:label="DrawerTest2"></activity>
+        <activity
+            android:name=".ExpList"
+            android:label="DrawerTest2"></activity>
 
     </application>
 
