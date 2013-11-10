@@ -36,7 +36,7 @@ public class StatistikFragment extends Fragment {
     private int valueX;
     private int valueY;
 
-    XYMultipleSeriesDataset dataSet;
+
     Resources res;
     TypedArray menge;
     String name0;
@@ -63,7 +63,7 @@ public class StatistikFragment extends Fragment {
         et_valueX = (EditText) view.findViewById(R.id.valueX_editText);
         et_valueY = (EditText) view.findViewById(R.id.valueY_editText);
 
-        dataSet = new XYMultipleSeriesDataset();
+
         res = getResources();
         menge = res.obtainTypedArray(R.array.menge);
         name0 = getString(R.string.machine_name, 0);
@@ -163,7 +163,7 @@ public class StatistikFragment extends Fragment {
 
     // Daten ins Diagramm schreiben
     private XYMultipleSeriesDataset createDataSet()
-    {
+    {XYMultipleSeriesDataset dataSet = new XYMultipleSeriesDataset();
 
         for (int i = 0; i < menge.length(); i++)
         {
