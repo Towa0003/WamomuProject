@@ -36,4 +36,10 @@
     <string name="drawer_open">Open Drawer</string>
     <string name="drawer_close">Close Drawer</string>
 
+    <string name="activity_statistik_title">Statistikdiagramm</string>
+    <string name="activity_statistik_charttitle">Fehler pro Tag</string>
+    <string name="activity_statistik_x_title">Datum</string>
+    <string name="activity_statistik_y_title">Menge</string>
+
+    <string name="machine_name">Maschine %0$2d</string>
 </resources>

@@ -1,7 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".StatistikFragment" >
 
-</LinearLayout>
+
+
+    <FrameLayout
+        android:id="@+id/chartContainerLineChart_frameLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
+
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/addValue_button"
+        android:text="Wert Hinzufügen"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/chartContainerLineChart_frameLayout"
+        android:layout_alignParentRight="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="X-Achse"
+        android:id="@+id/valueX_editText"
+        android:layout_below="@+id/chartContainerLineChart_frameLayout"
+        android:layout_alignParentLeft="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Y-Achse"
+        android:id="@+id/valueY_editText"
+        android:layout_below="@+id/chartContainerLineChart_frameLayout"
+        android:layout_toRightOf="@+id/valueX_editText" />
+
+</RelativeLayout>

@@ -3,16 +3,14 @@ package fh.kl.wamomu;
 /**
  * Created by Thundernator on 04.11.13.
  */
+
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
 
 public class UebersichtFragment extends Fragment {
 
