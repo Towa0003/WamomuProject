@@ -11,8 +11,8 @@
 
     <FrameLayout
         android:id="@+id/chartContainerLineChart_frameLayout"
-        android:layout_width="350dp"
-        android:layout_height="450dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true">
 

@@ -145,6 +145,7 @@ public class StatistikFragment extends Fragment {
 
         // axis
         renderer.setAxisTitleTextSize(40);      // Schriftgröße Titel Achsen
+        renderer.setMargins(new int[]{ 50,50,50,50});   // Abstand
         renderer.setLabelsColor(Color.BLACK);
         renderer.setLabelsTextSize(40);         // Schriftgröße an Achsen
         renderer.setXTitle(getText(R.string.activity_statistik_x_title).toString());
@@ -162,9 +163,10 @@ public class StatistikFragment extends Fragment {
         // Daten an die Achse schreiben
         for (int i = 0; i < datum.size(); i++)
         {
-
             renderer.addXTextLabel(i, datum.get(i).toString());
-
+            renderer.addYTextLabel(i,String.valueOf(i));
+            renderer.setXLabels(0);
+            renderer.setYLabels(0);
         }
         renderer.setXLabelsAngle(90);
 
@@ -201,8 +203,8 @@ public class StatistikFragment extends Fragment {
 
         for (int i = 0; i < werte.size(); i++)
         {
-            double x = i;                 // x-achse
-            double y = werte.get(i); // y-achse
+            double x = i;                   // x-achse
+            double y = werte.get(i);        // y-achse
             series.add(x, y);
         }
         dataSet.addSeries(series);
