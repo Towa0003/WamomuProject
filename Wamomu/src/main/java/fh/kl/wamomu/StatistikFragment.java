@@ -38,13 +38,12 @@ public class StatistikFragment extends Fragment {
     public EditText et_valueY;
     private double valueY;
 
-
     Resources res;
     TypedArray menge;
     String legend;
     XYSeries series;
 
-    /////// Arraylist, wird evtl ausgelagert ////////
+    /////// Arraylist, wird später evtl ausgelagert ////////
     static List<Double> datum = new ArrayList<Double>();
     static List<Double> werte = new ArrayList<Double>();
 
@@ -99,11 +98,13 @@ public class StatistikFragment extends Fragment {
 
             chart = ChartFactory.getLineChartView(getActivity(), createDataSet(), createRenderer());
             fl_chartContainer.addView(chart);
+            System.out.println("ON CREATE VIEW");
+
         return view;
     }
 
 
-   /* @Override
+   @Override
     public void onResume()
     {
         super.onResume();
@@ -112,12 +113,22 @@ public class StatistikFragment extends Fragment {
         {
             chart = ChartFactory.getLineChartView(getActivity(), createDataSet(), createRenderer());
             fl_chartContainer.addView(chart);
+            System.out.println("ON RESUME IF");
         }
         else
         {
+            System.out.println("ON RESUME ELSE");
            // chart.repaint();
         }
-    }*/
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        System.out.println("ON PAUSE");
+        datum.clear();
+        werte.clear();
+    }
 
     // Hinzufügen von Werten
     private void add(){
@@ -164,10 +175,12 @@ public class StatistikFragment extends Fragment {
         for (int i = 0; i < datum.size(); i++)
         {
             renderer.addXTextLabel(i, datum.get(i).toString());
-            renderer.addYTextLabel(i,String.valueOf(i));
-            renderer.setXLabels(0);
-            renderer.setYLabels(0);
+            renderer.addYTextLabel(i, String.valueOf(i));
+
+           // renderer.setXLabels(0);
+           // renderer.setYLabels(0);
         }
+        renderer.setXLabelsColor(Color.BLUE);   //  Farbe X Labels
         renderer.setXLabelsAngle(90);
 
 
@@ -183,7 +196,7 @@ public class StatistikFragment extends Fragment {
         // data area
         renderer.setShowGrid(true);
         renderer.setGridColor(Color.DKGRAY);        // Farbe Rasterlinien
-        renderer.setMargins(new int[]{30,10,10,10});
+        renderer.setMargins(new int[]{30,50,50,50});
         renderer.setMarginsColor(Color.WHITE);      // Hintergrundfarbe
 
         XYSeriesRenderer xySeriesRenderer0 = new XYSeriesRenderer();
