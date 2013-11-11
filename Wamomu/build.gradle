@@ -23,6 +23,7 @@ android {
 }
 
 dependencies {
+    compile fileTree(dir: 'libs', include: '*.jar')
     compile files('libs/achartengine-1.0.0.jar')
     compile 'com.android.support:support-v4:+'
 }
