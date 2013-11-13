@@ -1,6 +1,5 @@
 package fh.kl.wamomu;
 
-import android.app.Dialog;
 import android.app.Fragment;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
@@ -9,14 +8,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.bluetooth.BluetoothAdapter;
 
-import org.w3c.dom.Text;
-
 import java.util.Set;
+
+import fh.kl.wamomu.dialogs.custom_dialog;
 
 /**
  * Created by Thundernator on 04.11.13.

@@ -169,9 +169,7 @@ public class NavigationDrawer extends Activity {
                 if (which == 0) {
                     changeFragment = new MealsFragment();
                 } else if (which == 1) {
-                    //changeFragment = new MeasurementFragment();
-                    final custom_dialog dialog1 = new custom_dialog(test);
-                    dialog1.show();
+                    changeFragment = new MeasurementFragment();
                 }
 
                 ft.replace(R.id.content_frame, changeFragment);
