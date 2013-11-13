@@ -21,7 +21,7 @@ import fh.kl.wamomu.dialogs.custom_dialog;
 public class SettingsFragment extends Fragment {
 
     private TextView textview1;
-    private TextView textview2;
+    public TextView textview2;
     private static final int REQUEST_ENABLE_BT = 1;
     BluetoothAdapter btAdapter;
 
@@ -51,6 +51,7 @@ public class SettingsFragment extends Fragment {
             public void onClick(View arg0) {
 
                 final custom_dialog dialog1 = new custom_dialog(getActivity());
+
                 dialog1.show();
 
 //                // custom dialog
