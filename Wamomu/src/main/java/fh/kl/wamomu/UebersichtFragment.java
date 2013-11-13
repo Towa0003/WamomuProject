@@ -21,6 +21,7 @@ public class UebersichtFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.overview,
                 container, false);
+        getActivity().setTitle("Übersicht");
         String[] art =      new String[]{"Frühstück" , "Messung" , "Mittagessen" , "Messung" , "Abendessen" , "Messung"};
         String[] gericht =  new String[]{"Nutellabrot" , "32 mg" , "Gulasch" , "50 mg" , "Salamibrot" , "30 mg"};
 

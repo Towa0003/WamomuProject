@@ -46,6 +46,7 @@ public class NavigationDrawer extends Activity {
         ft.commit();
 
 
+
         // get list items from strings.xml
         drawerListViewItems = getResources().getStringArray(R.array.items);
         // get ListView defined in activity_main.xml
@@ -137,6 +138,8 @@ public class NavigationDrawer extends Activity {
             } else if (position == 4) {
                 changeFragment = new StatistikFragment();
             }
+
+
             ft.replace(R.id.content_frame, changeFragment);
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.commit();

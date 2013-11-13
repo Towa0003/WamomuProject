@@ -31,6 +31,7 @@ import java.util.Locale;
  */
 public class StatistikFragment extends Fragment {
 
+
     private GraphicalView chart;
     private FrameLayout fl_chartContainer;
 
@@ -62,6 +63,7 @@ public class StatistikFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.statistik,
                 container, false);
+            getActivity().setTitle("Statistik");
 
         fl_chartContainer = (FrameLayout) view.findViewById(R.id.chartContainerLineChart_frameLayout);
         b_addValue = (Button) view.findViewById(R.id.addValue_button);

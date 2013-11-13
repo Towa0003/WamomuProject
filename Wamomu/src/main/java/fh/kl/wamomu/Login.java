@@ -18,6 +18,7 @@ public class Login extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+        setTitle("Login");
 
         b_login = (Button) findViewById(R.id.login_button);
         b_login.setOnClickListener(new View.OnClickListener() {
@@ -31,7 +32,7 @@ public class Login extends Activity {
         b_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Login.this,ExpList.class);
+                Intent i = new Intent(Login.this,Register.class);
                 startActivity(i);
             }
         });

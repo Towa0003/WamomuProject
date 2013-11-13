@@ -16,6 +16,7 @@ public class SettingsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.settings,
                 container, false);
+        getActivity().setTitle("Einstellungen");
 
         return view;
     }
