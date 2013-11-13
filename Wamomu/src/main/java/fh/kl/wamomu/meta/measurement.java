@@ -6,11 +6,13 @@ package fh.kl.wamomu.meta;
 public class measurement {
 
     double date;
+    double time;
     double measurement;
 
 
-    public measurement(double date, double measurement) {
+    public measurement(double date, double time, double measurement) {
         this.date = date;
+        this.time = time;
         this.measurement = measurement;
     }
 
@@ -20,6 +22,14 @@ public class measurement {
 
     public void setDate(double date) {
         this.date = date;
+    }
+
+    public double getTime() {
+        return time;
+    }
+
+    public void setTime(double time) {
+        this.time = time;
     }
 
     public double getMeasurement() {
