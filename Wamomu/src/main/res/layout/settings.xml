@@ -4,6 +4,113 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+
+        >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Kalibrierungscode ändern"
+            android:id="@+id/kal_textView"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:gravity="center"/>
+
+    </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Code: 01234"
+        android:id="@+id/code"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true" />
+    <View
+
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="#FF0000FF"
+        />
+    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+
+        >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Neues Gerät hinzufügen"
+            android:id="@+id/ger_textView"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:gravity="center"/>
+
+
+
+    </RelativeLayout>
+    <View
+
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="#FF0000FF"
+        />
+
+    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+
+        >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Paired Devices"
+            android:id="@+id/pair_textView"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:gravity="center"
+            android:clickable="true"/>
+
+
+
+    </RelativeLayout>
+    <View
+
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="#FF0000FF"
+        />
+    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+
+        >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Informationen"
+            android:id="@+id/info_textView"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:gravity="center"/>
+
+
+
+    </RelativeLayout>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="#FF0000FF"
+        />
 
 
 </LinearLayout>
