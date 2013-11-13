@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -156,6 +157,7 @@ public class NavigationDrawer extends Activity {
 
     private void add() {
         System.out.println("add");
+        final Context test = getApplication();
         android.app.AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Hinzufügen").setItems(items, new DialogInterface.OnClickListener() {
 
@@ -167,7 +169,9 @@ public class NavigationDrawer extends Activity {
                 if (which == 0) {
                     changeFragment = new MealsFragment();
                 } else if (which == 1) {
-                    changeFragment = new MeasurementFragment();
+                    //changeFragment = new MeasurementFragment();
+                    final custom_dialog dialog1 = new custom_dialog(test);
+                    dialog1.show();
                 }
 
                 ft.replace(R.id.content_frame, changeFragment);
