@@ -1,4 +1,4 @@
-package fh.kl.wamomu;
+package fh.kl.wamomu.ui;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -20,6 +20,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import fh.kl.wamomu.R;
 
 /**
  * Created by Thundernator on 04.11.13.

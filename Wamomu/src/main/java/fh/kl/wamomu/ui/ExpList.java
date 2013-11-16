@@ -1,9 +1,7 @@
-package fh.kl.wamomu;
+package fh.kl.wamomu.ui;
 
 import android.app.ExpandableListActivity;
-import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListView;
@@ -28,13 +26,13 @@ public class ExpList extends ExpandableListActivity implements
         setGroupData();
         setChildGroupData();
 
-        ExpandableListAdapter mNewAdapter = new ExpandableListAdapter(groupItem, childItem);
-        mNewAdapter
-                .setInflater(
-                        (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE),
-                        this);
-        getExpandableListView().setAdapter(mNewAdapter);
-        expandbleLis.setOnChildClickListener(this);
+//        ExpandableListViewAdapter mNewAdapter = new ExpandableListViewAdapter(groupItem, childItem);
+//        mNewAdapter
+//                .setInflater(
+//                        (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE),
+//                        this);
+//        getExpandableListView().setAdapter(mNewAdapter);s
+//        expandbleLis.setOnChildClickListener(this);
 
 
       

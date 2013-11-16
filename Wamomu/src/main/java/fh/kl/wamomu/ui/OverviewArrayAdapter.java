@@ -1,4 +1,4 @@
-package fh.kl.wamomu;
+package fh.kl.wamomu.ui;
 
 /**
  * Created by Thundernator on 04.11.13.
@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import fh.kl.wamomu.R;
 
 public class OverviewArrayAdapter extends ArrayAdapter<String> {
     private final Context context;

@@ -1,4 +1,4 @@
-package fh.kl.wamomu;
+package fh.kl.wamomu.ui;
 
 import android.app.Fragment;
 import android.content.res.Resources;
@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import fh.kl.wamomu.R;
 import fh.kl.wamomu.meta.meal;
 
 /**
@@ -87,8 +88,6 @@ public class StatistikFragment extends Fragment {
           ///////////////// Vordefinierte Were für Arraylist ///////
 
            meals.add(new meal("Frühstück","Schinken",01.10,11.11));
-
-
 
 
             datum.add(0, 01.01);

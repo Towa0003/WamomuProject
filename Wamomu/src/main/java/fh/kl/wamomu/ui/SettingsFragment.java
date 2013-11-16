@@ -1,4 +1,4 @@
-package fh.kl.wamomu;
+package fh.kl.wamomu.ui;
 
 import android.app.Fragment;
 import android.bluetooth.BluetoothDevice;
@@ -13,7 +13,9 @@ import android.bluetooth.BluetoothAdapter;
 
 import java.util.Set;
 
+import fh.kl.wamomu.R;
 import fh.kl.wamomu.dialogs.custom_dialog;
+import fh.kl.wamomu.dialogs.custom_dialog2;
 
 /**
  * Created by Thundernator on 04.11.13.
@@ -50,7 +52,7 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View arg0) {
 
-                final custom_dialog dialog1 = new custom_dialog(getActivity());
+                final custom_dialog2 dialog1 = new custom_dialog2(getActivity());
 
                 dialog1.show();
 

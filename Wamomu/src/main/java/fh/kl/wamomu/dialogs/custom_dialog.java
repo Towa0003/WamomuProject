@@ -7,11 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.view.WindowManager;
-import android.widget.TextView;
 
 import fh.kl.wamomu.R;
-import fh.kl.wamomu.SettingsFragment;
 
 public class custom_dialog extends Dialog {
 

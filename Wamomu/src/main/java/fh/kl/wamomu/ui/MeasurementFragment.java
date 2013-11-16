@@ -1,8 +1,4 @@
-package fh.kl.wamomu;
-
-/**
- * Created by Thundernator on 04.11.13.
- */
+package fh.kl.wamomu.ui;
 
 import android.app.Fragment;
 import android.content.Context;
@@ -12,18 +8,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-public class UebersichtFragment extends Fragment {
+import fh.kl.wamomu.R;
+
+/**
+ * Created by Thundernator on 04.11.13.
+ */
+public class MeasurementFragment extends Fragment {
 
     private ListView overview_listview;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.overview,
+        View view = inflater.inflate(R.layout.measurement,
                 container, false);
-        getActivity().setTitle("Übersicht");
-        String[] art =      new String[]{"Frühstück" , "Messung" , "Mittagessen" , "Messung" , "Abendessen" , "Messung"};
-        String[] gericht =  new String[]{"Nutellabrot" , "32 mg" , "Gulasch" , "50 mg" , "Salamibrot" , "30 mg"};
+        getActivity().setTitle("Messungen");
+
+        String[] art =      new String[]{ "Messung" ,  "Messung" ,  "Messung"};
+        String[] gericht =  new String[]{ "32 mg" ,  "50 mg" ,  "30 mg"};
 
         overview_listview = (ListView) view.findViewById(R.id.overview_listView);
         Context context = getActivity();
@@ -31,6 +33,10 @@ public class UebersichtFragment extends Fragment {
         overview_listview.setAdapter(adapter);
 
         return view;
-    }
 
+
+
+    }
 }
+
+

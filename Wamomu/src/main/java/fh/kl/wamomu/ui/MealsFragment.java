@@ -1,4 +1,4 @@
-package fh.kl.wamomu;
+package fh.kl.wamomu.ui;
 
 import android.app.Fragment;
 import android.content.Context;
@@ -8,22 +8,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import fh.kl.wamomu.R;
+
 /**
  * Created by Thundernator on 04.11.13.
  */
-public class MeasurementFragment extends Fragment {
+public class MealsFragment extends Fragment {
 
     private ListView overview_listview;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.measurement,
+        View view = inflater.inflate(R.layout.meals,
                 container, false);
-        getActivity().setTitle("Messungen");
+        getActivity().setTitle("Mahlzeiten");
 
-        String[] art =      new String[]{ "Messung" ,  "Messung" ,  "Messung"};
-        String[] gericht =  new String[]{ "32 mg" ,  "50 mg" ,  "30 mg"};
+        String[] art =      new String[]{"Frühstück"  , "Mittagessen" , "Abendessen"  };
+        String[] gericht =  new String[]{"Nutellabrot"  , "Gularsch" ,  "Salamibrot" };
 
         overview_listview = (ListView) view.findViewById(R.id.overview_listView);
         Context context = getActivity();
@@ -31,9 +33,6 @@ public class MeasurementFragment extends Fragment {
         overview_listview.setAdapter(adapter);
 
         return view;
-
-
-
     }
 }
 
