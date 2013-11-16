@@ -48,7 +48,6 @@ public class StatistikFragment extends Fragment {
     XYSeries series;
 
     /////// Arraylist, wird später evtl ausgelagert ////////
-    static List<Double> datum = new ArrayList<Double>();
     static List<Double> werte = new ArrayList<Double>();
     static List<meal> meals = new ArrayList<meal>();
 
@@ -60,14 +59,16 @@ public class StatistikFragment extends Fragment {
         todo # Messpunkte wenns geht clickable machen
         todo # Wenn man reinzoomt -> Tage; rauszoomen -> Wochen; weiter Rauszoomen -> Monate auf X-Achse
         todo # Punkte Schwarz färben bzw. je nach Messwert gut -> Grün / schlecht -> Rot
+
+
         */
 
-        @Override
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.statistik,
                 container, false);
-            getActivity().setTitle("Statistik");
+        getActivity().setTitle("Statistik");
 
         fl_chartContainer = (FrameLayout) view.findViewById(R.id.chartContainerLineChart_frameLayout);
         b_addValue = (Button) view.findViewById(R.id.addValue_button);
@@ -81,82 +82,68 @@ public class StatistikFragment extends Fragment {
         b_addValue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              add();
+                add();
             }
         });
 
-          ///////////////// Vordefinierte Were für Arraylist ///////
+        ///////////////// Vordefinierte Werte für Meals-Arraylist ///////
 
-           meals.add(new meal("Frühstück","Schinken",01.10,11.11));
+        meals.add(new meal("Frühstück", "Schinken", 01.10, 11.11));
+        meals.add(new meal("Mittagessen", "Gulasch", 01.10, 15.30));
+        meals.add(new meal("Abendessen", "Salamibrot", 01.10, 18.20));
 
+        meals.add(new meal("Frühstück", "Käsebrot, Ei", 02.10, 10.00));
+        meals.add(new meal("Mittagessen", "Lasagne", 02.10, 13.50));
+        meals.add(new meal("Abendessen", "Schinkenbrot", 02.10, 18.30));
 
-            datum.add(0, 01.01);
-            datum.add(1, 02.01);
-            datum.add(2, 03.01);
-            datum.add(3, 04.01);
-            datum.add(4, 05.01);
-            datum.add(5, 06.01);
-            datum.add(6, 07.01);
+        meals.add(new meal("Frühstück", "Tomaten, Mozarella,, Toastbrot, Frischkäse", 03.10, 11.30));
 
-            werte.add(0, 1.0);
-            werte.add(1, 2.0);
-            werte.add(2, 2.0);
-            werte.add(3, 3.0);
-            werte.add(4, 4.0);
-            werte.add(5, 2.0);
-            werte.add(6, 0.0);
+        werte.add(0, 1.0);
+        werte.add(1, 2.0);
+        werte.add(2, 2.0);
+        werte.add(3, 3.0);
+        werte.add(4, 4.0);
+        werte.add(5, 2.0);
+        werte.add(6, 0.0);
 
-            chart = ChartFactory.getLineChartView(getActivity(), createDataSet(), createRenderer());
-            fl_chartContainer.addView(chart);
-            System.out.println("ON CREATE VIEW");
+        chart = ChartFactory.getLineChartView(getActivity(), createDataSet(), createRenderer());
+        fl_chartContainer.addView(chart);
+        System.out.println("ON CREATE VIEW");
 
         return view;
     }
 
 
-   @Override
-    public void onResume()
-    {
+    @Override
+    public void onResume() {
         super.onResume();
 
-        if (chart == null)
-        {
+        if (chart == null) {
             chart = ChartFactory.getLineChartView(getActivity(), createDataSet(), createRenderer());
             fl_chartContainer.addView(chart);
             System.out.println("ON RESUME IF");
-        }
-        else
-        {
+        } else {
             System.out.println("ON RESUME ELSE");
-           // chart.repaint();
+            // chart.repaint();
         }
     }
 
     @Override
-    public void onPause(){
+    public void onPause() {
         super.onPause();
         System.out.println("ON PAUSE");
-        datum.clear();
         werte.clear();
+        System.out.println("Arraylist werte cleared");
     }
 
     // Hinzufügen von Werten
-    private void add(){
+    private void add() {
         valueY = Double.parseDouble(et_valueY.getText().toString());
         System.out.println("VALUE Y = " + valueY + " ");
-        System.out.println("Größe Liste: " + datum.size());
-
         werte.add(werte.size(), valueY);
-
-
-        SimpleDateFormat df = new SimpleDateFormat("dd.MM", Locale.GERMANY);
-        String tag = df.format(new java.util.Date());
-        datum.add(datum.size(), Double.parseDouble(tag));
-        System.out.println("TAG.MONAT= " + tag);
     }
 
-    private XYMultipleSeriesRenderer createRenderer()
-    {
+    private XYMultipleSeriesRenderer createRenderer() {
         XYMultipleSeriesRenderer renderer = new XYMultipleSeriesRenderer();
         renderer.setAntialiasing(true);
 
@@ -164,49 +151,51 @@ public class StatistikFragment extends Fragment {
         // renderer.setChartTitleTextSize(14);     // Titel Größe
         // renderer.setChartTitle(getText(R.string.activity_line_chart_charttitle).toString()); // Titel setzen
 
-        // axis
-        renderer.setAxisTitleTextSize(40);      // Schriftgröße Titel Achsen
-        renderer.setMargins(new int[]{ 50,50,50,50});   // Abstand
+        // Achsen
+        renderer.setAxisTitleTextSize(50);                      // Schriftgröße Titel Achsen
+        renderer.setMargins(new int[]{50, 50, 50, 50});         // Abstand
         renderer.setLabelsColor(Color.BLACK);
-        renderer.setLabelsTextSize(40);         // Schriftgröße an Achsen
+        renderer.setLabelsTextSize(40);                         // Schriftgröße an Achsen
         renderer.setXTitle(getText(R.string.activity_statistik_x_title).toString());
         renderer.setYTitle(getText(R.string.activity_statistik_y_title).toString());
         renderer.setXAxisMin(0);
-        renderer.setXAxisMax(10);
+        renderer.setXAxisMax(5);
         renderer.setYAxisMin(0);
-        renderer.setYAxisMax(10);
+        renderer.setYAxisMax(7);
         renderer.setYLabelsAlign(Paint.Align.RIGHT);
         renderer.setAxesColor(Color.BLACK);
         renderer.setLabelsColor(Color.BLACK);
         renderer.setPanEnabled(true, false);
-        renderer.setZoomEnabled(true,false);
+        renderer.setZoomEnabled(true, false);
 
         // Daten an die Achse schreiben
-        for (int i = 0; i < datum.size(); i++)
-        {
-            renderer.addXTextLabel(i, datum.get(i).toString());
-            renderer.addYTextLabel(i, String.valueOf(i));
+        for (int i = 0; i < meals.size(); i++) {
+            String mealDate = String.valueOf(meals.get(i).getDate());
 
-           // renderer.setXLabels(0);
-           // renderer.setYLabels(0);
+            renderer.addXTextLabel(i, mealDate);            //  Datum an X-Achse schreiben
+            renderer.addYTextLabel(i, String.valueOf(i));   //  Werte an Y-Achse schreiben
+
+            System.out.println("meals of " + i + ": " +  meals.get(i).getFoodkind() + " - " +  meals.get(i).getFood() + " - " +  meals.get(i).getDate() + " - " +  meals.get(i).getTime() );
+            System.out.println("");
         }
-        renderer.setXLabelsColor(Color.BLUE);   //  Farbe X Labels
-        renderer.setXLabelsAngle(90);
+        System.out.println("meals size: " + meals.size());
+        renderer.setXLabels(0);             // Standard X-Labels ausblenden
+//      renderer.setYLabels(0);             // Standard Y-Labels ausblenden
+        renderer.setXLabelsColor(Color.BLACK);      // Farbe X-Labels
+        renderer.setYLabelsColor(0,Color.BLACK);    // Farbe Y-Label
+        renderer.setXLabelsAngle(0);               // Rotation X-Labels
 
-
-
-        // legend
+        // Legende
         renderer.setLegendTextSize(30);
         renderer.setLegendHeight(100);
 
-        // points
-        renderer.setPointSize(10f);
-
+        // Punkte
+        renderer.setPointSize(20f);
 
         // data area
         renderer.setShowGrid(true);
         renderer.setGridColor(Color.DKGRAY);        // Farbe Rasterlinien
-        renderer.setMargins(new int[]{30,50,50,50});
+        renderer.setMargins(new int[]{30, 50, 50, 50});
         renderer.setMarginsColor(Color.WHITE);      // Hintergrundfarbe
 
         XYSeriesRenderer xySeriesRenderer0 = new XYSeriesRenderer();
@@ -220,12 +209,11 @@ public class StatistikFragment extends Fragment {
     }
 
     // Daten ins Diagramm schreiben
-    private XYMultipleSeriesDataset createDataSet(){
+    private XYMultipleSeriesDataset createDataSet() {
 
         XYMultipleSeriesDataset dataSet = new XYMultipleSeriesDataset();
 
-        for (int i = 0; i < werte.size(); i++)
-        {
+        for (int i = 0; i < werte.size(); i++) {
             double x = i;                   // x-achse
             double y = werte.get(i);        // y-achse
             series.add(x, y);
