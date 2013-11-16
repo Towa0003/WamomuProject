@@ -12,10 +12,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import org.achartengine.ChartFactory;
 import org.achartengine.GraphicalView;
 import org.achartengine.chart.PointStyle;
+import org.achartengine.model.SeriesSelection;
 import org.achartengine.model.XYMultipleSeriesDataset;
 import org.achartengine.model.XYSeries;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
@@ -109,7 +111,23 @@ public class StatistikFragment extends Fragment {
         chart = ChartFactory.getLineChartView(getActivity(), createDataSet(), createRenderer());
         fl_chartContainer.addView(chart);
         System.out.println("ON CREATE VIEW");
-
+        chart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SeriesSelection seriesSelection = chart.getCurrentSeriesAndPoint();
+                if (seriesSelection == null) {
+                    Toast.makeText(getActivity(), "No point", 0).show();
+                } else {
+                    // display information of the clicked point
+                    Toast.makeText(
+                            getActivity(),
+                            "Chart element in series index " + seriesSelection.getSeriesIndex()
+                                    + " data point index " + seriesSelection.getPointIndex() + " was clicked"
+                                    + " closest point value X=" + seriesSelection.getXValue() + ", Y="
+                                    + seriesSelection.getValue(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         return view;
     }
 
@@ -146,6 +164,8 @@ public class StatistikFragment extends Fragment {
     private XYMultipleSeriesRenderer createRenderer() {
         XYMultipleSeriesRenderer renderer = new XYMultipleSeriesRenderer();
         renderer.setAntialiasing(true);
+        renderer.setClickEnabled(true);
+
 
         // title
         // renderer.setChartTitleTextSize(14);     // Titel Größe
@@ -175,7 +195,7 @@ public class StatistikFragment extends Fragment {
             renderer.addXTextLabel(i, mealDate);            //  Datum an X-Achse schreiben
             renderer.addYTextLabel(i, String.valueOf(i));   //  Werte an Y-Achse schreiben
 
-            System.out.println("meals of " + i + ": " +  meals.get(i).getFoodkind() + " - " +  meals.get(i).getFood() + " - " +  meals.get(i).getDate() + " - " +  meals.get(i).getTime() );
+            System.out.println("meals of " + i + ": " + meals.get(i).getFoodkind() + " - " + meals.get(i).getFood() + " - " + meals.get(i).getDate() + " - " + meals.get(i).getTime());
             System.out.println("");
         }
         System.out.println("meals size: " + meals.size());
@@ -190,14 +210,13 @@ public class StatistikFragment extends Fragment {
         renderer.setLegendHeight(100);
 
         // Punkte
-        renderer.setPointSize(20f);
+        renderer.setPointSize(30f);
 
         // data area
         renderer.setShowGrid(true);
         renderer.setGridColor(Color.DKGRAY);        // Farbe Rasterlinien
         renderer.setMargins(new int[]{30, 50, 50, 50});
         renderer.setMarginsColor(Color.WHITE);      // Hintergrundfarbe
-
         XYSeriesRenderer xySeriesRenderer0 = new XYSeriesRenderer();
         xySeriesRenderer0.setPointStyle(PointStyle.CIRCLE);
         xySeriesRenderer0.setFillPoints(true);
