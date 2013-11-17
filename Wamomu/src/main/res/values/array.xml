@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="zuckereinheit">
+        <item >mg/dl</item>
+        <item >mmol/l</item>
+    </string-array>
+
+    <string-array name="essensart">
+        <item >Frühstück</item>
+        <item >Mittagessen</item>
+        <item >Abendessen</item>
+        <item >Sonstiges</item>
+    </string-array>
+
+</resources>

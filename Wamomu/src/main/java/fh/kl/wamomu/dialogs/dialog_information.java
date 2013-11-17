@@ -10,15 +10,15 @@ import android.widget.TextView;
 
 import fh.kl.wamomu.R;
 
-public class custom_dialog extends Dialog {
+public class dialog_information extends Dialog {
 
     TextView t;
     ImageView image;
     Button dialogButton;
 
-    public custom_dialog(Context context) {
+    public dialog_information(Context context) {
         super(context);
-        setContentView(R.layout.custom);
+        setContentView(R.layout.dialog_informationen_settings);
 
         setTitle("Informationen");
          t = (TextView) findViewById(R.id.dia_text);

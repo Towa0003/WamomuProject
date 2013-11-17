@@ -20,7 +20,7 @@ public class custom_dialog2 extends Dialog {
 
     public custom_dialog2(Context context) {
         super(context);
-        setContentView(R.layout.custom2);
+        setContentView(R.layout.dialog_add_mahlzeit);
 
         List<ParentItem> itemList = new ArrayList<ParentItem>();
 
