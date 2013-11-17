@@ -54,15 +54,13 @@ public class StatistikFragment extends Fragment {
     static List<meal> meals = new ArrayList<meal>();
 
         /*
-        # Array-list erstellen - vordefinierte daten reinschreiben - neue daten hinzufügen zur Laufzeit CHECK
-        # Datum anpassen, bzw. Werte dem aktuellen datum hinzufügen    CHECK
-        todo # Werte werden nicht überschrieben, sondern hintendrangehängehängt und neu neu gezeichnet
-        todo # xy Labels ändern
-        todo # Messpunkte wenns geht clickable machen
-        todo # Wenn man reinzoomt -> Tage; rauszoomen -> Wochen; weiter Rauszoomen -> Monate auf X-Achse
-        todo # Punkte Schwarz färben bzw. je nach Messwert gut -> Grün / schlecht -> Rot
-
-
+            # Array-list erstellen - vordefinierte daten reinschreiben - neue daten hinzufügen zur Laufzeit CHECK
+            # Datum anpassen, bzw. Werte dem aktuellen datum hinzufügen    CHECK
+            todo # Werte werden nicht überschrieben, sondern hintendrangehängehängt und neu neu gezeichnet
+            todo # xy Labels ändern
+            todo # Messpunkte wenns geht clickable machen
+            todo # Wenn man reinzoomt -> Tage; rauszoomen -> Wochen; weiter Rauszoomen -> Monate auf X-Achse
+            todo # Punkte Schwarz färben bzw. je nach Messwert gut -> Grün / schlecht -> Rot
         */
 
     @Override
@@ -108,26 +106,8 @@ public class StatistikFragment extends Fragment {
         werte.add(5, 2.0);
         werte.add(6, 0.0);
 
-        chart = ChartFactory.getLineChartView(getActivity(), createDataSet(), createRenderer());
-        fl_chartContainer.addView(chart);
         System.out.println("ON CREATE VIEW");
-        chart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SeriesSelection seriesSelection = chart.getCurrentSeriesAndPoint();
-                if (seriesSelection == null) {
-                    Toast.makeText(getActivity(), "No point", Toast.LENGTH_SHORT).show();
-                } else {
-                    // display information of the clicked point
-                    Toast.makeText(
-                            getActivity(),
-                            "Chart element in series index " + seriesSelection.getSeriesIndex()
-                                    + " data point index " + seriesSelection.getPointIndex() + " was clicked"
-                                    + " closest point value X=" + seriesSelection.getXValue() + ", Y="
-                                    + seriesSelection.getValue(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+
         return view;
     }
 
@@ -140,9 +120,32 @@ public class StatistikFragment extends Fragment {
             chart = ChartFactory.getLineChartView(getActivity(), createDataSet(), createRenderer());
             fl_chartContainer.addView(chart);
             System.out.println("ON RESUME IF");
+
+            // onClick um von Punkten auf die jeweilige Mahlzeit zu verweisen
+            chart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SeriesSelection seriesSelection = chart.getCurrentSeriesAndPoint();     // initialisierung clickable area
+
+                    if (seriesSelection == null) {
+                        System.out.println("No Point");
+                    } else {
+                        // display information of the clicked point
+                        Toast.makeText(
+                                getActivity(),
+                                "Chart element in data point index " + seriesSelection.getPointIndex() + " was clicked"
+                                        + " value X=" + seriesSelection.getXValue() + ", Y="
+                                        + seriesSelection.getValue() + "\n" +
+                                        "meal Food: " + meals.get((int) seriesSelection.getXValue()).getFood() + "\n" +
+                                        "meal Datum: " + meals.get((int) seriesSelection.getXValue()).getDate() + "\n" +
+                                        "meal Zeit: " + meals.get((int) seriesSelection.getXValue()).getTime(), Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+
         } else {
             System.out.println("ON RESUME ELSE");
-            // chart.repaint();
+            chart.repaint();
         }
     }
 
@@ -162,20 +165,23 @@ public class StatistikFragment extends Fragment {
     }
 
     private XYMultipleSeriesRenderer createRenderer() {
+
+        System.out.println("create renderer ");
+
+
         XYMultipleSeriesRenderer renderer = new XYMultipleSeriesRenderer();
         renderer.setAntialiasing(true);
-        renderer.setClickEnabled(true);
-
+        renderer.setClickEnabled(true);         // clickable machen
+        renderer.setSelectableBuffer(30);       // clickable area der punkte
 
         // title
         // renderer.setChartTitleTextSize(14);     // Titel Größe
         // renderer.setChartTitle(getText(R.string.activity_line_chart_charttitle).toString()); // Titel setzen
 
         // Achsen
-        renderer.setAxisTitleTextSize(50);                      // Schriftgröße Titel Achsen
-        renderer.setMargins(new int[]{50, 50, 50, 50});         // Abstand
-        renderer.setLabelsColor(Color.BLACK);
-        renderer.setLabelsTextSize(40);                         // Schriftgröße an Achsen
+        renderer.setAxisTitleTextSize(50);                      // Schriftgröße Titel an Achsen
+        renderer.setLabelsColor(Color.BLACK);                   // Farbe Achsenwerte
+        renderer.setLabelsTextSize(40);                         // Schriftgröße Werte an Achsen
         renderer.setXTitle(getText(R.string.activity_statistik_x_title).toString());
         renderer.setYTitle(getText(R.string.activity_statistik_y_title).toString());
         renderer.setXAxisMin(0);
@@ -202,7 +208,7 @@ public class StatistikFragment extends Fragment {
         renderer.setXLabels(0);             // Standard X-Labels ausblenden
 //      renderer.setYLabels(0);             // Standard Y-Labels ausblenden
         renderer.setXLabelsColor(Color.BLACK);      // Farbe X-Labels
-        renderer.setYLabelsColor(0,Color.BLACK);    // Farbe Y-Label
+        renderer.setYLabelsColor(0, Color.BLACK);    // Farbe Y-Label
         renderer.setXLabelsAngle(0);               // Rotation X-Labels
 
         // Legende
@@ -215,13 +221,14 @@ public class StatistikFragment extends Fragment {
         // data area
         renderer.setShowGrid(true);
         renderer.setGridColor(Color.DKGRAY);        // Farbe Rasterlinien
-        renderer.setMargins(new int[]{30, 50, 50, 50});
+        renderer.setMargins(new int[]{30, 50, 50, 50});     // Abstand
         renderer.setMarginsColor(Color.WHITE);      // Hintergrundfarbe
+
         XYSeriesRenderer xySeriesRenderer0 = new XYSeriesRenderer();
         xySeriesRenderer0.setPointStyle(PointStyle.CIRCLE);
         xySeriesRenderer0.setFillPoints(true);
         xySeriesRenderer0.setColor(getResources().getColor(R.color.color_0));
-        xySeriesRenderer0.setLineWidth(5f);
+        xySeriesRenderer0.setLineWidth(10f);
         renderer.addSeriesRenderer(xySeriesRenderer0);
 
         return renderer;
