@@ -39,6 +39,10 @@
             android:name=".ui.ExpList"
             ></activity>
 
+        <activity
+            android:name=".database.test2"
+            ></activity>
+
     </application>
 
 </manifest>
