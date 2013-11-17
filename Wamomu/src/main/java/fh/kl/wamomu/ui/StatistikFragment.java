@@ -116,7 +116,7 @@ public class StatistikFragment extends Fragment {
             public void onClick(View v) {
                 SeriesSelection seriesSelection = chart.getCurrentSeriesAndPoint();
                 if (seriesSelection == null) {
-                    Toast.makeText(getActivity(), "No point", 0).show();
+                    Toast.makeText(getActivity(), "No point", Toast.LENGTH_SHORT).show();
                 } else {
                     // display information of the clicked point
                     Toast.makeText(
