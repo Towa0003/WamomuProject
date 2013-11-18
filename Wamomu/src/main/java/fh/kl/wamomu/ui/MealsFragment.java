@@ -5,7 +5,9 @@ import android.app.Dialog;
 import android.app.Fragment;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +35,7 @@ public class MealsFragment extends Fragment {
     private Button btnadd;
     private EditText timepicker, datepicker;
     private Spinner spMealGroup;
+    static public int meals = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,14 +52,23 @@ public class MealsFragment extends Fragment {
         OverviewArrayAdapter adapter = new OverviewArrayAdapter(context ,art,gericht);
         overview_listview.setAdapter(adapter);
 
+        if(meals == 1){
 
-        Dialog dialog = new Dialog(getActivity());
+
+        final Dialog dialog = new Dialog(getActivity());
 
         dialog.setContentView(R.layout.dialog_add_mahlzeit);
         dialog.setTitle("Mahlzeit");
         dialog.setCancelable(true);
+            dialog.setOnCancelListener(new  DialogInterface.OnCancelListener() {
+                public  void  onCancel(DialogInterface dialog) {
+                    Log.d("meals = 0", "user cancelling authentication");
+                    meals = 0;
 
-        TextView text = (TextView) dialog.findViewById(R.id.text);
+                }
+            });
+
+            TextView text = (TextView) dialog.findViewById(R.id.text);
         text.setText("Mahlzeit hinzufügen");
         ImageView image = (ImageView) dialog.findViewById(R.id.image);
         image.setImageResource(R.drawable.ic_launcher);
@@ -118,16 +130,21 @@ public class MealsFragment extends Fragment {
             }
         });
 
+
+
         btnadd.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                dialog.dismiss();
+                meals = 0;
 
             }
         });
         dialog.show();
-
+        }
 
         return view;
     }
+
 }
 
 

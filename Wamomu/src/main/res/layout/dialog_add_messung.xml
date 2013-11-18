@@ -101,7 +101,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <Spinner
-            android:id="@+id/spMuscleGroup"
+            android:id="@+id/spMeasureGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"

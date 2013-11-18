@@ -170,8 +170,10 @@ public class NavigationDrawer extends Activity {
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 if (which == 0) {
                     changeFragment = new MealsFragment();
+                    MealsFragment.meals = 1;
                 } else if (which == 1) {
                     changeFragment = new MeasurementFragment();
+                    MeasurementFragment.dia = 1;
                 }
 
                 ft.replace(R.id.content_frame, changeFragment);

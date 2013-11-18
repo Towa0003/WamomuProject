@@ -5,7 +5,9 @@ import android.app.Dialog;
 import android.app.Fragment;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +36,8 @@ public class MeasurementFragment extends Fragment {
     private EditText timepicker,datepicker;
     private TextView tvHome;
     private String values [];
-    private Spinner spMuscleGroup;
+    private Spinner spMeasureGroup;
+    static public int dia = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,13 +54,19 @@ public class MeasurementFragment extends Fragment {
         OverviewArrayAdapter adapter = new OverviewArrayAdapter(context ,art,gericht);
         overview_listview.setAdapter(adapter);
 
-        tvHome = (TextView) view.findViewById(R.id.tvHome);
-
-        Dialog dialog = new Dialog(getActivity());
+        if(dia == 1) {
+        final Dialog dialog = new Dialog(getActivity());
 
         dialog.setContentView(R.layout.dialog_add_messung);
         dialog.setTitle("Messung hinzufügen");
         dialog.setCancelable(true);
+            dialog.setOnCancelListener(new  DialogInterface.OnCancelListener() {
+                public  void  onCancel(DialogInterface dialog) {
+                    Log.d("dia = 0", "user cancelling authentication");
+                    dia = 0;
+
+                }
+            });
 
         TextView text = (TextView) dialog.findViewById(R.id.text);
         text.setText("Hello, this is a custom dialog!");
@@ -103,13 +112,13 @@ public class MeasurementFragment extends Fragment {
                 mDatePicker.show();
             }
         });
-        spMuscleGroup = (Spinner)dialog.findViewById(R.id.spMuscleGroup);
+        spMeasureGroup = (Spinner)dialog.findViewById(R.id.spMeasureGroup);
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(
                 getActivity(), R.array.zuckereinheit, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spMuscleGroup.setAdapter(adapter2);
+        spMeasureGroup.setAdapter(adapter2);
 
-        spMuscleGroup.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spMeasureGroup.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             public void onItemSelected(AdapterView<?> parent, View arg1,
                                        int arg2, long arg3) {
@@ -123,10 +132,12 @@ public class MeasurementFragment extends Fragment {
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
+                    dia = 0;
+               dialog.dismiss();
             }
         });
         dialog.show();
+        }
 
         return view;
 
