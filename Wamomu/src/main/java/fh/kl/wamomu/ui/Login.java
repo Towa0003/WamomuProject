@@ -30,8 +30,8 @@ public class Login extends Activity {
         setContentView(R.layout.login);
         setTitle("Login");
 
-        db = new database();
-        db.accessWebService();
+//        db = new database();
+//        db.accessWebService();
 
         et_login = (EditText) findViewById(R.id.et_username);
         et_password = (EditText) findViewById(R.id.et_password);
