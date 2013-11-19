@@ -47,6 +47,11 @@
             android:name=".database.MainActivity"
             ></activity>
 
+        <activity
+        android:name=".database.database"
+        ></activity>
+
+
     </application>
 
 </manifest>
