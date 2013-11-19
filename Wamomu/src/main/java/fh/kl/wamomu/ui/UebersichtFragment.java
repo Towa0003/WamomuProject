@@ -27,7 +27,7 @@ public class UebersichtFragment extends Fragment {
         String[] art =      new String[]{"Frühstück" , "Messung" , "Mittagessen" , "Messung" , "Abendessen" , "Messung"};
         String[] gericht =  new String[]{"Nutellabrot" , "32 mg" , "Gulasch" , "50 mg" , "Salamibrot" , "30 mg"};
 
-        overview_listview = (ListView) view.findViewById(R.id.overview_listView);
+        overview_listview = (ListView) view.findViewById(R.id.lv_meals);
         Context context = getActivity();
         OverviewArrayAdapter adapter = new OverviewArrayAdapter(context ,art,gericht);
         overview_listview.setAdapter(adapter);

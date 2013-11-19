@@ -49,7 +49,7 @@ public class MeasurementFragment extends Fragment {
         String[] art =      new String[]{ "Messung" ,  "Messung" ,  "Messung"};
         String[] gericht =  new String[]{ "32 mg" ,  "50 mg" ,  "30 mg"};
 
-        overview_listview = (ListView) view.findViewById(R.id.overview_listView);
+        overview_listview = (ListView) view.findViewById(R.id.lv_measurement);
         Context context = getActivity();
         OverviewArrayAdapter adapter = new OverviewArrayAdapter(context ,art,gericht);
         overview_listview.setAdapter(adapter);
@@ -68,12 +68,12 @@ public class MeasurementFragment extends Fragment {
                 }
             });
 
-        TextView text = (TextView) dialog.findViewById(R.id.text);
+        TextView text = (TextView) dialog.findViewById(R.id.tv_measuretext);
         text.setText("Hello, this is a custom dialog!");
-        ImageView image = (ImageView) dialog.findViewById(R.id.image);
+        ImageView image = (ImageView) dialog.findViewById(R.id.iv_measureimage);
         image.setImageResource(R.drawable.ic_launcher);
-        btnSave = (Button)dialog.findViewById(R.id.btnSave);
-        timepicker = (EditText)dialog.findViewById(R.id.timepick2);
+        btnSave = (Button)dialog.findViewById(R.id.bt_add_measure);
+        timepicker = (EditText)dialog.findViewById(R.id.et_timeedit_measure);
         timepicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,7 +93,7 @@ public class MeasurementFragment extends Fragment {
 
             }
         });
-        datepicker = (EditText)dialog.findViewById(R.id.datepick2);
+        datepicker = (EditText)dialog.findViewById(R.id.tv_dateedit_measure);
         datepicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,7 +112,7 @@ public class MeasurementFragment extends Fragment {
                 mDatePicker.show();
             }
         });
-        spMeasureGroup = (Spinner)dialog.findViewById(R.id.spMeasureGroup);
+        spMeasureGroup = (Spinner)dialog.findViewById(R.id.sp_MeasureGroup);
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(
                 getActivity(), R.array.zuckereinheit, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

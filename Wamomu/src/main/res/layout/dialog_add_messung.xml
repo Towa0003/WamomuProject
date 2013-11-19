@@ -11,7 +11,7 @@
         android:layout_height="wrap_content" >
 
         <ImageView
-            android:id="@+id/image"
+            android:id="@+id/iv_measureimage"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_marginRight="10dp"
@@ -19,7 +19,7 @@
 
 
         <TextView
-            android:id="@+id/text"
+            android:id="@+id/tv_measuretext"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:text="Messung hinzufügen"
@@ -35,7 +35,7 @@
 
 
         <TextView
-            android:id="@+id/timepick"
+            android:id="@+id/tv_timetext_measure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Uhrzeit"
@@ -44,7 +44,7 @@
 
 
         <EditText
-            android:id="@+id/timepick2"
+            android:id="@+id/et_timeedit_measure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -63,7 +63,7 @@
 
 
         <TextView
-            android:id="@+id/datepick"
+            android:id="@+id/tv_datetext_measure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Datum"
@@ -72,7 +72,7 @@
 
 
         <EditText
-            android:id="@+id/datepick2"
+            android:id="@+id/tv_dateedit_measure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -93,7 +93,7 @@
 
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/tv_masseinheit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
@@ -101,7 +101,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <Spinner
-            android:id="@+id/spMeasureGroup"
+            android:id="@+id/sp_MeasureGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
@@ -118,7 +118,7 @@
 
 
         <Button
-            android:id="@+id/btnSave"
+            android:id="@+id/bt_add_measure"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

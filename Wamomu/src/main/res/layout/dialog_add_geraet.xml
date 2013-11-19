@@ -11,7 +11,7 @@
         android:layout_height="wrap_content" >
 
         <ImageView
-            android:id="@+id/image"
+            android:id="@+id/iv_search_image"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_marginRight="10dp"
@@ -19,7 +19,7 @@
 
 
         <TextView
-            android:id="@+id/text"
+            android:id="@+id/tv_titletext"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:text="Neues Gerät hinzufügen"
@@ -35,7 +35,7 @@
 
 
         <TextView
-            android:id="@+id/koppin"
+            android:id="@+id/tv_koppin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Kopplungs-PIN: "
@@ -44,7 +44,7 @@
 
 
         <EditText
-            android:id="@+id/pinset"
+            android:id="@+id/et_pinset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -68,7 +68,7 @@
 
 
         <TextView
-            android:id="@+id/info"
+            android:id="@+id/tv_addinfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Info: Lore Ipsum Kackamänner"
@@ -97,7 +97,7 @@
 
 
         <Button
-            android:id="@+id/btnSearch"
+            android:id="@+id/bt_Search"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

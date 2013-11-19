@@ -14,7 +14,7 @@
 
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tv_username__register_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -22,7 +22,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/et_username_register_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -31,7 +31,7 @@
             android:text="Name" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/tv_password_register_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -39,7 +39,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/et_password_register_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -48,7 +48,7 @@
             android:text="Vorname" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/tv_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -56,7 +56,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/et_email_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -64,7 +64,7 @@
             android:inputType="textEmailAddress" />
 
         <TextView
-            android:id="@+id/password_1_textView"
+            android:id="@+id/tv_password1_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -73,7 +73,7 @@
 
 
         <EditText
-            android:id="@+id/editText4"
+            android:id="@+id/et_passwort1_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -81,7 +81,7 @@
             android:inputType="textPassword" />
 
         <TextView
-            android:id="@+id/password_2_textView"
+            android:id="@+id/tv_passwort2_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -89,7 +89,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
-            android:id="@+id/editText4"
+            android:id="@+id/et_passwort2_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -118,7 +118,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/leftSpacer"
+                    android:id="@+id/ll_leftSpacer_registerS"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.25"
@@ -126,7 +126,7 @@
                     android:visibility="gone" />
 
                 <Button
-                    android:id="@+id/login_button"
+                    android:id="@+id/bt_login_register"
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
@@ -137,7 +137,7 @@
                     android:text="Login" />
 
                 <LinearLayout
-                    android:id="@+id/rightSpacer"
+                    android:id="@+id/ll_rightSpacer_register"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.25"

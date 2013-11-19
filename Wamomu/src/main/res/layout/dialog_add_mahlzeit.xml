@@ -11,7 +11,7 @@
         android:layout_height="wrap_content" >
 
         <ImageView
-            android:id="@+id/image"
+            android:id="@+id/iv_mealimage"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_marginRight="10dp"
@@ -19,7 +19,7 @@
 
 
         <TextView
-            android:id="@+id/text"
+            android:id="@+id/tv_mealtext"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:text="Mahlzeit hinzufügen"
@@ -35,7 +35,7 @@
 
 
         <TextView
-            android:id="@+id/timetext"
+            android:id="@+id/tv_timetext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Uhrzeit"
@@ -44,7 +44,7 @@
 
 
         <EditText
-            android:id="@+id/timeedit"
+            android:id="@+id/tv_timeedit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -63,7 +63,7 @@
 
 
         <TextView
-            android:id="@+id/datetext"
+            android:id="@+id/tv_datetext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Datum"
@@ -72,7 +72,7 @@
 
 
         <EditText
-            android:id="@+id/editdate"
+            android:id="@+id/tv_dateedit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -91,7 +91,7 @@
 
 
         <TextView
-            android:id="@+id/textessen"
+            android:id="@+id/tv_mealtext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Art des Gerichts"
@@ -100,7 +100,7 @@
 
 
         <EditText
-            android:id="@+id/editessen"
+            android:id="@+id/et_mealedit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -121,7 +121,7 @@
 
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/tv_foodkindtext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
@@ -129,7 +129,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <Spinner
-            android:id="@+id/spMealGroup"
+            android:id="@+id/sp_MealGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
@@ -146,7 +146,7 @@
 
 
         <Button
-            android:id="@+id/btnAdd"
+            android:id="@+id/bt_add"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

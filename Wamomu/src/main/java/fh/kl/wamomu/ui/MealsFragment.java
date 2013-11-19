@@ -47,7 +47,7 @@ public class MealsFragment extends Fragment {
         String[] art =      new String[]{"Frühstück"  , "Mittagessen" , "Abendessen"  };
         String[] gericht =  new String[]{"Nutellabrot"  , "Gularsch" ,  "Salamibrot" };
 
-        overview_listview = (ListView) view.findViewById(R.id.overview_listView);
+        overview_listview = (ListView) view.findViewById(R.id.lv_meals);
         Context context = getActivity();
         OverviewArrayAdapter adapter = new OverviewArrayAdapter(context ,art,gericht);
         overview_listview.setAdapter(adapter);
@@ -68,12 +68,12 @@ public class MealsFragment extends Fragment {
                 }
             });
 
-            TextView text = (TextView) dialog.findViewById(R.id.text);
+            TextView text = (TextView) dialog.findViewById(R.id.tv_mealtext);
         text.setText("Mahlzeit hinzufügen");
-        ImageView image = (ImageView) dialog.findViewById(R.id.image);
+        ImageView image = (ImageView) dialog.findViewById(R.id.iv_mealimage);
         image.setImageResource(R.drawable.ic_launcher);
-        btnadd = (Button)dialog.findViewById(R.id.btnAdd);
-        timepicker = (EditText)dialog.findViewById(R.id.timeedit);
+        btnadd = (Button)dialog.findViewById(R.id.bt_add);
+        timepicker = (EditText)dialog.findViewById(R.id.tv_timeedit);
         timepicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,7 +93,7 @@ public class MealsFragment extends Fragment {
 
             }
         });
-        datepicker = (EditText)dialog.findViewById(R.id.editdate);
+        datepicker = (EditText)dialog.findViewById(R.id.tv_dateedit);
         datepicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,7 +112,7 @@ public class MealsFragment extends Fragment {
                 mDatePicker.show();
             }
         });
-        spMealGroup = (Spinner)dialog.findViewById(R.id.spMealGroup);
+        spMealGroup = (Spinner)dialog.findViewById(R.id.sp_MealGroup);
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(
                 getActivity(), R.array.essensart, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

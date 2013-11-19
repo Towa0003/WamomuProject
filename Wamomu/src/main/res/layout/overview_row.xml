@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Frühstück"
-        android:id="@+id/art_textView"
+        android:id="@+id/tv_art"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true" />
     <TextView
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="09:32 / 04.11.2013"
-        android:id="@+id/textView3"
+        android:id="@+id/tv_datum"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true" />
 </RelativeLayout>
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Nutellabrot"
-        android:id="@+id/gericht_textView"
+        android:id="@+id/tv_gericht"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true" />
 

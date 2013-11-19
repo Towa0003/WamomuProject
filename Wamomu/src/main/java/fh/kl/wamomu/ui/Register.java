@@ -20,7 +20,7 @@ public class Register extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
 
-        login = (Button) findViewById(R.id.login_button);
+        login = (Button) findViewById(R.id.bt_login_register);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

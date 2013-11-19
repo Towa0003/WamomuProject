@@ -35,9 +35,6 @@
         <activity
             android:name=".ui.NavigationDrawer"
             ></activity>
-        <activity
-            android:name=".ui.ExpList"
-            ></activity>
 
         <activity
             android:name=".database.test2"

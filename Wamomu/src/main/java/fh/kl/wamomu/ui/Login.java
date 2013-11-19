@@ -23,7 +23,7 @@ public class Login extends Activity {
         setContentView(R.layout.login);
         setTitle("Login");
 
-        b_login = (Button) findViewById(R.id.login_button);
+        b_login = (Button) findViewById(R.id.bt_login);
         b_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -31,7 +31,7 @@ public class Login extends Activity {
                 startActivity(i);
             }
         });
-        b_register = (Button) findViewById(R.id.register_button);
+        b_register = (Button) findViewById(R.id.bt_register);
         b_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

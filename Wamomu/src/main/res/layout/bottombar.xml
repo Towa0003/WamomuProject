@@ -24,7 +24,7 @@
             android:orientation="horizontal"
             android:measureWithLargestChild="true">
 
-            <LinearLayout android:id="@+id/leftSpacer"
+            <LinearLayout android:id="@+id/ll_leftSpacer"
                 android:layout_weight="0.25"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
                 android:filterTouchesWhenObscured="true"
                 style="?android:attr/buttonBarButtonStyle" />
 
-            <LinearLayout android:id="@+id/rightSpacer"
+            <LinearLayout android:id="@+id/ll_rightSpacer"
                 android:layout_width="0dip"
                 android:layout_weight="0.25"
                 android:layout_height="wrap_content"

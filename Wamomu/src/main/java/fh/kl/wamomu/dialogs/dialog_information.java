@@ -24,10 +24,10 @@ public class dialog_information extends Dialog {
          t = (TextView) findViewById(R.id.dia_text);
         t.setText("Diese App wurde von der Superhyperultracoolen Truppe Wamomu für das obergeilste Megafach Ever genannt Studienprojekt gemacht!!!! 65 Wat ");
 
-       image = (ImageView) findViewById(R.id.image);
+       image = (ImageView) findViewById(R.id.iv_infoimage);
                 image.setImageResource(R.drawable.ic_launcher);
 
-        dialogButton = (Button) findViewById(R.id.dialogButtonOK);
+        dialogButton = (Button) findViewById(R.id.bt_ok);
                 // if button is clicked, close the custom dialog
                 dialogButton.setOnClickListener(new View.OnClickListener() {
                    @Override

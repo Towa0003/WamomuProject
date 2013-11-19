@@ -37,11 +37,11 @@ public class SettingsFragment extends Fragment {
                 container, false);
         getActivity().setTitle("Einstellungen");
 
-        pairview = (TextView) view.findViewById(R.id.pair_textView);
-        infoview = (TextView) view.findViewById(R.id.info_textView);
-        kalview = (TextView) view.findViewById(R.id.add_textView);
+        pairview = (TextView) view.findViewById(R.id.tv_paired_devices);
+        infoview = (TextView) view.findViewById(R.id.tv_info);
+        kalview = (TextView) view.findViewById(R.id.tv_addGeraet);
 
-        codeview = (TextView) view.findViewById(R.id.code);
+        codeview = (TextView) view.findViewById(R.id.tv_code);
 
 
         kalview.setOnClickListener(new View.OnClickListener() {
@@ -55,8 +55,8 @@ public class SettingsFragment extends Fragment {
 
 
 
-                codepin = (EditText) dialog2.findViewById(R.id.pinset);
-                searchButton = (Button) dialog2.findViewById(R.id.btnSearch);
+                codepin = (EditText) dialog2.findViewById(R.id.et_pinset);
+                searchButton = (Button) dialog2.findViewById(R.id.bt_Search);
                 searchButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

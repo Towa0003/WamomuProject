@@ -44,7 +44,7 @@ public class NavigationDrawer extends Activity {
 
         changeFragment = new UebersichtFragment();
         FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.replace(R.id.content_frame, changeFragment);
+        ft.replace(R.id.fl_content_frame, changeFragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
 
@@ -143,7 +143,7 @@ public class NavigationDrawer extends Activity {
             }
 
 
-            ft.replace(R.id.content_frame, changeFragment);
+            ft.replace(R.id.fl_content_frame, changeFragment);
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.commit();
         }
@@ -176,7 +176,7 @@ public class NavigationDrawer extends Activity {
                     MeasurementFragment.dia = 1;
                 }
 
-                ft.replace(R.id.content_frame, changeFragment);
+                ft.replace(R.id.fl_content_frame, changeFragment);
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 ft.commit();
             }

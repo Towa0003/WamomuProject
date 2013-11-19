@@ -29,8 +29,8 @@ public class OverviewArrayAdapter extends ArrayAdapter<String> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.overview_row, parent, false);
-        TextView art = (TextView) rowView.findViewById(R.id.art_textView);
-        TextView gericht = (TextView) rowView.findViewById(R.id.gericht_textView);
+        TextView art = (TextView) rowView.findViewById(R.id.tv_art);
+        TextView gericht = (TextView) rowView.findViewById(R.id.tv_gericht);
         art.setText(values_art[position]);
         gericht.setText(values_gericht[position]);
 

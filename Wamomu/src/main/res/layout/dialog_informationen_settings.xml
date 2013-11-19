@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"  >
 
     <ImageView
-        android:id="@+id/image"
+        android:id="@+id/iv_infoimage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="5dp" />
@@ -14,17 +14,17 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/color_0"
-        android:layout_toRightOf="@+id/image"/>/>
+        android:layout_toRightOf="@+id/iv_mealimage"/>/>
 
     <Button
-        android:id="@+id/dialogButtonOK"
+        android:id="@+id/bt_ok"
         android:layout_width="100px"
         android:layout_height="wrap_content"
         android:text=" Ok "
         android:layout_marginTop="5dp"
         android:layout_marginRight="5dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/image"
+        android:layout_below="@+id/iv_mealimage"
         />
 
 </RelativeLayout>
