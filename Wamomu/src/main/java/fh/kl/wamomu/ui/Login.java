@@ -6,12 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import fh.kl.wamomu.R;
-import fh.kl.wamomu.database.MainActivity;
 import fh.kl.wamomu.database.database;
-import fh.kl.wamomu.database.test2;
 
 /**
  * Created by Thundernator on 04.11.13.
@@ -33,10 +30,10 @@ public class Login extends Activity {
 //        db = new database();
 //        db.accessWebService();
 
-        et_login = (EditText) findViewById(R.id.et_username);
-        et_password = (EditText) findViewById(R.id.et_password);
+        et_login = (EditText) findViewById(R.id.et_username_edit);
+        et_password = (EditText) findViewById(R.id.et_password_edit);
 
-        b_login = (Button) findViewById(R.id.login_button);
+        b_login = (Button) findViewById(R.id.bt_login);
         b_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,7 +49,7 @@ public class Login extends Activity {
                 startActivity(i);
             }
         });
-        b_register = (Button) findViewById(R.id.register_button);
+        b_register = (Button) findViewById(R.id.bt_register);
         b_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
