@@ -40,16 +40,16 @@ public class Login extends Activity {
         b_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (db.checkUser(et_login.getText().toString(), et_password.getText().toString())) {
-                    Intent i = new Intent(Login.this, NavigationDrawer.class);
-                    startActivity(i);
-                    Toast.makeText(Login.this, "Connected", Toast.LENGTH_LONG).show();
-
-                }else{
-                    Toast.makeText(Login.this, "User or password wrong", Toast.LENGTH_LONG).show();
-                    Intent i = new Intent(Login.this, NavigationDrawer.class);
-                    startActivity(i);
-                }
+//                if (db.checkUser(et_login.getText().toString(), et_password.getText().toString())) {
+//                    Intent i = new Intent(Login.this, NavigationDrawer.class);
+//                    startActivity(i);
+//                    Toast.makeText(Login.this, "Connected", Toast.LENGTH_LONG).show();
+//
+//                }else{
+//                    Toast.makeText(Login.this, "User or password wrong", Toast.LENGTH_LONG).show();
+//                }
+                Intent i = new Intent(Login.this, NavigationDrawer.class);
+                startActivity(i);
             }
         });
         b_register = (Button) findViewById(R.id.register_button);
