@@ -27,6 +27,7 @@ package fh.kl.wamomu.database;
         import android.util.Log;
         import android.widget.LinearLayout;
         import android.widget.TextView;
+        import android.widget.Toast;
 
         import fh.kl.wamomu.R;
 
@@ -49,7 +50,8 @@ public class test2 extends Activity {
         // Set the text and call the connect function.
         txt.setText("Connecting...");
         //call the method to run the data retreival
-        txt.setText(getServerData(KEY_121));
+//        txt.setText(getServerData(KEY_121));
+        new RetrieveMessages().execute();
 
 
 
@@ -67,8 +69,8 @@ public class test2 extends Activity {
         ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
         nameValuePairs.add(new BasicNameValuePair("year","1970"));
 
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
+//        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+//        StrictMode.setThreadPolicy(policy);
         //http post
         try{
             HttpClient httpclient = new DefaultHttpClient();
@@ -116,22 +118,62 @@ public class test2 extends Activity {
 
     private class RetrieveMessages extends AsyncTask<String, Void, String> {
         protected String doInBackground(String... urls) {
-            HttpClient client = new DefaultHttpClient();
-            String json = "";
-            try {
-                String line = "";
-                HttpGet request = new HttpGet(urls[0]);
-                HttpResponse response = client.execute(request);
-                BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-                while ((line = rd.readLine()) != null) {
-                    json += line + System.getProperty("line.separator");
-                }
-            } catch (IllegalArgumentException e1) {
-                e1.printStackTrace();
-            } catch (IOException e2) {
-                e2.printStackTrace();
+            InputStream is = null;
+
+            String result = "";
+            //the year data to send
+            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+            nameValuePairs.add(new BasicNameValuePair("year","1970"));
+
+           final String KEY_121 = "http://192.168.1.6/android/mysqlcon.php"; //i use my real ip here
+            String returnString = KEY_121;
+
+//        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+//        StrictMode.setThreadPolicy(policy);
+            //http post
+            try{
+                HttpClient httpclient = new DefaultHttpClient();
+                HttpPost httppost = new HttpPost(KEY_121);
+                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                HttpResponse response = httpclient.execute(httppost);
+                HttpEntity entity = response.getEntity();
+                is = entity.getContent();
+
+            }catch(Exception e){
+                Log.e("log_tag", "Error in http connection "+e.toString());
             }
-            return json;
+
+            //convert response to string
+            try{
+                BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line + "\n");
+                    System.out.println("line" + line);
+                }
+                is.close();
+                result=sb.toString();
+            }catch(Exception e){
+                Log.e("log_tag", "Error converting result "+e.toString());
+            }
+            //parse json data
+            try{
+                JSONArray jArray = new JSONArray(result);
+                for(int i=0;i<jArray.length();i++){
+                    JSONObject json_data = jArray.getJSONObject(i);
+                    Log.i("log_tag","id: "+json_data.getInt("id")+
+                            ", name: "+json_data.getString("name")+
+                            ", sex: "+json_data.getInt("sex")+
+                            ", birthyear: "+json_data.getInt("birthyear")
+                    );
+                    //Get an output to the screen
+                    returnString += "\n\t" + jArray.getJSONObject(i);
+                }
+            }catch(JSONException e){
+                Log.e("log_tag", "Error parsing data "+e.toString());
+            }
+            return returnString;
         }
 
         protected void onProgressUpdate(Void... progress) {
@@ -139,8 +181,10 @@ public class test2 extends Activity {
         }
 
         protected void onPostExecute(String result) {
-           // TextView tv = (TextView) findViewById(R.id.tv_messages);
-           // tv.setText(result);
+            if(result != null){
+           TextView tv = (TextView) findViewById(R.id.tv_messages);
+           tv.setText(result);
+            }
         }
     }
 

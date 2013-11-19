@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import fh.kl.wamomu.R;
+import fh.kl.wamomu.database.MainActivity;
 import fh.kl.wamomu.database.test2;
 
 /**
@@ -36,7 +37,7 @@ public class Login extends Activity {
             @Override
             public void onClick(View v) {
                 //Intent i = new Intent(Login.this,Register.class);
-                Intent i = new Intent(Login.this,test2.class);
+                Intent i = new Intent(Login.this,MainActivity.class);
 
                 startActivity(i);
             }
