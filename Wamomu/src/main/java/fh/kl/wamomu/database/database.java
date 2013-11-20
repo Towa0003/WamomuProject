@@ -119,7 +119,7 @@ public class database extends Activity {
                 String number = jsonChildNode.optString("password");
 
                 System.out.println("Number " + number);
-                String name = jsonChildNode.optString("name");
+                String name = jsonChildNode.optString("user");
                 System.out.println("Name" + name);
 
                 String password = jsonChildNode.optString("password");

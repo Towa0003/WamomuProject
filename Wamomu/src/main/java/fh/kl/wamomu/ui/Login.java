@@ -42,6 +42,7 @@ public class Login extends Activity {
         b_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.out.println(  "Teseghwqzhwzghhjrfdbnw    kut" +  et_login.getText().toString() + et_password.getText().toString()  );
                 if (db.checkUser(et_login.getText().toString(), et_password.getText().toString())) {
                     activeUser = new user(et_login.getText().toString(), et_password.getText().toString(),null,null);
                     Intent i = new Intent(Login.this, NavigationDrawer.class);
