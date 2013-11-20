@@ -156,7 +156,7 @@ public class database extends Activity {
             for (int i = 0; i < jsonMainNode.length(); i++) {
                 JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
                 System.out.println("Test" + jsonChildNode.toString());
-                String test = jsonChildNode.getString("name");
+                String test = jsonChildNode.getString("user");
                 System.out.println("gfehbuiogq" + test);
                 String number = jsonChildNode.optString("password");
 
