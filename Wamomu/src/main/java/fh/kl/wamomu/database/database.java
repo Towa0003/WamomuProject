@@ -114,18 +114,18 @@ public class database extends Activity {
             for (int i = 0; i < jsonMainNode.length(); i++) {
                 JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
                 System.out.println("Test" + jsonChildNode.toString());
-                String test = jsonChildNode.getString("name");
+                String test = jsonChildNode.getString("user");
                 System.out.println("gfehbuiogq" + test);
                 String number = jsonChildNode.optString("password");
 
                 System.out.println("Number " + number);
-                String name = jsonChildNode.optString("user");
-                System.out.println("Name" + name);
+                String user = jsonChildNode.optString("user");
+                System.out.println("user" + user);
 
                 String password = jsonChildNode.optString("password");
                 System.out.println("Password" + password);
 
-                String outPut = name + "-" + number + "-" + password;
+                String outPut = user + "-" + number + "-" + password;
                 employeeList.add(createEmployee("employees", outPut));
             }
         } catch (JSONException e) {
@@ -139,13 +139,13 @@ public class database extends Activity {
         listView.setAdapter(simpleAdapter);
     }
 
-    private HashMap<String, String> createEmployee(String name, String number) {
-        HashMap<String, String> employeeNameNo = new HashMap<String, String>();
-        employeeNameNo.put(name, number);
-        return employeeNameNo;
+    private HashMap<String, String> createEmployee(String user, String number) {
+        HashMap<String, String> employeeuserNo = new HashMap<String, String>();
+        employeeuserNo.put(user, number);
+        return employeeuserNo;
     }
 
-    public boolean checkUser(String username, String userpassword) {
+    public boolean checkUser(String useruser, String userpassword) {
         boolean datatrue = false;
 
         try {
@@ -161,13 +161,13 @@ public class database extends Activity {
                 String number = jsonChildNode.optString("password");
 
                 System.out.println("Number " + number);
-                String name = jsonChildNode.optString("name");
-                System.out.println("Name" + name);
+                String user = jsonChildNode.optString("user");
+                System.out.println("user" + user);
 
                 String password = jsonChildNode.optString("password");
                 System.out.println("Password" + password);
 
-                if (username.equals(name) && userpassword.equals(password)) {
+                if (useruser.equals(user) && userpassword.equals(password)) {
                     System.out.println("DATATRUE!!!!!!!!!!!!!!!!!!!");
                     datatrue = true;
                 } else {
