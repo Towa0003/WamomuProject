@@ -22,6 +22,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import fh.kl.wamomu.R;
+import fh.kl.wamomu.database.database;
+import fh.kl.wamomu.meta.user;
 
 /**
  * Created by Thundernator on 04.11.13.
@@ -33,6 +35,8 @@ public class NavigationDrawer extends Activity {
     private ListView drawerListView;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     final CharSequence[] items = {"Mahlzeit", "Messung"};
+
+
 
 
     Fragment changeFragment = null;
