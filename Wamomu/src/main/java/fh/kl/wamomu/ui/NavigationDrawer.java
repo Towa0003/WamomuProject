@@ -144,6 +144,8 @@ public class NavigationDrawer extends Activity {
                 changeFragment = new SettingsFragment();
             } else if (position == 4) {
                 changeFragment = new StatistikFragment();
+            }else if (position == 5) {
+                changeFragment = new StatistikTESTFragment();
             }
 
 

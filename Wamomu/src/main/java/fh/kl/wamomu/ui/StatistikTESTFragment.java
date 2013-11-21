@@ -1,12 +1,16 @@
 package fh.kl.wamomu.ui;
 
 import android.app.Fragment;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -14,10 +18,8 @@ import org.achartengine.ChartFactory;
 import org.achartengine.GraphicalView;
 import org.achartengine.chart.PointStyle;
 import org.achartengine.model.SeriesSelection;
-import org.achartengine.model.TimeSeries;
 import org.achartengine.model.XYMultipleSeriesDataset;
 import org.achartengine.model.XYSeries;
-import org.achartengine.renderer.BasicStroke;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
@@ -31,15 +33,20 @@ import fh.kl.wamomu.meta.measurement;
 /**
  * Created by Thundernator on 04.11.13.
  */
-public class StatistikFragment extends Fragment {
+public class StatistikTESTFragment extends Fragment {
 
 
     private GraphicalView chart;
     private FrameLayout fl_chartContainer;
 
-    TimeSeries series;
-    TimeSeries series2;
-    XYSeries series3;
+    private Button b_addValue;
+    public EditText et_valueY;
+    private double valueY;
+
+    Resources res;
+    TypedArray menge;
+    String legend;
+    XYSeries series;
 
     /////// Arraylist, wird später evtl ausgelagert ////////
     static List<meal> meals = new ArrayList<meal>();
@@ -64,10 +71,19 @@ public class StatistikFragment extends Fragment {
         getActivity().setTitle("Statistik");
 
         fl_chartContainer = (FrameLayout) view.findViewById(R.id.chartContainerLineChart_frameLayout);
+//        b_addValue = (Button) view.findViewById(R.id.addValue_button);
+//        et_valueY = (EditText) view.findViewById(R.id.valueY_editText);
 
-        series = new TimeSeries("random");
-        series2 = new TimeSeries("random2");
-        series3 = new XYSeries("random3");
+        legend = getString(R.string.legend_name, 0);
+        series = new XYSeries(legend);
+
+
+//        b_addValue.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                add();
+//            }
+//        });
 
         ///////////////// Vordefinierte Werte für Meals-Arraylist ///////
 
@@ -103,34 +119,6 @@ public class StatistikFragment extends Fragment {
         measurements.add(new measurement(03.10, 11.32, 5.3));
 
         System.out.println("ON CREATE VIEW");
-        if (chart == null) {
-            chart = ChartFactory.getLineChartView(getActivity(), createDataSet(), createRenderer());
-            fl_chartContainer.addView(chart);
-            System.out.println("chart PAINTED");
-
-
-        } else {
-            System.out.println("chart REPAINTED");
-            chart.repaint();
-        }
-        // onClick um von Punkten auf die jeweilige Mahlzeit zu verweisen
-        chart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SeriesSelection seriesSelection = chart.getCurrentSeriesAndPoint();     // initialisierung clickable area
-
-                if (seriesSelection == null) {
-
-                } else {
-                    // display information of the clicked point
-                    Toast.makeText(
-                            getActivity(),
-                            "Data point index " + seriesSelection.getPointIndex() + " was clicked" + "\n"
-                                    + "value X=" + seriesSelection.getXValue() + "\n"
-                                    + "value Y=" + seriesSelection.getValue(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
 
         return view;
     }
@@ -140,15 +128,40 @@ public class StatistikFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
+        if (chart == null) {
+            chart = ChartFactory.getLineChartView(getActivity(), createDataSet(), createRenderer());
+            fl_chartContainer.addView(chart);
+            System.out.println("ON RESUME IF");
 
+            // onClick um von Punkten auf die jeweilige Mahlzeit zu verweisen
+            chart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SeriesSelection seriesSelection = chart.getCurrentSeriesAndPoint();     // initialisierung clickable area
+
+                    if (seriesSelection == null) {
+                        System.out.println("No Point");
+                    } else {
+                        // display information of the clicked point
+                        Toast.makeText(
+                                getActivity(),
+                                "Data point index " + seriesSelection.getPointIndex() + " was clicked" + "\n"
+                                        + "value X=" + seriesSelection.getXValue() + "\n"
+                                        + "value Y=" + seriesSelection.getValue(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+        } else {
+            System.out.println("ON RESUME ELSE");
+            chart.repaint();
+        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
         System.out.println("ON PAUSE");
-//        meals.clear();
-//        measurements.clear();
 
     }
 
@@ -165,10 +178,9 @@ public class StatistikFragment extends Fragment {
 
 
         XYMultipleSeriesRenderer renderer = new XYMultipleSeriesRenderer();
-
+        XYMultipleSeriesRenderer rendererr = new XYMultipleSeriesRenderer();
         XYSeriesRenderer xySeriesRenderer0 = new XYSeriesRenderer();
-        XYSeriesRenderer xySeriesRenderer1 = new XYSeriesRenderer();
-        XYSeriesRenderer xySeriesRenderer2 = new XYSeriesRenderer();
+        XYSeriesRenderer xySeriesRenderer1= new XYSeriesRenderer();
 
         renderer.setAntialiasing(true);
         renderer.setClickEnabled(true);         // clickable machen
@@ -192,11 +204,6 @@ public class StatistikFragment extends Fragment {
         renderer.setLabelsColor(Color.BLACK);
         renderer.setPanEnabled(true, false);
         renderer.setZoomEnabled(true, false);
-        double limit[] = {0-0.01, measurements.size()-0.99, 0, 10};
-        renderer.setPanLimits(limit);
-        renderer.setZoomLimits(limit);
-
-        System.out.println("ZOOOOOOOOOOM= " + renderer.getZoomRate());
 
         renderer.setXLabels(0);             // Standard X-Labels ausblenden
 //      renderer.setYLabels(0);             // Standard Y-Labels ausblenden
@@ -207,10 +214,9 @@ public class StatistikFragment extends Fragment {
         // Legende
         renderer.setLegendTextSize(30);
         renderer.setLegendHeight(100);
-        renderer.setShowLegend(false);
 
         // Punkte
-        renderer.setPointSize(25f);
+        renderer.setPointSize(20f);
 
         // data area
         renderer.setShowGrid(true);
@@ -220,38 +226,35 @@ public class StatistikFragment extends Fragment {
         renderer.setMargins(new int[]{60, 80, 100, 0});     // Abstand
         renderer.setMarginsColor(Color.WHITE);      // Hintergrundfarbe außerhalb Diagramm
 
-//        xySeriesRenderer0.setPointStyle(null);
-        xySeriesRenderer0.setColor(getResources().getColor(R.color.color_line));
+
+        xySeriesRenderer0.setPointStyle(PointStyle.CIRCLE);
+
+        xySeriesRenderer0.setColor(getResources().getColor(R.color.color_good));
         xySeriesRenderer0.setLineWidth(5f);
         xySeriesRenderer0.setFillBelowLine(true);
-        xySeriesRenderer0.setFillBelowLineColor(getResources().getColor(R.color.color_belowLine));
-
+        xySeriesRenderer0.setFillBelowLineColor(getResources().getColor(R.color.color_bad));
+        xySeriesRenderer0.setFillPoints(true);
         xySeriesRenderer1.setPointStyle(PointStyle.CIRCLE);
-        xySeriesRenderer1.setColor(getResources().getColor(R.color.color_bad));
-        xySeriesRenderer1.setStroke(BasicStroke.DASHED);
-//        xySeriesRenderer1.setLineWidth(5f);
         xySeriesRenderer1.setFillPoints(true);
+        xySeriesRenderer1.setColor(Color.RED);
+        xySeriesRenderer1.setLineWidth(5f);
 
-        xySeriesRenderer2.setPointStyle(PointStyle.CIRCLE);
-        xySeriesRenderer2.setColor(getResources().getColor(R.color.color_good));
-        xySeriesRenderer2.setStroke(BasicStroke.DASHED);
-//        xySeriesRenderer2.setLineWidth(5f);
-        xySeriesRenderer2.setFillPoints(true);
 
-//        xySeriesRenderer3.setPointStyle(null);
-//        xySeriesRenderer3.setColor(getResources().getColor(R.color.color_good));
-//        xySeriesRenderer3.setLineWidth(5f);
+
 
         // Daten an die Achse schreiben
         for (int i = 0; i < measurements.size(); i++) {
             renderer.addXTextLabel(i, String.valueOf(measurements.get(i).getDate() + "\n" + measurements.get(i).getTime()));        // Datum an X-Achse schreiben
+
             if(i<=10){
                 renderer.addYTextLabel(i, String.valueOf(i));               // Werte an Y-Achse schreiben
+
             }
         }
-        renderer.addSeriesRenderer(0, xySeriesRenderer0);
-        renderer.addSeriesRenderer(1, xySeriesRenderer1);
-        renderer.addSeriesRenderer(2, xySeriesRenderer2);
+        System.out.println("meals size: " + meals.size());
+        System.out.println("measurements size: " + measurements.size());
+        renderer.addSeriesRenderer(0,xySeriesRenderer0);
+
         return renderer;
     }
 
@@ -259,28 +262,17 @@ public class StatistikFragment extends Fragment {
     private XYMultipleSeriesDataset createDataSet() {
 
         XYMultipleSeriesDataset dataSet = new XYMultipleSeriesDataset();
-        double x;
-        double y;
 
         for (int i = 0; i < measurements.size(); i++) {
-            x = i;                                       // Wert X-Achse
-            y = measurements.get(i).getMeasurement();    // Wert Y-Achse
-            if(4.5<=measurements.get(i).getMeasurement()){
-                series3.add(x, y);
-            }
-            else{
-                series2.add(x,y);
-            }
-            series.add(x,y);
-        }
+            double x = i;                                       // Wert X-Achse
+            double y = measurements.get(i).getMeasurement();    // Wert Y-Achse
 
-        dataSet.addSeries(0,series);
-        dataSet.addSeries(1,series2);
-        dataSet.addSeries(2,series3);
+            series.add(x, y);
+        }
+        dataSet.addSeries(series);
 
         return dataSet;
     }
-
 
 }
 
