@@ -11,7 +11,7 @@
         android:layout_height="wrap_content" >
 
         <ImageView
-            android:id="@+id/iv_search_image"
+            android:id="@+id/iv_code_image"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_marginRight="10dp"
@@ -19,10 +19,10 @@
 
 
         <TextView
-            android:id="@+id/tv_titletext"
+            android:id="@+id/tv_codetitel"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:text="Neues Gerät hinzufügen"
+            android:text="Code ändern"
              />
 
     </LinearLayout>
@@ -35,7 +35,7 @@
 
 
         <TextView
-            android:id="@+id/tv_koppin"
+            android:id="@+id/tv_codetext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Kopplungs-PIN: "
@@ -44,12 +44,11 @@
 
 
         <EditText
-            android:id="@+id/et_pinset"
+            android:id="@+id/et_codeset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="9676"
             android:padding="10dp" >
 
             <requestFocus />
@@ -58,33 +57,7 @@
 
 
     </LinearLayout>
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dip"
-        android:background="#FF0000FF"
-        />
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
 
-
-        <TextView
-            android:id="@+id/tv_addinfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Info: Lore Ipsum Kackamänner"
-            android:padding="10dp"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-
-
-
-            <requestFocus />
-
-
-
-
-    </LinearLayout>
 
 
 
@@ -98,11 +71,11 @@
 
 
         <Button
-            android:id="@+id/bt_Search"
+            android:id="@+id/bt_code"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Suchen" />
+            android:text="Code ändern" />
 
     </LinearLayout>
 

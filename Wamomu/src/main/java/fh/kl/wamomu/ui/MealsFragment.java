@@ -22,6 +22,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import fh.kl.wamomu.R;
@@ -74,12 +75,18 @@ public class MealsFragment extends Fragment {
         image.setImageResource(R.drawable.ic_launcher);
         btnadd = (Button)dialog.findViewById(R.id.bt_add);
         timepicker = (EditText)dialog.findViewById(R.id.tv_timeedit);
+            Calendar mcurrentTime = Calendar.getInstance();
+            final int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+            final int minute = mcurrentTime.get(Calendar.MINUTE);
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+            final int date = mcurrentTime.get(Calendar.DATE);
+            final int month = mcurrentTime.get(Calendar.MONTH);
+            final int year = mcurrentTime.get(Calendar.YEAR);
+            timepicker.setText(sdf.format(mcurrentTime.getTime()));
+
         timepicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Calendar mcurrentTime = Calendar.getInstance();
-                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-                int minute = mcurrentTime.get(Calendar.MINUTE);
                 TimePickerDialog mTimePicker;
                 mTimePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
                     @Override
@@ -94,13 +101,12 @@ public class MealsFragment extends Fragment {
             }
         });
         datepicker = (EditText)dialog.findViewById(R.id.tv_dateedit);
+
+        datepicker.setText(date + "." + month + "." + year);
         datepicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Calendar mcurrentTime = Calendar.getInstance();
-                int date = mcurrentTime.get(Calendar.DATE);
-                int month = mcurrentTime.get(Calendar.MONTH);
-                int year = mcurrentTime.get(Calendar.YEAR);
+
                 DatePickerDialog mDatePicker;
                 mDatePicker = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener(){
                     @Override

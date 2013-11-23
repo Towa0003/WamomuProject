@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.bluetooth.BluetoothAdapter;
 
+import org.w3c.dom.Text;
+
 import java.util.Set;
 
 import fh.kl.wamomu.R;
@@ -26,7 +28,7 @@ public class SettingsFragment extends Fragment {
 
     private TextView pairview, infoview, kalview, codeview;
     private EditText codepin;
-    private Button searchButton;
+    private Button searchButton, codeButton;
     private static final int REQUEST_ENABLE_BT = 1;
     BluetoothAdapter btAdapter;
 
@@ -40,8 +42,32 @@ public class SettingsFragment extends Fragment {
         pairview = (TextView) view.findViewById(R.id.tv_paired_devices);
         infoview = (TextView) view.findViewById(R.id.tv_info);
         kalview = (TextView) view.findViewById(R.id.tv_addGeraet);
+        codeview = (TextView) view.findViewById(R.id.tv_kalibrierungscode);
 
-        codeview = (TextView) view.findViewById(R.id.tv_code);
+        codeview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog dialog3 = new Dialog(getActivity());
+
+                dialog3.setContentView(R.layout.dialog_change_code);
+                dialog3.setTitle("Kalibrierungscode ändern");
+                dialog3.setCancelable(true);
+
+
+
+                codepin = (EditText) dialog3.findViewById(R.id.et_codeset);
+                codeButton = (Button) dialog3.findViewById(R.id.bt_code);
+                codeButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                       codeview.setText("Code: " +codepin.getText().toString());
+                        dialog3.dismiss();
+                    }
+                });
+
+                dialog3.show();
+            }
+        });
 
 
         kalview.setOnClickListener(new View.OnClickListener() {
@@ -55,12 +81,12 @@ public class SettingsFragment extends Fragment {
 
 
 
-                codepin = (EditText) dialog2.findViewById(R.id.et_pinset);
+
                 searchButton = (Button) dialog2.findViewById(R.id.bt_Search);
                 searchButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        codeview.setText(codepin.getText().toString());
+
                        dialog2.dismiss();
                    }
                 });
