@@ -30,6 +30,7 @@
         <item>Mahlzeiten</item>
         <item>Einstellungen</item>
         <item>Statistik</item>
+        <item>StatistikTEST</item>
     </string-array>
 
     <string name="drawer_open">Open Drawer</string>
