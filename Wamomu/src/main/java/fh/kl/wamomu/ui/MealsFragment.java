@@ -111,7 +111,7 @@ public class MealsFragment extends Fragment {
                 mDatePicker = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener(){
                     @Override
                     public void onDateSet(DatePicker datePicker, int selectedDate, int selectedMonth, int selectedYear) {
-                        datepicker.setText( selectedDate + ":" + selectedMonth + ":" + selectedYear);
+                        datepicker.setText( selectedDate + " :" + selectedMonth + ":" + selectedYear);
                     }
                 }, date, month, year);
                 mDatePicker.setTitle("Select Date");
