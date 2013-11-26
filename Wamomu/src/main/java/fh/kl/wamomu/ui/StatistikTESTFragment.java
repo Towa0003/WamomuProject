@@ -23,10 +23,14 @@ import org.achartengine.model.XYSeries;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import fh.kl.wamomu.R;
+import fh.kl.wamomu.database.databaseMeals;
 import fh.kl.wamomu.meta.meal;
 import fh.kl.wamomu.meta.measurement;
 
@@ -42,14 +46,16 @@ public class StatistikTESTFragment extends Fragment {
     private Button b_addValue;
     public EditText et_valueY;
     private double valueY;
-
+    String test;
+    SimpleDateFormat sdf;
+    Date date;
     Resources res;
     TypedArray menge;
     String legend;
     XYSeries series;
 
     /////// Arraylist, wird später evtl ausgelagert ////////
-    static List<meal> meals = new ArrayList<meal>();
+
     static List<measurement> measurements = new ArrayList<measurement>();
 
         /*
@@ -84,18 +90,23 @@ public class StatistikTESTFragment extends Fragment {
 //                add();
 //            }
 //        });
+        System.out.println("MEEEEALS: " + databaseMeals.meals.size());
+        for (int i = 0; i < databaseMeals.meals.size(); i++){
+            System.out.println(databaseMeals.meals.get(i).getDate());
+            System.out.println(databaseMeals.meals.get(i).getTime());
 
+        }
         ///////////////// Vordefinierte Werte für Meals-Arraylist ///////
 
-        meals.add(new meal("Frühstück", "Schinken", 01.10, 11.11));
-        meals.add(new meal("Mittagessen", "Gulasch", 01.10, 15.30));
-        meals.add(new meal("Abendessen", "Salamibrot", 01.10, 18.20));
-
-        meals.add(new meal("Frühstück", "Käsebrot, Ei", 02.10, 10.00));
-        meals.add(new meal("Mittagessen", "Lasagne", 02.10, 13.50));
-        meals.add(new meal("Abendessen", "Schinkenbrot", 02.10, 18.30));
-
-        meals.add(new meal("Frühstück", "Tomaten, Mozarella,, Toastbrot, Frischkäse", 03.10, 11.30));
+//        meals.add(new meal("Frühstück", "Schinken", 01.10, 11.11));
+//        meals.add(new meal("Mittagessen", "Gulasch", 01.10, 15.30));
+//        meals.add(new meal("Abendessen", "Salamibrot", 01.10, 18.20));
+//
+//        meals.add(new meal("Frühstück", "Käsebrot, Ei", 02.10, 10.00));
+//        meals.add(new meal("Mittagessen", "Lasagne", 02.10, 13.50));
+//        meals.add(new meal("Abendessen", "Schinkenbrot", 02.10, 18.30));
+//
+//        meals.add(new meal("Frühstück", "Tomaten, Mozarella,, Toastbrot, Frischkäse", 03.10, 11.30));
 
         measurements.add(new measurement(01.10, 11.00, 3.6));
         measurements.add(new measurement(01.10, 11.12, 5.0));
@@ -251,7 +262,7 @@ public class StatistikTESTFragment extends Fragment {
 
             }
         }
-        System.out.println("meals size: " + meals.size());
+//        System.out.println("meals size: " + meals.size());
         System.out.println("measurements size: " + measurements.size());
         renderer.addSeriesRenderer(0,xySeriesRenderer0);
 

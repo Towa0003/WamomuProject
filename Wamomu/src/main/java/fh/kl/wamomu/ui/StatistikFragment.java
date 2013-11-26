@@ -21,7 +21,9 @@ import org.achartengine.renderer.BasicStroke;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import fh.kl.wamomu.R;
@@ -70,16 +72,21 @@ public class StatistikFragment extends Fragment {
         series3 = new XYSeries("random3");
 
         ///////////////// Vordefinierte Werte für Meals-Arraylist ///////
-
-        meals.add(new meal("Frühstück", "Schinken", 01.10, 11.11));
-        meals.add(new meal("Mittagessen", "Gulasch", 01.10, 15.30));
-        meals.add(new meal("Abendessen", "Salamibrot", 01.10, 18.20));
-
-        meals.add(new meal("Frühstück", "Käsebrot, Ei", 02.10, 10.00));
-        meals.add(new meal("Mittagessen", "Lasagne", 02.10, 13.50));
-        meals.add(new meal("Abendessen", "Schinkenbrot", 02.10, 18.30));
-
-        meals.add(new meal("Frühstück", "Tomaten, Mozarella,, Toastbrot, Frischkäse", 03.10, 11.30));
+//        String date = "2013-11-10";
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        String datee = sdf.parse(date);
+//        meals.add(new meal("Frühstück", "Schinken", , null));
+//        meals.add(new meal("Mittagessen", "Gulasch", 01.10, 15.30));
+//        meals.add(new meal("Abendessen", "Salamibrot", 01.10, 18.20));
+//
+//        meals.add(new meal("Frühstück", "Käsebrot, Ei", 02.10, 10.00));
+//        meals.add(new meal("Mittagessen", "Lasagne", 02.10, 13.50));
+//        meals.add(new meal("Abendessen", "Schinkenbrot", 02.10, 18.30));
+//
+//        meals.add(new meal("Frühstück", "Tomaten, Mozarella,, Toastbrot, Frischkäse", 03.10, 11.30));
+        for(int i = 0; i < meals.size(); i++){
+            System.out.println("MEEEEEEEEALS: " + meals.get(i));
+        }
 
         measurements.add(new measurement(01.10, 11.00, 3.6));
         measurements.add(new measurement(01.10, 11.12, 5.0));

@@ -1,6 +1,9 @@
 package fh.kl.wamomu.meta;
 
+import android.text.format.Time;
+
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by T on 13.11.13.
@@ -8,13 +11,13 @@ import java.text.SimpleDateFormat;
 public class meal {
 
     String foodkind; //Frühstück,Mittagessen,Abendessen
-    String food; //Schinken
-    double date;
-    double time;
+//    String food; //Schinken
+    Date date;
+    Date time;
 
-    public meal(String foodkind, String food, double date, double time) {
+    public meal(String foodkind, Date date, Date time) {
         this.foodkind = foodkind;
-        this.food = food;
+//        this.food = food;
         this.date = date;
         this.time = time;
     }
@@ -26,28 +29,28 @@ public class meal {
     public void setFoodkind(String foodkind) {
         this.foodkind = foodkind;
     }
+//
+//    public String getFood() {
+//        return food;
+//    }
+//
+//    public void setFood(String food) {
+//        this.food = food;
+//    }
 
-    public String getFood() {
-        return food;
-    }
-
-    public void setFood(String food) {
-        this.food = food;
-    }
-
-    public double getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(double date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
-    public double getTime() {
+    public Date getTime() {
         return time;
     }
 
-    public void setTime(double time) {
+    public void setTime(Date time) {
         this.time = time;
     }
 }

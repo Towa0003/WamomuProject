@@ -3,6 +3,7 @@ package fh.kl.wamomu.database;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.format.Time;
 import android.view.Menu;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -21,21 +22,26 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import fh.kl.wamomu.R;
+import fh.kl.wamomu.meta.meal;
 
-public class database extends Activity {
+public class databaseMeals extends Activity {
     private String jsonResult;
 //    private String url = "http://cpriyankara.coolpage.biz/employee_details.php";
 
-
-    protected int usersID;
-    private String url = "http://192.168.178.48/wamomusql/users_details.php";
+    private String url = "http://192.168.178.48/wamomusql/meals_details.php";
     private ListView listView;
+    public static List<meal> meals = new ArrayList<meal>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,14 +56,6 @@ public class database extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
-    }
-
-    public void setUsersID(int usersID) {
-        this.usersID = usersID;
-    }
-
-    public int getUsersID() {
-        return usersID;
     }
 
     // Async Task to access the web
@@ -116,78 +114,49 @@ public class database extends Activity {
 
     }
 
-    // build hash set for list view
-    public void ListDrwaer() {
-        List<Map<String, String>> employeeList = new ArrayList<Map<String, String>>();
-
-        try {
-            JSONObject jsonResponse = new JSONObject(jsonResult);
-
-            System.out.println("JSONObject= " + jsonResponse.toString());
-            JSONArray jsonMainNode = jsonResponse.optJSONArray("users");
-            System.out.println("JSONONArray= " + jsonMainNode.toString());
-
-
-            for (int i = 0; i < jsonMainNode.length(); i++) {
-                JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
-                System.out.println("jsonChildNode= " + jsonChildNode.toString());
-                String test = jsonChildNode.getString("user");
-                System.out.println("Current User= " + test);
-                String number = jsonChildNode.optString("id");
-                System.out.println("id= " + number);
-
-                String user = jsonChildNode.optString("user");
-                System.out.println("user" + user);
-
-                String password = jsonChildNode.optString("password");
-                System.out.println("Password" + password);
-
-                String outPut = user + "-" + number + "-" + password;
-                employeeList.add(createEmployee("employees", outPut));
-            }
-        } catch (JSONException e) {
-            Toast.makeText(this, "Error" + e.toString(),
-                    Toast.LENGTH_SHORT).show();
-        }
-
-        SimpleAdapter simpleAdapter = new SimpleAdapter(this, employeeList,
-                android.R.layout.simple_list_item_1,
-                new String[]{"employees"}, new int[]{android.R.id.text1});
-        listView.setAdapter(simpleAdapter);
-    }
-
-    private HashMap<String, String> createEmployee(String user, String number) {
-        HashMap<String, String> employeeuserNo = new HashMap<String, String>();
-        employeeuserNo.put(user, number);
-        return employeeuserNo;
-    }
-
-    public boolean checkUser(String useruser, String userpassword) {
+    public boolean checkMeal(int currentUserID) {
         boolean datatrue = false;
+        int currentID = currentUserID;
 
         try {
             JSONObject jsonResponse = new JSONObject(jsonResult);
             System.out.println("jsonresult= " + jsonResult);
             System.out.println("JSONObject= " + jsonResponse.toString());
-            JSONArray jsonMainNode = jsonResponse.optJSONArray("users");
+            JSONArray jsonMainNode = jsonResponse.optJSONArray("meals");
             System.out.println("jsonResponse.optJSONArray= " + jsonMainNode.toString());
 
             for (int i = 0; i < jsonMainNode.length(); i++) {
                 JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
-                System.out.println("Current User= " + jsonChildNode.toString());
-                String number = jsonChildNode.optString("id");
-                System.out.println("ID=  " + number);
-                String user = jsonChildNode.optString("user");
-                System.out.println("user: " + user);
-                String password = jsonChildNode.optString("password");
-                System.out.println("Password: " + password);
+                System.out.println("Current meal= " + jsonChildNode.toString());
+                String usersid = jsonChildNode.optString("users_id");
+                System.out.println("Users_ID=  " + usersid);
+                if(currentID == Integer.parseInt(usersid)){
+                    String mealkind = jsonChildNode.optString("mealkind");
+                    String datestr = jsonChildNode.optString("date");
+                    String timestr = jsonChildNode.optString("time");
+                    try
+                    {
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        Date date = sdf.parse(datestr);
+                        System.out.println("DAAAAAAAAATE:  " + sdf.format(date));
 
-                if (useruser.equals(user) && userpassword.equals(password)) {
-                    System.out.println("DATATRUE!!!!!!!!!!!!!!!!!!!");
-                    datatrue = true;
-                    setUsersID(Integer.parseInt(number));
-                } else {
-                    System.out.println("DATAFALSEE!!!!!!!!!!!!!!lllllllllllllllllllllllllllllllllllllllllllllll");
+                        sdf = new SimpleDateFormat("HH:mm:ss");
+                        Date time =  sdf.parse(timestr);
+                        System.out.println("TIIIIIIIIIIIIIIIIIIIME:  " + sdf.format(time));
+
+
+                        String mealsUserID = jsonChildNode.optString("users_id");
+                        System.out.println("Mealkind: " + mealkind
+                                + " Datum: " + date
+                                + " Zeit: " + time
+                                + " UsersID: " + mealsUserID);
+
+                        meals.add(new meal(mealkind, date, time));
+                    }
+                    catch (ParseException pe){
+                        System.out.println("PARSEEXCEPTION: " + pe);
+                    }
+
                 }
             }
         } catch (JSONException e) {
