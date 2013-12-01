@@ -1,42 +1,44 @@
 package fh.kl.wamomu.meta;
 
+import java.util.Date;
+
 /**
  * Created by T on 13.11.13.
  */
 public class measurement {
 
-    double date;
-    double time;
-    double measurement;
+    double mvalue;
+    Date date;
+    Date time;
 
 
-    public measurement(double date, double time, double measurement) {
+    public measurement(double mvalue, Date date, Date time) {
+        this.mvalue = mvalue;
         this.date = date;
         this.time = time;
-        this.measurement = measurement;
     }
 
-    public double getDate() {
+    public double getmvalue() {
+        return mvalue;
+    }
+
+    public void setmvalue(double mvalue) {
+        this.mvalue = mvalue;
+    }
+
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(double date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
-    public double getTime() {
+    public Date getTime() {
         return time;
     }
 
-    public void setTime(double time) {
+    public void setTime(Date time) {
         this.time = time;
-    }
-
-    public double getMeasurement() {
-        return measurement;
-    }
-
-    public void setMeasurement(double measurement) {
-        this.measurement = measurement;
     }
 }

@@ -34,14 +34,15 @@ import java.util.Map;
 
 import fh.kl.wamomu.R;
 import fh.kl.wamomu.meta.meal;
+import fh.kl.wamomu.meta.measurement;
 
-public class databaseMeals extends Activity {
+public class databaseMeasurements extends Activity {
     private String jsonResult;
 //    private String url = "http://cpriyankara.coolpage.biz/employee_details.php";
 
-    private String url = "http://192.168.178.48/wamomusql/meals_details.php";
+    private String url = "http://192.168.178.48/wamomusql/measurements_details.php";
     private ListView listView;
-    public static List<meal> meals = new ArrayList<meal>();
+    public static List<measurement> measurements = new ArrayList<measurement>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +115,7 @@ public class databaseMeals extends Activity {
 
     }
 
-    public boolean checkMeal(int currentUserID) {
+    public boolean checkMeasurment(int currentUserID) {
         boolean datatrue = false;
         int currentID = currentUserID;
 
@@ -122,16 +123,17 @@ public class databaseMeals extends Activity {
             JSONObject jsonResponse = new JSONObject(jsonResult);
             System.out.println("jsonresult= " + jsonResult);
             System.out.println("JSONObject= " + jsonResponse.toString());
-            JSONArray jsonMainNode = jsonResponse.optJSONArray("meals");
+            JSONArray jsonMainNode = jsonResponse.optJSONArray("measurements");
             System.out.println("jsonResponse.optJSONArray= " + jsonMainNode.toString());
 
             for (int i = 0; i < jsonMainNode.length(); i++) {
                 JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
-                System.out.println("Current meal= " + jsonChildNode.toString());
+                System.out.println("Current measurement= " + jsonChildNode.toString());
                 String usersid = jsonChildNode.optString("users_id");
                 System.out.println("Users_ID=  " + usersid);
                 if(currentID == Integer.parseInt(usersid)){
-                    String mealkind = jsonChildNode.optString("mealkind");
+                    String strMvalue = jsonChildNode.optString("mvalue");
+                    Double mvalue = Double.parseDouble(strMvalue);
                     String datestr = jsonChildNode.optString("date");
                     String timestr = jsonChildNode.optString("time");
                     try
@@ -140,18 +142,18 @@ public class databaseMeals extends Activity {
                         Date date = sdf.parse(datestr);
                         System.out.println("DAAAAAAAAATE:  " + sdf.format(date));
 
-                        sdf = new SimpleDateFormat("HH:mm");
+                        sdf = new SimpleDateFormat("HH:mm:ss");
                         Date time =  sdf.parse(timestr);
                         System.out.println("TIIIIIIIIIIIIIIIIIIIME:  " + sdf.format(time));
 
 
                         String mealsUserID = jsonChildNode.optString("users_id");
-                        System.out.println("Mealkind: " + mealkind
+                        System.out.println("Measurement: " + mvalue
                                 + " Datum: " + date
                                 + " Zeit: " + time
                                 + " UsersID: " + mealsUserID);
 
-                        meals.add(new meal(mealkind, date, time));
+                        measurements.add(new measurement(mvalue, date, time));
                     }
                     catch (ParseException pe){
                         System.out.println("PARSEEXCEPTION: " + pe);

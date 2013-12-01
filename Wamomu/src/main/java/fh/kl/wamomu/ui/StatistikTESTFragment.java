@@ -43,6 +43,9 @@ public class StatistikTESTFragment extends Fragment {
     private GraphicalView chart;
     private FrameLayout fl_chartContainer;
 
+    SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
+
     private Button b_addValue;
     public EditText et_valueY;
     private double valueY;
@@ -59,10 +62,6 @@ public class StatistikTESTFragment extends Fragment {
     static List<measurement> measurements = new ArrayList<measurement>();
 
         /*
-            # Array-list erstellen - vordefinierte daten reinschreiben - neue daten hinzufügen zur Laufzeit CHECK
-            # Datum anpassen, bzw. Werte dem aktuellen datum hinzufügen    CHECK
-            # Werte werden nicht überschrieben, sondern hintendrangehängehängt und neu neu gezeichnet CHECK
-            # Messpunkte wenns geht clickable machen CHECK
             (todo # Messpunkte momentan nur über den X-Wert clickable, wenns probleme gibt evtl. ändern)
             todo # xy Labels ändern
             todo # Wenn man reinzoomt -> Tage; rauszoomen -> Wochen; weiter Rauszoomen -> Monate auf X-Achse
@@ -77,19 +76,10 @@ public class StatistikTESTFragment extends Fragment {
         getActivity().setTitle("Statistik");
 
         fl_chartContainer = (FrameLayout) view.findViewById(R.id.chartContainerLineChart_frameLayout);
-//        b_addValue = (Button) view.findViewById(R.id.addValue_button);
-//        et_valueY = (EditText) view.findViewById(R.id.valueY_editText);
 
         legend = getString(R.string.legend_name, 0);
         series = new XYSeries(legend);
 
-
-//        b_addValue.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                add();
-//            }
-//        });
         System.out.println("MEEEEALS: " + databaseMeals.meals.size());
         for (int i = 0; i < databaseMeals.meals.size(); i++){
             System.out.println(databaseMeals.meals.get(i).getDate());
@@ -107,28 +97,36 @@ public class StatistikTESTFragment extends Fragment {
 //        meals.add(new meal("Abendessen", "Schinkenbrot", 02.10, 18.30));
 //
 //        meals.add(new meal("Frühstück", "Tomaten, Mozarella,, Toastbrot, Frischkäse", 03.10, 11.30));
+        try{
+            measurements.add(new measurement(3.6, sdfDate.parse("2013-10-01"), sdfTime.parse("11:00") ));
+            measurements.add(new measurement(5.0, sdfDate.parse("2013-10-01"), sdfTime.parse("11:12") ));
 
-        measurements.add(new measurement(01.10, 11.00, 3.6));
-        measurements.add(new measurement(01.10, 11.12, 5.0));
+            measurements.add(new measurement(4.6, sdfDate.parse("2013-10-01"), sdfTime.parse("15:10") ));
+            measurements.add(new measurement(6.3, sdfDate.parse("2013-10-01"), sdfTime.parse("15:32") ));
 
-        measurements.add(new measurement(01.10, 15.10, 4.6));
-        measurements.add(new measurement(01.10, 15.32, 6.3));
+            measurements.add(new measurement(4.9, sdfDate.parse("2013-10-01"), sdfTime.parse("18:00") ));
+            measurements.add(new measurement(6.8, sdfDate.parse("2013-10-01"), sdfTime.parse("18:21") ));
 
-        measurements.add(new measurement(01.10, 18.00, 4.9));
-        measurements.add(new measurement(01.10, 18.21, 6.8));
+            measurements.add(new measurement(3.0, sdfDate.parse("2013-10-02"), sdfTime.parse("09:40") ));
+            measurements.add(new measurement(4.8, sdfDate.parse("2013-10-02"), sdfTime.parse("10:05") ));
 
-        measurements.add(new measurement(02.10, 09.40, 3.0));
-        measurements.add(new measurement(02.10, 10.05, 4.8));
+            measurements.add(new measurement(3.2, sdfDate.parse("2013-10-02"), sdfTime.parse("13:25") ));
+            measurements.add(new measurement(5.0, sdfDate.parse("2013-10-02"), sdfTime.parse("13:55") ));
 
-        measurements.add(new measurement(02.10, 13.25, 3.2));
-        measurements.add(new measurement(02.10, 13.55, 5.0));
+            measurements.add(new measurement(3.9, sdfDate.parse("2013-10-02"), sdfTime.parse("18:15") ));
+            measurements.add(new measurement(5.6, sdfDate.parse("2013-10-02"), sdfTime.parse("18:34") ));
 
-        measurements.add(new measurement(02.10, 18.15, 3.9));
-        measurements.add(new measurement(02.10, 18.34, 5.6));
+            measurements.add(new measurement(3.2, sdfDate.parse("2013-10-03"), sdfTime.parse("11:06") ));
+            measurements.add(new measurement(5.3, sdfDate.parse("2013-10-03"), sdfTime.parse("11:32") ));
+        }
+        catch(ParseException pe){
+            System.out.print("ParseException:  " + pe);
 
-        measurements.add(new measurement(03.10, 11.06, 3.2));
-        measurements.add(new measurement(03.10, 11.32, 5.3));
+        }
 
+        for(int i = 0; i < measurements.size(); i++){
+            System.out.println("MEASUREMEEEEENTS: " + measurements.get(i));
+        }
         System.out.println("ON CREATE VIEW");
 
         return view;
@@ -276,7 +274,7 @@ public class StatistikTESTFragment extends Fragment {
 
         for (int i = 0; i < measurements.size(); i++) {
             double x = i;                                       // Wert X-Achse
-            double y = measurements.get(i).getMeasurement();    // Wert Y-Achse
+            double y = measurements.get(i).getmvalue();    // Wert Y-Achse
 
             series.add(x, y);
         }

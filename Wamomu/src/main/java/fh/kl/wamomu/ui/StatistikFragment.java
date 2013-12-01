@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -20,13 +21,19 @@ import org.achartengine.model.XYSeries;
 import org.achartengine.renderer.BasicStroke;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
+import org.achartengine.tools.PanListener;
+import org.achartengine.tools.Zoom;
+import org.achartengine.tools.ZoomEvent;
+import org.achartengine.tools.ZoomListener;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import fh.kl.wamomu.R;
+import fh.kl.wamomu.database.databaseMeals;
 import fh.kl.wamomu.meta.meal;
 import fh.kl.wamomu.meta.measurement;
 
@@ -39,19 +46,18 @@ public class StatistikFragment extends Fragment {
     private GraphicalView chart;
     private FrameLayout fl_chartContainer;
 
+    SimpleDateFormat sdfDate = new SimpleDateFormat("MM-dd");
+    SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
     TimeSeries series;
     TimeSeries series2;
     XYSeries series3;
-
+    Zoom zoomV;
+    ZoomListener listener;
     /////// Arraylist, wird später evtl ausgelagert ////////
     static List<meal> meals = new ArrayList<meal>();
     static List<measurement> measurements = new ArrayList<measurement>();
 
         /*
-            # Array-list erstellen - vordefinierte daten reinschreiben - neue daten hinzufügen zur Laufzeit CHECK
-            # Datum anpassen, bzw. Werte dem aktuellen datum hinzufügen    CHECK
-            # Werte werden nicht überschrieben, sondern hintendrangehängehängt und neu neu gezeichnet CHECK
-            # Messpunkte wenns geht clickable machen CHECK
             (todo # Messpunkte momentan nur über den X-Wert clickable, wenns probleme gibt evtl. ändern)
             todo # xy Labels ändern
             todo # Wenn man reinzoomt -> Tage; rauszoomen -> Wochen; weiter Rauszoomen -> Monate auf X-Achse
@@ -84,30 +90,42 @@ public class StatistikFragment extends Fragment {
 //        meals.add(new meal("Abendessen", "Schinkenbrot", 02.10, 18.30));
 //
 //        meals.add(new meal("Frühstück", "Tomaten, Mozarella,, Toastbrot, Frischkäse", 03.10, 11.30));
-        for(int i = 0; i < meals.size(); i++){
-            System.out.println("MEEEEEEEEALS: " + meals.get(i));
+        System.out.println("MEEEEALS: " + databaseMeals.meals.size());
+        for (int i = 0; i < databaseMeals.meals.size(); i++){
+            System.out.println("MEEEEALS DATE: " + databaseMeals.meals.get(i).getDate());
+            System.out.println("MEEEEALS TIME: " + databaseMeals.meals.get(i).getTime());
         }
+          try{
+              measurements.add(new measurement(3.6, sdfDate.parse("10-01"), sdfTime.parse("11:00") ));
+              measurements.add(new measurement(5.0, sdfDate.parse("10-01"), sdfTime.parse("11:12") ));
 
-        measurements.add(new measurement(01.10, 11.00, 3.6));
-        measurements.add(new measurement(01.10, 11.12, 5.0));
+              measurements.add(new measurement(4.6, sdfDate.parse("10-01"), sdfTime.parse("15:10") ));
+              measurements.add(new measurement(6.3, sdfDate.parse("10-01"), sdfTime.parse("15:32") ));
 
-        measurements.add(new measurement(01.10, 15.10, 4.6));
-        measurements.add(new measurement(01.10, 15.32, 6.3));
+              measurements.add(new measurement(4.9, sdfDate.parse("10-01"), sdfTime.parse("18:00") ));
+              measurements.add(new measurement(6.8, sdfDate.parse("10-01"), sdfTime.parse("18:21") ));
 
-        measurements.add(new measurement(01.10, 18.00, 4.9));
-        measurements.add(new measurement(01.10, 18.21, 6.8));
+              measurements.add(new measurement(3.0, sdfDate.parse("10-02"), sdfTime.parse("09:40") ));
+              measurements.add(new measurement(4.8, sdfDate.parse("10-02"), sdfTime.parse("10:05") ));
 
-        measurements.add(new measurement(02.10, 09.40, 3.0));
-        measurements.add(new measurement(02.10, 10.05, 4.8));
+              measurements.add(new measurement(3.2, sdfDate.parse("10-02"), sdfTime.parse("13:25") ));
+              measurements.add(new measurement(5.0, sdfDate.parse("10-02"), sdfTime.parse("13:55") ));
 
-        measurements.add(new measurement(02.10, 13.25, 3.2));
-        measurements.add(new measurement(02.10, 13.55, 5.0));
+              measurements.add(new measurement(3.9, sdfDate.parse("10-02"), sdfTime.parse("18:15") ));
+              measurements.add(new measurement(5.6, sdfDate.parse("10-02"), sdfTime.parse("18:34") ));
 
-        measurements.add(new measurement(02.10, 18.15, 3.9));
-        measurements.add(new measurement(02.10, 18.34, 5.6));
+              measurements.add(new measurement(3.2, sdfDate.parse("10-03"), sdfTime.parse("11:06") ));
+              measurements.add(new measurement(5.3, sdfDate.parse("10-03"), sdfTime.parse("11:32") ));
+          }
+          catch(ParseException pe){
+              System.out.print("ParseException:  " + pe);
 
-        measurements.add(new measurement(03.10, 11.06, 3.2));
-        measurements.add(new measurement(03.10, 11.32, 5.3));
+          }
+        System.out.println("MEASUREMEEEEENTS DATE: " + measurements.size());
+        for(int i = 0; i < measurements.size(); i++){
+            System.out.println("MEASUREMEEEEENTS DATE: " + measurements.get(i).getDate());
+            System.out.println("MEASUREMEEEEENTS TIME: " + measurements.get(i).getTime());
+        }
 
         System.out.println("ON CREATE VIEW");
         if (chart == null) {
@@ -124,20 +142,32 @@ public class StatistikFragment extends Fragment {
         chart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SeriesSelection seriesSelection = chart.getCurrentSeriesAndPoint();     // initialisierung clickable area
-
+                SeriesSelection  seriesSelection = chart.getCurrentSeriesAndPoint();     // initialisierung clickable area
                 if (seriesSelection == null) {
-
                 } else {
+
                     // display information of the clicked point
                     Toast.makeText(
                             getActivity(),
                             "Data point index " + seriesSelection.getPointIndex() + " was clicked" + "\n"
                                     + "value X=" + seriesSelection.getXValue() + "\n"
-                                    + "value Y=" + seriesSelection.getValue(), Toast.LENGTH_SHORT).show();
+                                    + "value Y=" + seriesSelection.getValue() + " ", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+        chart.addZoomListener(new ZoomListener() {
+            @Override
+            public void zoomApplied(ZoomEvent ze) {
+                System.out.println("Zoom rate " + ze.getZoomRate());
+
+            }
+
+            @Override
+            public void zoomReset() {
+                System.out.println("Reset");
+            }
+
+        },true, true);
 
         return view;
     }
@@ -146,7 +176,6 @@ public class StatistikFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
 
     }
 
@@ -159,16 +188,7 @@ public class StatistikFragment extends Fragment {
 
     }
 
-//    // Hinzufügen von Werten
-//    private void add() {
-//        valueY = Double.parseDouble(et_valueY.getText().toString());
-//        System.out.println("VALUE Y = " + valueY + " ");
-//        werte.add(werte.size(), valueY);
-//    }
-
     private XYMultipleSeriesRenderer createRenderer() {
-
-        System.out.println("create renderer ");
 
 
         XYMultipleSeriesRenderer renderer = new XYMultipleSeriesRenderer();
@@ -190,20 +210,18 @@ public class StatistikFragment extends Fragment {
         renderer.setLabelsTextSize(35);                         // Schriftgröße Werte an Achsen
         renderer.setXTitle("\n \n \n Datum/Uhrzeit");
         renderer.setYTitle("Messwerte");
-        renderer.setXAxisMin(0);
-        renderer.setXAxisMax(5);
-        renderer.setYAxisMin(0);
+        renderer.setXAxisMax(measurements.size()-1);
+        renderer.setXAxisMin(renderer.getXAxisMax()-5);
         renderer.setYAxisMax(10);
+        renderer.setYAxisMin(0);
         renderer.setYLabelsAlign(Paint.Align.RIGHT);
         renderer.setAxesColor(Color.BLACK);
         renderer.setLabelsColor(Color.BLACK);
         renderer.setPanEnabled(true, false);
         renderer.setZoomEnabled(true, false);
-        double limit[] = {0-0.01, measurements.size()-0.99, 0, 10};
+        double limit[] = {0-0.01, measurements.size()-0.99, 0, 10}; // minX, maxX, minY, maxY
         renderer.setPanLimits(limit);
         renderer.setZoomLimits(limit);
-
-        System.out.println("ZOOOOOOOOOOM= " + renderer.getZoomRate());
 
         renderer.setXLabels(0);             // Standard X-Labels ausblenden
 //      renderer.setYLabels(0);             // Standard Y-Labels ausblenden
@@ -215,7 +233,6 @@ public class StatistikFragment extends Fragment {
         renderer.setLegendTextSize(30);
         renderer.setLegendHeight(100);
         renderer.setShowLegend(false);
-
         // Punkte
         renderer.setPointSize(25f);
 
@@ -248,13 +265,20 @@ public class StatistikFragment extends Fragment {
 //        xySeriesRenderer3.setPointStyle(null);
 //        xySeriesRenderer3.setColor(getResources().getColor(R.color.color_good));
 //        xySeriesRenderer3.setLineWidth(5f);
-
         // Daten an die Achse schreiben
         for (int i = 0; i < measurements.size(); i++) {
-            renderer.addXTextLabel(i, String.valueOf(measurements.get(i).getDate() + "\n" + measurements.get(i).getTime()));        // Datum an X-Achse schreiben
-            if(i<=10){
-                renderer.addYTextLabel(i, String.valueOf(i));               // Werte an Y-Achse schreiben
-            }
+
+          String strDate = sdfDate.format(measurements.get(i).getDate());
+          String strTime = sdfTime.format(measurements.get(i).getTime());
+            System.out.println("x-label: " + i);
+            renderer.addXTextLabel(i, String.valueOf(strDate + "\n" + strTime));        // Datum an X-Achse schreiben
+        }
+
+        int j = 0;
+        while (j <= 10){
+            System.out.println("y-label: " + j);
+            renderer.addYTextLabel(j, String.valueOf(j));// Werte an Y-Achse schreiben
+            j++;
         }
         renderer.addSeriesRenderer(0, xySeriesRenderer0);
         renderer.addSeriesRenderer(1, xySeriesRenderer1);
@@ -271,8 +295,8 @@ public class StatistikFragment extends Fragment {
 
         for (int i = 0; i < measurements.size(); i++) {
             x = i;                                       // Wert X-Achse
-            y = measurements.get(i).getMeasurement();    // Wert Y-Achse
-            if(4.5<=measurements.get(i).getMeasurement()){
+            y = measurements.get(i).getmvalue();    // Wert Y-Achse
+            if(4.5<=measurements.get(i).getmvalue()){
                 series3.add(x, y);
             }
             else{
@@ -287,8 +311,6 @@ public class StatistikFragment extends Fragment {
 
         return dataSet;
     }
-
-
 }
 
 
