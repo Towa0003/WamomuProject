@@ -34,6 +34,7 @@ import java.util.List;
 
 import fh.kl.wamomu.R;
 import fh.kl.wamomu.database.databaseMeals;
+import fh.kl.wamomu.database.databaseMeasurements;
 import fh.kl.wamomu.meta.meal;
 import fh.kl.wamomu.meta.measurement;
 
@@ -53,9 +54,6 @@ public class StatistikFragment extends Fragment {
     XYSeries series3;
     Zoom zoomV;
     ZoomListener listener;
-    /////// Arraylist, wird später evtl ausgelagert ////////
-    static List<meal> meals = new ArrayList<meal>();
-    static List<measurement> measurements = new ArrayList<measurement>();
 
         /*
             (todo # Messpunkte momentan nur über den X-Wert clickable, wenns probleme gibt evtl. ändern)
@@ -77,54 +75,16 @@ public class StatistikFragment extends Fragment {
         series2 = new TimeSeries("random2");
         series3 = new XYSeries("random3");
 
-        ///////////////// Vordefinierte Werte für Meals-Arraylist ///////
-//        String date = "2013-11-10";
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//        String datee = sdf.parse(date);
-//        meals.add(new meal("Frühstück", "Schinken", , null));
-//        meals.add(new meal("Mittagessen", "Gulasch", 01.10, 15.30));
-//        meals.add(new meal("Abendessen", "Salamibrot", 01.10, 18.20));
-//
-//        meals.add(new meal("Frühstück", "Käsebrot, Ei", 02.10, 10.00));
-//        meals.add(new meal("Mittagessen", "Lasagne", 02.10, 13.50));
-//        meals.add(new meal("Abendessen", "Schinkenbrot", 02.10, 18.30));
-//
-//        meals.add(new meal("Frühstück", "Tomaten, Mozarella,, Toastbrot, Frischkäse", 03.10, 11.30));
         System.out.println("MEEEEALS: " + databaseMeals.meals.size());
         for (int i = 0; i < databaseMeals.meals.size(); i++){
             System.out.println("MEEEEALS DATE: " + databaseMeals.meals.get(i).getDate());
             System.out.println("MEEEEALS TIME: " + databaseMeals.meals.get(i).getTime());
         }
-          try{
-              measurements.add(new measurement(3.6, sdfDate.parse("10-01"), sdfTime.parse("11:00") ));
-              measurements.add(new measurement(5.0, sdfDate.parse("10-01"), sdfTime.parse("11:12") ));
 
-              measurements.add(new measurement(4.6, sdfDate.parse("10-01"), sdfTime.parse("15:10") ));
-              measurements.add(new measurement(6.3, sdfDate.parse("10-01"), sdfTime.parse("15:32") ));
-
-              measurements.add(new measurement(4.9, sdfDate.parse("10-01"), sdfTime.parse("18:00") ));
-              measurements.add(new measurement(6.8, sdfDate.parse("10-01"), sdfTime.parse("18:21") ));
-
-              measurements.add(new measurement(3.0, sdfDate.parse("10-02"), sdfTime.parse("09:40") ));
-              measurements.add(new measurement(4.8, sdfDate.parse("10-02"), sdfTime.parse("10:05") ));
-
-              measurements.add(new measurement(3.2, sdfDate.parse("10-02"), sdfTime.parse("13:25") ));
-              measurements.add(new measurement(5.0, sdfDate.parse("10-02"), sdfTime.parse("13:55") ));
-
-              measurements.add(new measurement(3.9, sdfDate.parse("10-02"), sdfTime.parse("18:15") ));
-              measurements.add(new measurement(5.6, sdfDate.parse("10-02"), sdfTime.parse("18:34") ));
-
-              measurements.add(new measurement(3.2, sdfDate.parse("10-03"), sdfTime.parse("11:06") ));
-              measurements.add(new measurement(5.3, sdfDate.parse("10-03"), sdfTime.parse("11:32") ));
-          }
-          catch(ParseException pe){
-              System.out.print("ParseException:  " + pe);
-
-          }
-        System.out.println("MEASUREMEEEEENTS DATE: " + measurements.size());
-        for(int i = 0; i < measurements.size(); i++){
-            System.out.println("MEASUREMEEEEENTS DATE: " + measurements.get(i).getDate());
-            System.out.println("MEASUREMEEEEENTS TIME: " + measurements.get(i).getTime());
+        System.out.println("MEASUREMEEEEENTS: " + databaseMeasurements.measurements.size());
+        for(int i = 0; i <  databaseMeasurements.measurements.size(); i++){
+            System.out.println("MEASUREMEEEEENTS DATE: " +  databaseMeasurements.measurements.get(i).getDate());
+            System.out.println("MEASUREMEEEEENTS TIME: " +  databaseMeasurements.measurements.get(i).getTime());
         }
 
         System.out.println("ON CREATE VIEW");
@@ -149,18 +109,23 @@ public class StatistikFragment extends Fragment {
                     // display information of the clicked point
                     Toast.makeText(
                             getActivity(),
-                            "Data point index " + seriesSelection.getPointIndex() + " was clicked" + "\n"
+                            "Data point index " + seriesSelection.getPointIndex()+ " was clicked" + "\n"
                                     + "value X=" + seriesSelection.getXValue() + "\n"
                                     + "value Y=" + seriesSelection.getValue() + " ", Toast.LENGTH_SHORT).show();
+                    System.out.println( "Data point index " + seriesSelection.getPointIndex()+ " was clicked"
+                            + " value X= " + seriesSelection.getXValue()
+                            + " value Y= " + seriesSelection.getValue() + " ");
                 }
             }
         });
-        chart.addZoomListener(new ZoomListener() {
+        chart.addZoomListener(new ZoomListener()
+        { SeriesSelection  seriesSelection = chart.getCurrentSeriesAndPoint();     // initialisierung clickable area
             @Override
-            public void zoomApplied(ZoomEvent ze) {
+            public void zoomApplied(ZoomEvent ze)
+            {
                 System.out.println("Zoom rate " + ze.getZoomRate());
-
             }
+
 
             @Override
             public void zoomReset() {
@@ -168,6 +133,7 @@ public class StatistikFragment extends Fragment {
             }
 
         },true, true);
+
 
         return view;
     }
@@ -189,8 +155,6 @@ public class StatistikFragment extends Fragment {
     }
 
     private XYMultipleSeriesRenderer createRenderer() {
-
-
         XYMultipleSeriesRenderer renderer = new XYMultipleSeriesRenderer();
 
         XYSeriesRenderer xySeriesRenderer0 = new XYSeriesRenderer();
@@ -210,8 +174,8 @@ public class StatistikFragment extends Fragment {
         renderer.setLabelsTextSize(35);                         // Schriftgröße Werte an Achsen
         renderer.setXTitle("\n \n \n Datum/Uhrzeit");
         renderer.setYTitle("Messwerte");
-        renderer.setXAxisMax(measurements.size()-1);
-        renderer.setXAxisMin(renderer.getXAxisMax()-5);
+        renderer.setXAxisMax( databaseMeasurements.measurements.size() - 1);
+        renderer.setXAxisMin(renderer.getXAxisMax() - 5);
         renderer.setYAxisMax(10);
         renderer.setYAxisMin(0);
         renderer.setYLabelsAlign(Paint.Align.RIGHT);
@@ -219,7 +183,7 @@ public class StatistikFragment extends Fragment {
         renderer.setLabelsColor(Color.BLACK);
         renderer.setPanEnabled(true, false);
         renderer.setZoomEnabled(true, false);
-        double limit[] = {0-0.01, measurements.size()-0.99, 0, 10}; // minX, maxX, minY, maxY
+        double limit[] = {0-0.01,  databaseMeasurements.measurements.size()-0.99, 0, 10}; // minX, maxX, minY, maxY
         renderer.setPanLimits(limit);
         renderer.setZoomLimits(limit);
 
@@ -235,7 +199,6 @@ public class StatistikFragment extends Fragment {
         renderer.setShowLegend(false);
         // Punkte
         renderer.setPointSize(25f);
-
         // data area
         renderer.setShowGrid(true);
         renderer.setApplyBackgroundColor(true);
@@ -266,10 +229,9 @@ public class StatistikFragment extends Fragment {
 //        xySeriesRenderer3.setColor(getResources().getColor(R.color.color_good));
 //        xySeriesRenderer3.setLineWidth(5f);
         // Daten an die Achse schreiben
-        for (int i = 0; i < measurements.size(); i++) {
-
-          String strDate = sdfDate.format(measurements.get(i).getDate());
-          String strTime = sdfTime.format(measurements.get(i).getTime());
+        for (int i = 0; i <  databaseMeasurements.measurements.size(); i++) {
+          String strDate = sdfDate.format( databaseMeasurements.measurements.get(i).getDate());
+          String strTime = sdfTime.format( databaseMeasurements.measurements.get(i).getTime());
             System.out.println("x-label: " + i);
             renderer.addXTextLabel(i, String.valueOf(strDate + "\n" + strTime));        // Datum an X-Achse schreiben
         }
@@ -293,10 +255,10 @@ public class StatistikFragment extends Fragment {
         double x;
         double y;
 
-        for (int i = 0; i < measurements.size(); i++) {
+        for (int i = 0; i <  databaseMeasurements.measurements.size(); i++) {
             x = i;                                       // Wert X-Achse
-            y = measurements.get(i).getmvalue();    // Wert Y-Achse
-            if(4.5<=measurements.get(i).getmvalue()){
+            y =  databaseMeasurements.measurements.get(i).getmvalue();    // Wert Y-Achse
+            if(4.5<= databaseMeasurements.measurements.get(i).getmvalue()){
                 series3.add(x, y);
             }
             else{

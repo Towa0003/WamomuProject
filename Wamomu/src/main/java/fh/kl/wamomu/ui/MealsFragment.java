@@ -24,8 +24,11 @@ import android.widget.TimePicker;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import fh.kl.wamomu.R;
+import fh.kl.wamomu.database.database;
+import fh.kl.wamomu.database.databaseMeals;
 
 /**
  * Created by Thundernator on 04.11.13.
@@ -37,6 +40,8 @@ public class MealsFragment extends Fragment {
     private EditText timepicker, datepicker;
     private Spinner spMealGroup;
     static public int meals = 0;
+    SimpleDateFormat sdfDate = new SimpleDateFormat("dd.MM");
+    SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,17 +50,22 @@ public class MealsFragment extends Fragment {
                 container, false);
         getActivity().setTitle("Mahlzeiten");
 
-        String[] art =      new String[]{"Frühstück"  , "Mittagessen" , "Abendessen"  };
-        String[] gericht =  new String[]{"Nutellabrot"  , "Gularsch" ,  "Salamibrot" };
+        String[] art = new String[databaseMeals.meals.size()];
+        String[] gericht =  new String[databaseMeals.meals.size()];
+        String[] datum = new String[databaseMeals.meals.size()];
+
+        for (int i = 0; i < databaseMeals.meals.size(); i++){
+            art[i] = databaseMeals.meals.get(i).getFoodkind();
+            gericht[i] = databaseMeals.meals.get(i).getFood();
+            datum[i] = sdfDate.format(databaseMeals.meals.get(i).getDate()) + "/" + sdfTime.format(databaseMeals.meals.get(i).getTime());
+        }
 
         overview_listview = (ListView) view.findViewById(R.id.lv_meals);
         Context context = getActivity();
-        OverviewArrayAdapter adapter = new OverviewArrayAdapter(context ,art,gericht);
+        OverviewArrayAdapter adapter = new OverviewArrayAdapter(context ,art,gericht,datum);
         overview_listview.setAdapter(adapter);
 
         if(meals == 1){
-
-
         final Dialog dialog = new Dialog(getActivity());
 
         dialog.setContentView(R.layout.dialog_add_mahlzeit);

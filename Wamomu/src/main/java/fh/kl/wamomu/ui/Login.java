@@ -11,6 +11,7 @@ import android.widget.Toast;
 import fh.kl.wamomu.R;
 import fh.kl.wamomu.database.database;
 import fh.kl.wamomu.database.databaseMeals;
+import fh.kl.wamomu.database.databaseMeasurements;
 import fh.kl.wamomu.meta.user;
 
 /**
@@ -25,6 +26,7 @@ public class Login extends Activity {
 
     public static database db;
     public static databaseMeals dbMeals;
+    public static databaseMeasurements dbMeasurements;
     public static user activeUser;
 
 
@@ -36,8 +38,10 @@ public class Login extends Activity {
 
         db = new database();
         dbMeals = new databaseMeals();
+        dbMeasurements = new databaseMeasurements();
         db.accessWebService();
         dbMeals.accessWebService();
+        dbMeasurements.accessWebService();
 
         et_login = (EditText) findViewById(R.id.et_username_edit);
         et_password = (EditText) findViewById(R.id.et_password_edit);
@@ -50,6 +54,7 @@ public class Login extends Activity {
                 if (db.checkUser(et_login.getText().toString(), et_password.getText().toString())) {
                     int currentUserID = db.getUsersID();
                     dbMeals.checkMeal(currentUserID);        // alle Meals des jeweiligen Users ausgeben
+                    dbMeasurements.checkMeasurment(currentUserID); // alle Measurements des jeweiligen Users ausgeben
                     activeUser = new user(et_login.getText().toString(), et_password.getText().toString(),null,null);
                     Intent i = new Intent(Login.this, NavigationDrawer.class);
                     startActivity(i);

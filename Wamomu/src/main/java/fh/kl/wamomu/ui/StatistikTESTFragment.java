@@ -31,6 +31,7 @@ import java.util.List;
 
 import fh.kl.wamomu.R;
 import fh.kl.wamomu.database.databaseMeals;
+import fh.kl.wamomu.database.databaseMeasurements;
 import fh.kl.wamomu.meta.meal;
 import fh.kl.wamomu.meta.measurement;
 
@@ -58,8 +59,6 @@ public class StatistikTESTFragment extends Fragment {
     XYSeries series;
 
     /////// Arraylist, wird später evtl ausgelagert ////////
-
-    static List<measurement> measurements = new ArrayList<measurement>();
 
         /*
             (todo # Messpunkte momentan nur über den X-Wert clickable, wenns probleme gibt evtl. ändern)
@@ -97,35 +96,35 @@ public class StatistikTESTFragment extends Fragment {
 //        meals.add(new meal("Abendessen", "Schinkenbrot", 02.10, 18.30));
 //
 //        meals.add(new meal("Frühstück", "Tomaten, Mozarella,, Toastbrot, Frischkäse", 03.10, 11.30));
-        try{
-            measurements.add(new measurement(3.6, sdfDate.parse("2013-10-01"), sdfTime.parse("11:00") ));
-            measurements.add(new measurement(5.0, sdfDate.parse("2013-10-01"), sdfTime.parse("11:12") ));
+//        try{
+//            measurements.add(new measurement(3.6, sdfDate.parse("2013-10-01"), sdfTime.parse("11:00") ));
+//            measurements.add(new measurement(5.0, sdfDate.parse("2013-10-01"), sdfTime.parse("11:12") ));
+//
+//            measurements.add(new measurement(4.6, sdfDate.parse("2013-10-01"), sdfTime.parse("15:10") ));
+//            measurements.add(new measurement(6.3, sdfDate.parse("2013-10-01"), sdfTime.parse("15:32") ));
+//
+//            measurements.add(new measurement(4.9, sdfDate.parse("2013-10-01"), sdfTime.parse("18:00") ));
+//            measurements.add(new measurement(6.8, sdfDate.parse("2013-10-01"), sdfTime.parse("18:21") ));
+//
+//            measurements.add(new measurement(3.0, sdfDate.parse("2013-10-02"), sdfTime.parse("09:40") ));
+//            measurements.add(new measurement(4.8, sdfDate.parse("2013-10-02"), sdfTime.parse("10:05") ));
+//
+//            measurements.add(new measurement(3.2, sdfDate.parse("2013-10-02"), sdfTime.parse("13:25") ));
+//            measurements.add(new measurement(5.0, sdfDate.parse("2013-10-02"), sdfTime.parse("13:55") ));
+//
+//            measurements.add(new measurement(3.9, sdfDate.parse("2013-10-02"), sdfTime.parse("18:15") ));
+//            measurements.add(new measurement(5.6, sdfDate.parse("2013-10-02"), sdfTime.parse("18:34") ));
+//
+//            measurements.add(new measurement(3.2, sdfDate.parse("2013-10-03"), sdfTime.parse("11:06") ));
+//            measurements.add(new measurement(5.3, sdfDate.parse("2013-10-03"), sdfTime.parse("11:32") ));
+//        }
+//        catch(ParseException pe){
+//            System.out.print("ParseException:  " + pe);
+//
+//        }
 
-            measurements.add(new measurement(4.6, sdfDate.parse("2013-10-01"), sdfTime.parse("15:10") ));
-            measurements.add(new measurement(6.3, sdfDate.parse("2013-10-01"), sdfTime.parse("15:32") ));
-
-            measurements.add(new measurement(4.9, sdfDate.parse("2013-10-01"), sdfTime.parse("18:00") ));
-            measurements.add(new measurement(6.8, sdfDate.parse("2013-10-01"), sdfTime.parse("18:21") ));
-
-            measurements.add(new measurement(3.0, sdfDate.parse("2013-10-02"), sdfTime.parse("09:40") ));
-            measurements.add(new measurement(4.8, sdfDate.parse("2013-10-02"), sdfTime.parse("10:05") ));
-
-            measurements.add(new measurement(3.2, sdfDate.parse("2013-10-02"), sdfTime.parse("13:25") ));
-            measurements.add(new measurement(5.0, sdfDate.parse("2013-10-02"), sdfTime.parse("13:55") ));
-
-            measurements.add(new measurement(3.9, sdfDate.parse("2013-10-02"), sdfTime.parse("18:15") ));
-            measurements.add(new measurement(5.6, sdfDate.parse("2013-10-02"), sdfTime.parse("18:34") ));
-
-            measurements.add(new measurement(3.2, sdfDate.parse("2013-10-03"), sdfTime.parse("11:06") ));
-            measurements.add(new measurement(5.3, sdfDate.parse("2013-10-03"), sdfTime.parse("11:32") ));
-        }
-        catch(ParseException pe){
-            System.out.print("ParseException:  " + pe);
-
-        }
-
-        for(int i = 0; i < measurements.size(); i++){
-            System.out.println("MEASUREMEEEEENTS: " + measurements.get(i));
+        for(int i = 0; i <  databaseMeasurements.measurements.size(); i++){
+            System.out.println("MEASUREMEEEEENTS: " +  databaseMeasurements.measurements.get(i));
         }
         System.out.println("ON CREATE VIEW");
 
@@ -187,7 +186,6 @@ public class StatistikTESTFragment extends Fragment {
 
 
         XYMultipleSeriesRenderer renderer = new XYMultipleSeriesRenderer();
-        XYMultipleSeriesRenderer rendererr = new XYMultipleSeriesRenderer();
         XYSeriesRenderer xySeriesRenderer0 = new XYSeriesRenderer();
         XYSeriesRenderer xySeriesRenderer1= new XYSeriesRenderer();
 
@@ -252,8 +250,8 @@ public class StatistikTESTFragment extends Fragment {
 
 
         // Daten an die Achse schreiben
-        for (int i = 0; i < measurements.size(); i++) {
-            renderer.addXTextLabel(i, String.valueOf(measurements.get(i).getDate() + "\n" + measurements.get(i).getTime()));        // Datum an X-Achse schreiben
+        for (int i = 0; i < databaseMeasurements.measurements.size(); i++) {
+            renderer.addXTextLabel(i, String.valueOf(databaseMeasurements.measurements.get(i).getDate() + "\n" + databaseMeasurements.measurements.get(i).getTime()));        // Datum an X-Achse schreiben
 
             if(i<=10){
                 renderer.addYTextLabel(i, String.valueOf(i));               // Werte an Y-Achse schreiben
@@ -261,7 +259,7 @@ public class StatistikTESTFragment extends Fragment {
             }
         }
 //        System.out.println("meals size: " + meals.size());
-        System.out.println("measurements size: " + measurements.size());
+        System.out.println("measurements size: " + databaseMeasurements.measurements.size());
         renderer.addSeriesRenderer(0,xySeriesRenderer0);
 
         return renderer;
@@ -272,9 +270,9 @@ public class StatistikTESTFragment extends Fragment {
 
         XYMultipleSeriesDataset dataSet = new XYMultipleSeriesDataset();
 
-        for (int i = 0; i < measurements.size(); i++) {
+        for (int i = 0; i < databaseMeasurements.measurements.size(); i++) {
             double x = i;                                       // Wert X-Achse
-            double y = measurements.get(i).getmvalue();    // Wert Y-Achse
+            double y = databaseMeasurements.measurements.get(i).getmvalue();    // Wert Y-Achse
 
             series.add(x, y);
         }

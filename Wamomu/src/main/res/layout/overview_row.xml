@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Frühstück"
+        android:text=""
         android:id="@+id/tv_art"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true" />
@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="09:32 / 04.11.2013"
+        android:text=""
         android:id="@+id/tv_datum"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true" />
@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Nutellabrot"
+        android:text=""
         android:id="@+id/tv_gericht"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true" />

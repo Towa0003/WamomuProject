@@ -26,6 +26,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import fh.kl.wamomu.R;
+import fh.kl.wamomu.database.database;
+import fh.kl.wamomu.database.databaseMeasurements;
 
 /**
  * Created by Thundernator on 04.11.13.
@@ -35,10 +37,10 @@ public class MeasurementFragment extends Fragment {
     private ListView overview_listview;
     private Button btnSave;
     private EditText timepicker,datepicker;
-    private TextView tvHome;
-    private String values [];
     private Spinner spMeasureGroup;
     static public int dia = 0;
+    SimpleDateFormat sdfDate = new SimpleDateFormat("dd.MM");
+    SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,13 +49,20 @@ public class MeasurementFragment extends Fragment {
                 container, false);
         getActivity().setTitle("Messungen");
 
-        String[] art =      new String[]{ "Messung" ,  "Messung" ,  "Messung"};
-        String[] gericht =  new String[]{ "32 mg" ,  "50 mg" ,  "30 mg"};
+        String[] art = new String[databaseMeasurements.measurements.size()];
+        String[] value =  new String[databaseMeasurements.measurements.size()];
+        String[] datum = new String[databaseMeasurements.measurements.size()];
 
+        for (int i = 0; i < databaseMeasurements.measurements.size(); i++){
+            art[i] = "Messung";
+            value[i] = databaseMeasurements.measurements.get(i).getmvalue() + " mmol/l";
+            datum[i] = sdfDate.format(databaseMeasurements.measurements.get(i).getDate()) + "/" + sdfTime.format(databaseMeasurements.measurements.get(i).getTime());
+        }
         overview_listview = (ListView) view.findViewById(R.id.lv_measurement);
         Context context = getActivity();
-        OverviewArrayAdapter adapter = new OverviewArrayAdapter(context ,art,gericht);
+        OverviewArrayAdapter adapter = new OverviewArrayAdapter(context ,art, value, datum);
         overview_listview.setAdapter(adapter);
+
 
         if(dia == 1) {
         final Dialog dialog = new Dialog(getActivity());

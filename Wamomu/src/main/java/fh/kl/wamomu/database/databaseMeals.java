@@ -131,7 +131,9 @@ public class databaseMeals extends Activity {
                 String usersid = jsonChildNode.optString("users_id");
                 System.out.println("Users_ID=  " + usersid);
                 if(currentID == Integer.parseInt(usersid)){
+                    int mealID = jsonChildNode.optInt("meal_id");
                     String mealkind = jsonChildNode.optString("mealkind");
+                    String meal = jsonChildNode.optString("meal");
                     String datestr = jsonChildNode.optString("date");
                     String timestr = jsonChildNode.optString("time");
                     try
@@ -144,14 +146,14 @@ public class databaseMeals extends Activity {
                         Date time =  sdf.parse(timestr);
                         System.out.println("TIIIIIIIIIIIIIIIIIIIME:  " + sdf.format(time));
 
-
-                        String mealsUserID = jsonChildNode.optString("users_id");
-                        System.out.println("Mealkind: " + mealkind
+                        System.out.println("MealID: " + mealID
+                                + "Mealkind: " + mealkind
+                                + "Meal: " + meal
                                 + " Datum: " + date
                                 + " Zeit: " + time
-                                + " UsersID: " + mealsUserID);
+                                + " UsersID: " + usersid);
 
-                        meals.add(new meal(mealkind, date, time));
+                        meals.add(new meal(mealID, mealkind, meal, date, time));
                     }
                     catch (ParseException pe){
                         System.out.println("PARSEEXCEPTION: " + pe);

@@ -10,33 +10,33 @@ import java.util.Date;
  */
 public class meal {
 
+    int mealID;
     String foodkind; //Frühstück,Mittagessen,Abendessen
-//    String food; //Schinken
+    String food; //Schinken
     Date date;
     Date time;
 
-    public meal(String foodkind, Date date, Date time) {
+    public meal(int mealID, String foodkind, String food, Date date, Date time) {
+        this.mealID = mealID;
         this.foodkind = foodkind;
-//        this.food = food;
+        this.food = food;
         this.date = date;
         this.time = time;
     }
 
-    public String getFoodkind() {
-        return foodkind;
+    public int getMealID() {
+        return mealID;
     }
 
-    public void setFoodkind(String foodkind) {
-        this.foodkind = foodkind;
-    }
-//
-//    public String getFood() {
-//        return food;
-//    }
-//
-//    public void setFood(String food) {
-//        this.food = food;
-//    }
+    public void setMealID(int mealID) {this.mealID = mealID;}
+
+    public String getFoodkind() {return foodkind;}
+
+    public void setFoodkind(String foodkind) {this.foodkind = foodkind;}
+
+    public String getFood() {return food;}
+
+    public void setFood(String food) {this.food = food;}
 
     public Date getDate() {
         return date;
