@@ -6,6 +6,7 @@ import android.app.Fragment;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -34,13 +36,28 @@ import fh.kl.wamomu.database.databaseMeasurements;
  */
 public class MeasurementFragment extends Fragment {
 
-    private ListView overview_listview;
+    public ListView overview_listview;
     private Button btnSave;
     private EditText timepicker,datepicker;
     private Spinner spMeasureGroup;
     static public int dia = 0;
     SimpleDateFormat sdfDate = new SimpleDateFormat("dd.MM");
     SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
+
+    OverviewArrayAdapter adapter;
+
+    public int sfItem = 0;
+
+
+    public int getSfItem() {
+        return sfItem;
+    }
+
+    public void setSfItem(int sfItem) {
+        this.sfItem = sfItem;
+    }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,9 +77,31 @@ public class MeasurementFragment extends Fragment {
         }
         overview_listview = (ListView) view.findViewById(R.id.lv_measurement);
         Context context = getActivity();
-        OverviewArrayAdapter adapter = new OverviewArrayAdapter(context ,art, value, datum);
+        adapter = new OverviewArrayAdapter(context ,art, value, datum);
         overview_listview.setAdapter(adapter);
+        overview_listview.setItemsCanFocus(true);
 
+        // delay, da sonst der smoothscroll nicht funzt, wenn man von der Statistik drauf zugreift
+        overview_listview.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                overview_listview.performItemClick(overview_listview, getSfItem(), getSfItem());
+//                overview_listview.setSelection(getSfItem());
+            }
+        }, 250);
+
+        overview_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                setSfItem(position);
+                Toast.makeText(
+                        getActivity(),
+                        "Selected Value: " + position, Toast.LENGTH_SHORT).show();
+                System.out.println("POSITION ITEM :  " + position);
+                System.out.println("ID ITEM :  " + id);
+                overview_listview.smoothScrollToPosition(getSfItem());
+            }
+        });
 
         if(dia == 1) {
         final Dialog dialog = new Dialog(getActivity());

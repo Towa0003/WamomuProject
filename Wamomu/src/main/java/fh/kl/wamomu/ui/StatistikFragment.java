@@ -1,6 +1,7 @@
 package fh.kl.wamomu.ui;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -46,9 +47,11 @@ public class StatistikFragment extends Fragment {
 
     private GraphicalView chart;
     private FrameLayout fl_chartContainer;
+    MeasurementFragment mf = new MeasurementFragment();
 
     SimpleDateFormat sdfDate = new SimpleDateFormat("MM-dd");
     SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
+
     TimeSeries series;
     TimeSeries series2;
     XYSeries series3;
@@ -105,17 +108,25 @@ public class StatistikFragment extends Fragment {
                 SeriesSelection  seriesSelection = chart.getCurrentSeriesAndPoint();     // initialisierung clickable area
                 if (seriesSelection == null) {
                 } else {
-
                     // display information of the clicked point
-                    Toast.makeText(
-                            getActivity(),
-                            "Data point index " + seriesSelection.getPointIndex()+ " was clicked" + "\n"
-                                    + "value X=" + seriesSelection.getXValue() + "\n"
-                                    + "value Y=" + seriesSelection.getValue() + " ", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(
+//                            getActivity(),
+//                            "Data point index " + seriesSelection.getPointIndex()+ " was clicked" + "\n"
+//                                    + "value X=" + seriesSelection.getXValue() + "\n"
+//                                    + "value Y=" + seriesSelection.getValue() + " ", Toast.LENGTH_SHORT).show();
+
+//                    mf.overview_listview.smoothScrollToPosition((int)seriesSelection.getXValue());
                     System.out.println( "Data point index " + seriesSelection.getPointIndex()+ " was clicked"
                             + " value X= " + seriesSelection.getXValue()
                             + " value Y= " + seriesSelection.getValue() + " ");
+                    FragmentTransaction ft = getFragmentManager().beginTransaction();
+                    mf.setSfItem((int) seriesSelection.getXValue());
+                    ft.replace(R.id.fl_content_frame, mf);
+                    ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                    ft.commit();
                 }
+
+
             }
         });
         chart.addZoomListener(new ZoomListener()

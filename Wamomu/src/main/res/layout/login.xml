@@ -27,7 +27,7 @@
         android:layout_gravity="center_horizontal"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text=""
+        android:text="Test"
         android:hint="Username"/>
 
     <TextView
@@ -44,6 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:ems="10"
+        android:text="Testpw"
         android:inputType="textPassword" />
 
     <Button

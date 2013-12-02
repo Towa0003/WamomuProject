@@ -18,6 +18,7 @@ public class OverviewArrayAdapter extends ArrayAdapter<String> {
     private final String[] values_gericht;
     private final String[] values_date;
 
+
     public OverviewArrayAdapter(Context context, String[] values_art, String[] values_gericht, String[] values_date) {
         super(context, R.layout.overview_row, values_art);
         this.context = context;
