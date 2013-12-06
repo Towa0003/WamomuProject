@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
@@ -21,20 +20,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.sql.SQLOutput;
 
 import fh.kl.wamomu.R;
 
 public class database extends Activity {
+    protected int usersID; //192.168.178.48
+    //    private String url = "http://cpriyankara.coolpage.biz/employee_details.php";
     private String jsonResult;
-//    private String url = "http://cpriyankara.coolpage.biz/employee_details.php";
-
-
-    protected int usersID;
-    private String url = "http://192.168.178.48/wamomusql/users_details.php";
+    private String url = "http://192.168.1.4/wamomusql/users_details.php";
     private ListView listView;
 
     @Override
@@ -52,14 +46,97 @@ public class database extends Activity {
         return true;
     }
 
-    public void setUsersID(int usersID) {
-        this.usersID = usersID;
-    }
-
     public int getUsersID() {
         return usersID;
     }
 
+    public void setUsersID(int usersID) {
+        this.usersID = usersID;
+    }
+
+    public void accessWebService() {
+        JsonReadTask task = new JsonReadTask();
+        // passes values for the urls string array
+        task.execute(new String[]{url});
+        System.out.println("##########AccessWebService#########= ");
+    }
+
+    public boolean checkUser(String useruser, String userpassword) {
+        boolean datatrue = false;
+
+        try {
+            JSONObject jsonResponse = new JSONObject(jsonResult);
+            System.out.println("jsonresult= " + jsonResult);
+            System.out.println("JSONObject= " + jsonResponse.toString());
+            JSONArray jsonMainNode = jsonResponse.optJSONArray("users");
+            System.out.println("jsonResponse.optJSONArray= " + jsonMainNode.toString());
+
+            for (int i = 0; i < jsonMainNode.length(); i++) {
+                JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
+                System.out.println("Current User= " + jsonChildNode.toString());
+                String number = jsonChildNode.optString("id");
+                System.out.println("ID=  " + number);
+                String user = jsonChildNode.optString("user");
+                System.out.println("user: " + user);
+                String password = jsonChildNode.optString("password");
+                System.out.println("Password: " + password);
+
+                if (useruser.equals(user) && userpassword.equals(password)) {
+                    System.out.println("DATATRUE!!!!!!!!!!!!!!!!!!!");
+                    datatrue = true;
+                    setUsersID(Integer.parseInt(number));
+                } else {
+                    System.out.println("DATAFALSEE!!!!!!!!!!!!!!lllllllllllllllllllllllllllllllllllllllllllllll");
+                }
+            }
+        } catch (JSONException e) {
+            System.out.println(e.toString());
+        }
+
+        return datatrue;
+    }
+
+    public boolean checkPushUser(String useruser, String userpassword, String userPasswordRepeat) {
+        boolean datatrue = false;
+        System.out.println("°--------------------------------,,-------------------------------°");
+        try {
+            JSONObject jsonResponse = new JSONObject(jsonResult);
+            System.out.println("jsonresult= " + jsonResult);
+            System.out.println("JSONObject= " + jsonResponse.toString());
+            JSONArray jsonMainNode = jsonResponse.optJSONArray("users");
+            System.out.println("jsonResponse.optJSONArray= " + jsonMainNode.toString());
+
+            for (int i = 0; i < jsonMainNode.length(); i++) {
+                JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
+                System.out.println("Current User= " + jsonChildNode.toString());
+
+                String user = jsonChildNode.optString("user");
+                System.out.println("user: " + user);
+                String password = jsonChildNode.optString("password");
+                System.out.println("Password: " + password);
+
+                System.out.println("CHECK THIS OUT:" + userpassword + "" + userPasswordRepeat + "asd");
+                System.out.println("PW STIMMEN NICHT ÜBEREIN " + !userpassword.equals(userPasswordRepeat));
+                if (useruser.equals(user)) {
+                    System.out.println("DATAFALSEE!!!!!!!!!!!!!!lllllllllllllllllllllllllllllllllllllllllllllll");
+                    datatrue = false;
+                    i = jsonMainNode.length()-1;
+                }
+                else if(!userpassword.equals(userPasswordRepeat)){
+                    System.out.println("DATAFALSEE!!!!!!!!!!!!!!lllllllllllllllllllllllllllllllllllllllllllllll");
+                    datatrue = false;
+                    i = jsonMainNode.length()-1;
+                }else{
+                    System.out.println("DATATRUE!!!!!!!!!!!!!!22222222222222222222222222222222");
+                    datatrue = true;
+                }
+            }
+        } catch (JSONException e) {
+            System.out.println(e.toString());
+        }
+
+        return datatrue;
+    }
     // Async Task to access the web
     private class JsonReadTask extends AsyncTask<String, Void, String> {
         @Override
@@ -101,99 +178,5 @@ public class database extends Activity {
             }
             return answer;
         }
-
-        @Override
-        protected void onPostExecute(String result) {
-//            ListDrwaer();
-        }
     }// end async task
-
-    public void accessWebService() {
-        JsonReadTask task = new JsonReadTask();
-        // passes values for the urls string array
-        task.execute(new String[]{url});
-        System.out.println("##########AccessWebService#########= ");
-
-    }
-
-    // build hash set for list view
-    public void ListDrwaer() {
-        List<Map<String, String>> employeeList = new ArrayList<Map<String, String>>();
-
-        try {
-            JSONObject jsonResponse = new JSONObject(jsonResult);
-
-            System.out.println("JSONObject= " + jsonResponse.toString());
-            JSONArray jsonMainNode = jsonResponse.optJSONArray("users");
-            System.out.println("JSONONArray= " + jsonMainNode.toString());
-
-
-            for (int i = 0; i < jsonMainNode.length(); i++) {
-                JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
-                System.out.println("jsonChildNode= " + jsonChildNode.toString());
-                String test = jsonChildNode.getString("user");
-                System.out.println("Current User= " + test);
-                String number = jsonChildNode.optString("id");
-                System.out.println("id= " + number);
-
-                String user = jsonChildNode.optString("user");
-                System.out.println("user" + user);
-
-                String password = jsonChildNode.optString("password");
-                System.out.println("Password" + password);
-
-                String outPut = user + "-" + number + "-" + password;
-                employeeList.add(createEmployee("employees", outPut));
-            }
-        } catch (JSONException e) {
-            Toast.makeText(this, "Error" + e.toString(),
-                    Toast.LENGTH_SHORT).show();
-        }
-
-        SimpleAdapter simpleAdapter = new SimpleAdapter(this, employeeList,
-                android.R.layout.simple_list_item_1,
-                new String[]{"employees"}, new int[]{android.R.id.text1});
-        listView.setAdapter(simpleAdapter);
-    }
-
-    private HashMap<String, String> createEmployee(String user, String number) {
-        HashMap<String, String> employeeuserNo = new HashMap<String, String>();
-        employeeuserNo.put(user, number);
-        return employeeuserNo;
-    }
-
-    public boolean checkUser(String useruser, String userpassword) {
-        boolean datatrue = false;
-
-        try {
-            JSONObject jsonResponse = new JSONObject(jsonResult);
-            System.out.println("jsonresult= " + jsonResult);
-            System.out.println("JSONObject= " + jsonResponse.toString());
-            JSONArray jsonMainNode = jsonResponse.optJSONArray("users");
-            System.out.println("jsonResponse.optJSONArray= " + jsonMainNode.toString());
-
-            for (int i = 0; i < jsonMainNode.length(); i++) {
-                JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
-                System.out.println("Current User= " + jsonChildNode.toString());
-                String number = jsonChildNode.optString("id");
-                System.out.println("ID=  " + number);
-                String user = jsonChildNode.optString("user");
-                System.out.println("user: " + user);
-                String password = jsonChildNode.optString("password");
-                System.out.println("Password: " + password);
-
-                if (useruser.equals(user) && userpassword.equals(password)) {
-                    System.out.println("DATATRUE!!!!!!!!!!!!!!!!!!!");
-                    datatrue = true;
-                    setUsersID(Integer.parseInt(number));
-                } else {
-                    System.out.println("DATAFALSEE!!!!!!!!!!!!!!lllllllllllllllllllllllllllllllllllllllllllllll");
-                }
-            }
-        } catch (JSONException e) {
-            System.out.println(e.toString());
-        }
-
-        return datatrue;
-    }
 }

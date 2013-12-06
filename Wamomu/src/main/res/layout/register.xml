@@ -12,13 +12,12 @@
         android:orientation="vertical"
         android:layout_centerInParent="true">
 
-
         <TextView
-            android:id="@+id/tv_username__register_text"
+            android:id="@+id/tv_username_register_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Name :"
+            android:text="Username :"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
@@ -28,10 +27,27 @@
             android:layout_gravity="center_horizontal"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Name" />
+            android:hint="Username" />
 
         <TextView
-            android:id="@+id/tv_password_register_text"
+            android:id="@+id/tv_name_register_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Name :"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <EditText
+            android:id="@+id/et_name_register_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="Nachname" />
+
+        <TextView
+            android:id="@+id/tv_vname_register_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -39,16 +55,16 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
-            android:id="@+id/et_password_register_edit"
+            android:id="@+id/et_vname_register_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Vorname" />
+            android:hint="Vorname" />
 
         <TextView
-            android:id="@+id/tv_email"
+            android:id="@+id/tv_email_register_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -56,24 +72,24 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
-            android:id="@+id/et_email_edit"
+            android:id="@+id/et_email_register_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:ems="10"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:hint="blaa@blaa.blaah"/>
 
         <TextView
-            android:id="@+id/tv_password1_text"
+            android:id="@+id/tv_password1_register_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="Passwort :"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
-
         <EditText
-            android:id="@+id/et_passwort1_edit"
+            android:id="@+id/et_password1_register_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -81,7 +97,7 @@
             android:inputType="textPassword" />
 
         <TextView
-            android:id="@+id/tv_passwort2_text"
+            android:id="@+id/tv_password2_register_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -89,7 +105,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
-            android:id="@+id/et_passwort2_edit"
+            android:id="@+id/et_password2_register_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

@@ -71,9 +71,7 @@ public class Login extends Activity {
         b_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent i = new Intent(Login.this,Register.class);
-                Intent i = new Intent(Login.this, database.class);
-
+                Intent i = new Intent(Login.this,Register.class);
                 startActivity(i);
             }
         });
