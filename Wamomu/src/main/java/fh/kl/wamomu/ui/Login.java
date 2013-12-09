@@ -39,6 +39,7 @@ public class Login extends Activity {
         db = new database();
         dbMeals = new databaseMeals();
         dbMeasurements = new databaseMeasurements();
+
         db.accessWebService();
         dbMeals.accessWebService();
         dbMeasurements.accessWebService();
@@ -51,10 +52,13 @@ public class Login extends Activity {
             @Override
             public void onClick(View v) {
                 System.out.println(  "Teseghwqzhwzghhjrfdbnw    kut" +  et_login.getText().toString() + et_password.getText().toString()  );
-                if (db.checkUser(et_login.getText().toString(), et_password.getText().toString())) {
+                if(db.getJsonResult() == null){
+                    Toast.makeText(Login.this, "Databaseconnection is NULL. Check if MySQL Server is running, change IP,  or go home and cry...just cry!", Toast.LENGTH_LONG).show();
+                }
+                else if (db.checkUser(et_login.getText().toString(), et_password.getText().toString())) {
                     int currentUserID = db.getUsersID();
-                    dbMeals.checkMeal(currentUserID);        // alle Meals des jeweiligen Users ausgeben
-                    dbMeasurements.checkMeasurment(currentUserID); // alle Measurements des jeweiligen Users ausgeben
+                    dbMeals.checkMeal(database.getUsersID());       // alle Meals des jeweiligen Users ausgeben
+                    dbMeasurements.checkMeasurment(currentUserID);  // alle Measurements des jeweiligen Users ausgeben
                     activeUser = new user(et_login.getText().toString(), et_password.getText().toString(),null,null);
                     Intent i = new Intent(Login.this, NavigationDrawer.class);
                     startActivity(i);
@@ -63,8 +67,6 @@ public class Login extends Activity {
                 } else {
                     Toast.makeText(Login.this, "User or password wrong", Toast.LENGTH_LONG).show();
                 }
-//                Intent i = new Intent(Login.this, NavigationDrawer.class);
-//                startActivity(i);
             }
         });
         b_register = (Button) findViewById(R.id.bt_register);

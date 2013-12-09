@@ -72,7 +72,7 @@ public class databaseMeals extends Activity {
 //                        response.getEntity().getContent()).toString());
                 jsonResult = inputStreamToString(
                         response.getEntity().getContent()).toString();
-                System.out.println("Test#########" + jsonResult);
+                System.out.println("Test DatabaseMeals: " + jsonResult);
 
             } catch (ClientProtocolException e) {
                 e.printStackTrace();
@@ -110,9 +110,9 @@ public class databaseMeals extends Activity {
         JsonReadTask task = new JsonReadTask();
         // passes values for the urls string array
         task.execute(new String[]{url});
-        System.out.println("##########AccessWebService#########= ");
-
+        System.out.println("##########AccessWebService#########= databaseMeals");
     }
+
 
     public boolean checkMeal(int currentUserID) {
         boolean datatrue = false;
@@ -125,11 +125,14 @@ public class databaseMeals extends Activity {
             JSONArray jsonMainNode = jsonResponse.optJSONArray("meals");
             System.out.println("jsonResponse.optJSONArray= " + jsonMainNode.toString());
 
+            meals.clear();
+            System.out.println("MEALS JSONMAINNODE LENGTH: " +jsonMainNode.length());
             for (int i = 0; i < jsonMainNode.length(); i++) {
                 JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
                 System.out.println("Current meal= " + jsonChildNode.toString());
                 String usersid = jsonChildNode.optString("users_id");
                 System.out.println("Users_ID=  " + usersid);
+
                 if(currentID == Integer.parseInt(usersid)){
                     int mealID = jsonChildNode.optInt("meal_id");
                     String mealkind = jsonChildNode.optString("mealkind");

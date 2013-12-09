@@ -56,10 +56,18 @@ public class UebersichtFragment extends Fragment {
             }
             else
             {
-                art[i] = "Messung";
-                gericht[i] = databaseMeasurements.measurements.get(countermeas).getmvalue() + " mmol/l";
-                datum[i] = sdfDate.format(databaseMeasurements.measurements.get(countermeas).getDate()) + "/" + sdfTime.format(databaseMeasurements.measurements.get(countermeas).getTime());
-                countermeas++;
+                if(countermeas >= databaseMeasurements.measurements.size()){
+                    art[i] = databaseMeals.meals.get(countermeals).getFoodkind();
+                    gericht[i] = databaseMeals.meals.get(countermeals).getFood();
+                    datum[i] = sdfDate.format(databaseMeals.meals.get(countermeals).getDate()) + "/" + sdfTime.format(databaseMeals.meals.get(countermeals).getTime());
+                    countermeals++;
+                }
+                else{
+                    art[i] = "Messung";
+                    gericht[i] = databaseMeasurements.measurements.get(countermeas).getmvalue() + " mmol/l";
+                    datum[i] = sdfDate.format(databaseMeasurements.measurements.get(countermeas).getDate()) + "/" + sdfTime.format(databaseMeasurements.measurements.get(countermeas).getTime());
+                    countermeas++;
+                }
             }
         }
         overview_listview = (ListView) view.findViewById(R.id.lv_meals);

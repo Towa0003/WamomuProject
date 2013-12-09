@@ -62,7 +62,6 @@ public class StatistikFragment extends Fragment {
             (todo # Messpunkte momentan nur über den X-Wert clickable, wenns probleme gibt evtl. ändern)
             todo # xy Labels ändern
             todo # Wenn man reinzoomt -> Tage; rauszoomen -> Wochen; weiter Rauszoomen -> Monate auf X-Achse
-            todo # Punkte Schwarz färben bzw. je nach Messwert gut -> Grün / schlecht -> Rot
         */
 
     @Override

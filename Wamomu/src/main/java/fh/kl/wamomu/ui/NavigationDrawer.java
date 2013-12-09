@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import fh.kl.wamomu.R;
 import fh.kl.wamomu.database.database;
+import fh.kl.wamomu.database.databaseMeals;
 import fh.kl.wamomu.meta.user;
 
 /**
@@ -35,9 +36,6 @@ public class NavigationDrawer extends Activity {
     private ListView drawerListView;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     final CharSequence[] items = {"Mahlzeit", "Messung"};
-
-
-
 
     Fragment changeFragment = null;
 
@@ -171,8 +169,6 @@ public class NavigationDrawer extends Activity {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(NavigationDrawer.this,
-                        "Selected + " + which, Toast.LENGTH_LONG).show();
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 if (which == 0) {
                     changeFragment = new MealsFragment();

@@ -44,12 +44,13 @@
 
 
         <EditText
-            android:id="@+id/tv_timeedit"
+            android:id="@+id/et_timeedit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:padding="10dp" >
+            android:padding="10dp"
+            android:inputType="datetime">
 
             <requestFocus />
         </EditText>
@@ -72,12 +73,13 @@
 
 
         <EditText
-            android:id="@+id/tv_dateedit"
+            android:id="@+id/et_dateedit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:padding="10dp" >
+            android:padding="10dp"
+            android:inputType="date">
 
             <requestFocus />
         </EditText>
@@ -105,7 +107,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:padding="10dp" >
+            android:padding="10dp"
+            android:inputType="text">
 
             <requestFocus />
         </EditText>

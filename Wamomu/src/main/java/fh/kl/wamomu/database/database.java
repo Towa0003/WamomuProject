@@ -25,10 +25,15 @@ import java.sql.SQLOutput;
 import fh.kl.wamomu.R;
 
 public class database extends Activity {
-    protected int usersID; //192.168.178.48
+    protected static int usersID; //192.168.178.48
+
+    public String getJsonResult() {
+        return jsonResult;
+    }
+
     //    private String url = "http://cpriyankara.coolpage.biz/employee_details.php";
     private String jsonResult;
-    private String url = "http://192.168.1.4/wamomusql/users_details.php";
+    private String url = "http://192.168.178.48/wamomusql/users_details.php";
     private ListView listView;
 
     @Override
@@ -46,7 +51,7 @@ public class database extends Activity {
         return true;
     }
 
-    public int getUsersID() {
+    public static int getUsersID() {
         return usersID;
     }
 
@@ -58,7 +63,7 @@ public class database extends Activity {
         JsonReadTask task = new JsonReadTask();
         // passes values for the urls string array
         task.execute(new String[]{url});
-        System.out.println("##########AccessWebService#########= ");
+        System.out.println("##########AccessWebService#########= database");
     }
 
     public boolean checkUser(String useruser, String userpassword) {
@@ -85,6 +90,7 @@ public class database extends Activity {
                     System.out.println("DATATRUE!!!!!!!!!!!!!!!!!!!");
                     datatrue = true;
                     setUsersID(Integer.parseInt(number));
+                    break;
                 } else {
                     System.out.println("DATAFALSEE!!!!!!!!!!!!!!lllllllllllllllllllllllllllllllllllllllllllllll");
                 }
@@ -120,12 +126,12 @@ public class database extends Activity {
                 if (useruser.equals(user)) {
                     System.out.println("DATAFALSEE!!!!!!!!!!!!!!lllllllllllllllllllllllllllllllllllllllllllllll");
                     datatrue = false;
-                    i = jsonMainNode.length()-1;
+                    break;
                 }
                 else if(!userpassword.equals(userPasswordRepeat)){
                     System.out.println("DATAFALSEE!!!!!!!!!!!!!!lllllllllllllllllllllllllllllllllllllllllllllll");
                     datatrue = false;
-                    i = jsonMainNode.length()-1;
+                    break;
                 }else{
                     System.out.println("DATATRUE!!!!!!!!!!!!!!22222222222222222222222222222222");
                     datatrue = true;
