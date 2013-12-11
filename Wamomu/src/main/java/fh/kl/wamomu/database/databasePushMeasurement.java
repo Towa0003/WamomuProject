@@ -20,14 +20,14 @@ import java.io.InputStreamReader;
 
 import fh.kl.wamomu.R;
 import fh.kl.wamomu.ui.MealsFragment;
-import fh.kl.wamomu.ui.Register;
+import fh.kl.wamomu.ui.MeasurementFragment;
 
-public class databasePushMeal extends Activity {
+public class databasePushMeasurement extends Activity {
     private String jsonResult;
 //    private String url = "http://cpriyankara.coolpage.biz/employee_details.php";
 
     protected int usersID; //192.168.178.48
-    private String url = "http://192.168.178.48/wamomusql/addmeal.php";
+    private String url = "http://192.168.178.48/wamomusql/addmeasurement.php";
     private ListView listView;
 
     @Override
@@ -91,10 +91,9 @@ public class databasePushMeal extends Activity {
     public void accessWebService() {
         JsonReadTask task = new JsonReadTask();
         // passes values for the urls string array
-        task.execute(new String[]{url + "?essenszeit=" + MealsFragment.getEssenszeit() + "&essen=" + MealsFragment.getEssen()
-                                      + "&datum=" + MealsFragment.getDatumPush() + "&zeit=" + MealsFragment.getZeit()
-                                      + "&userid=" + MealsFragment.getUserid()});
-        System.out.println("##########AccessWebService######### DATABASEPUSH MEAL");
+        task.execute(new String[]{url + "?messwert=" + MeasurementFragment.getMesswert() + "&datum=" + MeasurementFragment.getDatumPush()
+                                      + "&zeit=" + MeasurementFragment.getZeit() + "&userid=" + MeasurementFragment.getUserid()});
+        System.out.println("##########AccessWebService######### DATABASEPUSH MEASUREMENT ");
 
     }
 }

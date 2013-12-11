@@ -7,15 +7,25 @@ import java.util.Date;
  */
 public class measurement {
 
+    int measurementID;
     double mvalue;
     Date date;
     Date time;
 
 
-    public measurement(double mvalue, Date date, Date time) {
+    public measurement(int measurementID, double mvalue, Date date, Date time) {
+        this.measurementID = measurementID;
         this.mvalue = mvalue;
         this.date = date;
         this.time = time;
+    }
+
+    public int getMeasurementID() {
+        return measurementID;
+    }
+
+    public void setMeasurementID(int measurementID) {
+        this.measurementID = measurementID;
     }
 
     public double getmvalue() {

@@ -73,7 +73,7 @@ public class databaseMeasurements extends Activity {
 //                        response.getEntity().getContent()).toString());
                 jsonResult = inputStreamToString(
                         response.getEntity().getContent()).toString();
-                System.out.println("Test#########" + jsonResult);
+                System.out.println("Test DatabaseMeasurements" + jsonResult);
 
             } catch (ClientProtocolException e) {
                 e.printStackTrace();
@@ -111,7 +111,7 @@ public class databaseMeasurements extends Activity {
         JsonReadTask task = new JsonReadTask();
         // passes values for the urls string array
         task.execute(new String[]{url});
-        System.out.println("##########AccessWebService#########= ");
+        System.out.println("##########AccessWebService#########= databaseMeasurements");
 
     }
 
@@ -131,7 +131,9 @@ public class databaseMeasurements extends Activity {
                 System.out.println("Current measurement= " + jsonChildNode.toString());
                 String usersid = jsonChildNode.optString("users_id");
                 System.out.println("Users_ID=  " + usersid);
+                // Dem jeweiligen user die entsprechenden Daten zuweisen
                 if(currentID == Integer.parseInt(usersid)){
+                    int measurementID = jsonChildNode.optInt("measurement_id");
                     String strMvalue = jsonChildNode.optString("mvalue");
                     Double mvalue = Double.parseDouble(strMvalue);
                     String datestr = jsonChildNode.optString("date");
@@ -146,14 +148,13 @@ public class databaseMeasurements extends Activity {
                         Date time =  sdf.parse(timestr);
                         System.out.println("TIIIIIIIIIIIIIIIIIIIME:  " + sdf.format(time));
 
-
-                        String mealsUserID = jsonChildNode.optString("users_id");
-                        System.out.println("Measurement: " + mvalue
+                        System.out.println("MeasurementID: " + measurementID
+                                + "Measurement: " + mvalue
                                 + " Datum: " + date
                                 + " Zeit: " + time
-                                + " UsersID: " + mealsUserID);
+                                + " UsersID: " + usersid);
 
-                        measurements.add(new measurement(mvalue, date, time));
+                        measurements.add(new measurement(measurementID, mvalue, date, time));
                     }
                     catch (ParseException pe){
                         System.out.println("PARSEEXCEPTION: " + pe);
