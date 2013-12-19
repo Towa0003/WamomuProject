@@ -150,8 +150,6 @@ public class MealsFragment extends Fragment {
             timepicker = (EditText) dialog.findViewById(R.id.et_timeedit);
             Calendar mcurrentTime = Calendar.getInstance();
 
-
-
             final int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
             final int minute = mcurrentTime.get(Calendar.MINUTE);
             final int date = mcurrentTime.get(Calendar.DATE);

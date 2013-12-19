@@ -40,10 +40,6 @@ public class Login extends Activity {
         dbMeals = new databaseMeals();
         dbMeasurements = new databaseMeasurements();
 
-        db.accessWebService();
-        dbMeals.accessWebService();
-        dbMeasurements.accessWebService();
-
         et_login = (EditText) findViewById(R.id.et_username_edit);
         et_password = (EditText) findViewById(R.id.et_password_edit);
 
@@ -51,11 +47,17 @@ public class Login extends Activity {
         b_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                db.accessWebService();
+                dbMeals.accessWebService();
+                dbMeasurements.accessWebService();
+
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
                 System.out.println(  "Teseghwqzhwzghhjrfdbnw    kut" +  et_login.getText().toString() + et_password.getText().toString()  );
                 if(db.getJsonResult() == null){
                     Toast.makeText(Login.this, "Databaseconnection is NULL. Check if MySQL Server is running, change IP,  or go home and cry...just cry!", Toast.LENGTH_LONG).show();
