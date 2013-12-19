@@ -142,7 +142,7 @@ public class MealsFragment extends Fragment {
             TextView text = (TextView) dialog.findViewById(R.id.tv_mealtext);
             text.setText("Mahlzeit hinzufügen");
             ImageView image = (ImageView) dialog.findViewById(R.id.iv_mealimage);
-            image.setImageResource(R.drawable.ic_launcher);
+            image.setImageResource(R.drawable.mahlzeit);
 
             mealedit = (EditText) dialog.findViewById(R.id.et_mealedit);
 

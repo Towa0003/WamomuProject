@@ -25,7 +25,7 @@ public class dialog_information extends Dialog {
         t.setText("Diese App wurde von der Superhyperultracoolen Truppe Wamomu für das obergeilste Megafach Ever genannt Studienprojekt gemacht!!!! 65 Wat ");
 
        image = (ImageView) findViewById(R.id.iv_infoimage);
-                image.setImageResource(R.drawable.ic_launcher);
+                image.setImageResource(R.drawable.einstellung);
 
         dialogButton = (Button) findViewById(R.id.bt_ok);
                 // if button is clicked, close the custom dialog

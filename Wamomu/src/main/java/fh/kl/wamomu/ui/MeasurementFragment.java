@@ -155,7 +155,7 @@ public class MeasurementFragment extends Fragment {
             TextView text = (TextView) dialog.findViewById(R.id.tv_measuretext);
             text.setText("Hello, this is a custom dialog!");
             ImageView image = (ImageView) dialog.findViewById(R.id.iv_measureimage);
-            image.setImageResource(R.drawable.ic_launcher);
+            image.setImageResource(R.drawable.messung);
 
             measurementedit = (EditText) dialog.findViewById(R.id.et_wertedit);
 

@@ -7,6 +7,7 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
@@ -17,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,7 +33,9 @@ import fh.kl.wamomu.meta.user;
  */
 public class NavigationDrawer extends Activity {
 
+    // slide menu items
     private String[] drawerListViewItems;
+
     private DrawerLayout drawerLayout;
     private ListView drawerListView;
     private ActionBarDrawerToggle actionBarDrawerToggle;
@@ -50,8 +54,6 @@ public class NavigationDrawer extends Activity {
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
 
-
-
         // get list items from strings.xml
         drawerListViewItems = getResources().getStringArray(R.array.items);
         // get ListView defined in activity_main.xml
@@ -63,6 +65,7 @@ public class NavigationDrawer extends Activity {
 
         // 2. App Icon
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
 
         // 2.1 create ActionBarDrawerToggle
         actionBarDrawerToggle = new ActionBarDrawerToggle(

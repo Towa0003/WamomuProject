@@ -14,16 +14,7 @@
     <string name="action_add">Hinzufuegen</string>
 
 
-    <string-array name="menus">
-        <item >Home</item>
-        <item >Android</item>
-        <item >Blackberry</item>
-        <item >J2ME</item>
-        <item >Sencha Touch</item>
-        <item >PhoneGap</item>
-        <item >Java</item>
-    </string-array>
-
+    <!-- Nav Drawer Menu Items -->
     <string-array name="items">
         <item>Übersicht</item>
         <item>Messungen</item>
@@ -32,6 +23,19 @@
         <item>Statistik</item>
         <item>StatistikTEST</item>
     </string-array>
+
+    <!-- Nav Drawer List Item Icons -->
+    <!-- Keep them in order as the titles are in -->
+    <array name="nav_drawer_icons">
+        <item>@drawable/uebersicht</item>
+        <item>@drawable/messung</item>
+        <item>@drawable/mahlzeit</item>
+        <item>@drawable/einstellung</item>
+        <item>@drawable/statistik</item>
+        <item>@drawable/statistik</item>
+    </array>
+    <!-- Content Description -->
+    <string name="desc_list_item_icon">Item Icon</string>
 
     <string name="drawer_open">Open Drawer</string>
     <string name="drawer_close">Close Drawer</string>
