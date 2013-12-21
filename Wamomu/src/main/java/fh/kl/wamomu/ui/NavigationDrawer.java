@@ -23,6 +23,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import fh.kl.wamomu.R;
 import fh.kl.wamomu.database.database;
 import fh.kl.wamomu.database.databaseMeals;
@@ -33,13 +35,24 @@ import fh.kl.wamomu.meta.user;
  */
 public class NavigationDrawer extends Activity {
 
-    // slide menu items
-    private String[] drawerListViewItems;
-
     private DrawerLayout drawerLayout;
     private ListView drawerListView;
     private ActionBarDrawerToggle actionBarDrawerToggle;
+
+    // nav drawer title
+    private CharSequence drawerTitle;
+
+    // used to store app title
+    private CharSequence title;
+
+    // slide menu items
+    private String[] drawerListViewItems;
+    private TypedArray navMenuIcons;
+
     final CharSequence[] items = {"Mahlzeit", "Messung"};
+
+    private ArrayList<NavigationDrawerItem> navDrawerItems;
+    private NavigationDrawerAdapter adapter;
 
     Fragment changeFragment = null;
 
@@ -54,33 +67,68 @@ public class NavigationDrawer extends Activity {
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
 
+        title = drawerTitle = getTitle();
+
         // get list items from strings.xml
-        drawerListViewItems = getResources().getStringArray(R.array.items);
+        drawerListViewItems = getResources().getStringArray(R.array.nav_drawer_items);
+
+        // get list icons from strings.xml
+        navMenuIcons = getResources().obtainTypedArray(R.array.nav_drawer_icons);
+
+        // Layout of Drawer
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         // get ListView defined in activity_main.xml
         drawerListView = (ListView) findViewById(R.id.left_drawer);
 
+        navDrawerItems = new ArrayList<NavigationDrawerItem>();
+        // adding nav drawer items to array
+        // Home
+        navDrawerItems.add(new NavigationDrawerItem(drawerListViewItems[0], navMenuIcons.getResourceId(0, -1)));
+        // Find People
+        navDrawerItems.add(new NavigationDrawerItem(drawerListViewItems[1], navMenuIcons.getResourceId(1, -1)));
+        // Photos
+        navDrawerItems.add(new NavigationDrawerItem(drawerListViewItems[2], navMenuIcons.getResourceId(2, -1)));
+        // Communities, Will add a counter here
+        navDrawerItems.add(new NavigationDrawerItem(drawerListViewItems[3], navMenuIcons.getResourceId(3, -1)));
+        // Pages
+        navDrawerItems.add(new NavigationDrawerItem(drawerListViewItems[4], navMenuIcons.getResourceId(4, -1)));
+        // What's hot, We  will add a counter here
+        navDrawerItems.add(new NavigationDrawerItem(drawerListViewItems[5], navMenuIcons.getResourceId(5, -1)));
+
+        navMenuIcons.recycle();
+
         // Set the adapter for the list view
-        drawerListView.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_list_item, drawerListViewItems));
+        adapter = new NavigationDrawerAdapter(getApplicationContext(), navDrawerItems);
+        drawerListView.setAdapter(adapter);
 
-        // 2. App Icon
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        // enable and show "up" arrow
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setHomeButtonEnabled(true);
 
-
-        // 2.1 create ActionBarDrawerToggle
+        // Create ActionBarDrawerToggle
         actionBarDrawerToggle = new ActionBarDrawerToggle(
                 this,                  /* host Activity */
                 drawerLayout,         /* DrawerLayout object */
                 R.drawable.ic_drawer,  /* nav drawer icon to replace 'Up' caret */
                 R.string.drawer_open,  /* "open drawer" description */
                 R.string.drawer_close  /* "close drawer" description */
-        );
+        ){
+            public void onDrawerClosed(View view) {
+                getActionBar().setTitle(title);
+                // calling onPrepareOptionsMenu() to show action bar icons
+                invalidateOptionsMenu();
+            }
 
-        // 2.2 Set actionBarDrawerToggle as the DrawerListener
+            public void onDrawerOpened(View drawerView) {
+                getActionBar().setTitle(drawerTitle);
+                // calling onPrepareOptionsMenu() to hide action bar icons
+                invalidateOptionsMenu();
+            }
+        };
+
+        // Set actionBarDrawerToggle as the DrawerListener
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
-
-        // 2.3 enable and show "up" arrow
-        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         // just styling option
         drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
@@ -90,18 +138,7 @@ public class NavigationDrawer extends Activity {
     }
 
 
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        actionBarDrawerToggle.syncState();
-    }
 
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        actionBarDrawerToggle.onConfigurationChanged(newConfig);
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -126,34 +163,61 @@ public class NavigationDrawer extends Activity {
 
     }
 
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        actionBarDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        actionBarDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Toast.makeText(NavigationDrawer.this, ((TextView) view).getText(), Toast.LENGTH_LONG).show();
-
             drawerLayout.closeDrawer(drawerListView);
-
+            displayView(position);
+        }
+        private void displayView(int position) {
             FragmentTransaction ft = getFragmentManager().beginTransaction();
-            if (position == 0) {
-                changeFragment = new UebersichtFragment();
-            } else if (position == 1) {
-                changeFragment = new MeasurementFragment();
-            } else if (position == 2) {
-                changeFragment = new MealsFragment();
-            } else if (position == 3) {
-                changeFragment = new SettingsFragment();
-            } else if (position == 4) {
-                changeFragment = new StatistikFragment();
-            }else if (position == 5) {
-                changeFragment = new StatistikTESTFragment();
+            switch(position) {
+                case 0:
+                    changeFragment = new UebersichtFragment();
+                    break;
+                case 1:
+                    changeFragment = new MeasurementFragment();
+                    break;
+                case 2:
+                    changeFragment = new MealsFragment();
+                    break;
+                case 3:
+                    changeFragment = new SettingsFragment();
+                    break;
+                case 4:
+                    changeFragment = new StatistikFragment();
+                    break;
+                case 5:
+                    changeFragment = new StatistikTESTFragment();
+                    break;
+                default:
+                    break;
             }
-
 
             ft.replace(R.id.fl_content_frame, changeFragment);
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.commit();
+
+            // update selected item and title, then close the drawer
+            drawerListView.setItemChecked(position,true);
+            drawerListView.setSelection(position);
         }
+
+
     }
 
     @Override

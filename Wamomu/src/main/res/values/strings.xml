@@ -15,7 +15,7 @@
 
 
     <!-- Nav Drawer Menu Items -->
-    <string-array name="items">
+    <string-array name="nav_drawer_items">
         <item>Übersicht</item>
         <item>Messungen</item>
         <item>Mahlzeiten</item>

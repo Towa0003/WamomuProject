@@ -9,93 +9,6 @@
         android:id="@+id/fl_content_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <ScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/uebersicht"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="textEnd"
-                        android:textSize="20dp"
-                        android:text="Uebersicht" />
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/messung"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="textEnd"
-                        android:textSize="20dp"
-                        android:text="Messung" />
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/mahlzeit"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="textEnd"
-                        android:textSize="20dp"
-                        android:text="Mahlzeiten" />
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/einstellung"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="textEnd"
-                        android:textSize="20dp"
-                        android:text="Einstellungen" />
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/statistik"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="textEnd"
-                        android:textSize="20dp"
-                        android:text="Statistik" />
-                </LinearLayout>
-            </LinearLayout>
-        </ScrollView>
     </FrameLayout>
 
 
@@ -105,11 +18,10 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:choiceMode="singleChoice"
-        android:divider="#666"
+        android:divider="@color/list_divider"
         android:dividerHeight="1dp"
-        android:background="#333"
-        android:paddingLeft="15sp"
-        android:paddingRight="15sp"
+        android:listSelector="@drawable/list_selector"
+        android:background="@color/list_background"
         />
 
 </android.support.v4.widget.DrawerLayout>
