@@ -90,6 +90,7 @@ public class database extends Activity {
                     System.out.println("DATATRUE!!!!!!!!!!!!!!!!!!!");
                     datatrue = true;
                     setUsersID(Integer.parseInt(number));
+                    System.out.println("USERID= " + getUsersID());
                     break;
                 } else {
                     System.out.println("DATAFALSEE!!!!!!!!!!!!!!lllllllllllllllllllllllllllllllllllllllllllllll");
@@ -121,7 +122,7 @@ public class database extends Activity {
                 String password = jsonChildNode.optString("password");
                 System.out.println("Password: " + password);
 
-                System.out.println("CHECK THIS OUT:" + userpassword + "" + userPasswordRepeat + "asd");
+                System.out.println("CHECK THIS OUT:" + userpassword + "" + userPasswordRepeat );
                 System.out.println("PW STIMMEN NICHT ÜBEREIN " + !userpassword.equals(userPasswordRepeat));
                 if (useruser.equals(user)) {
                     System.out.println("DATAFALSEE!!!!!!!!!!!!!!lllllllllllllllllllllllllllllllllllllllllllllll");

@@ -62,11 +62,14 @@ public class Register extends Activity {
             @Override
             public void onClick(View v) {
                 strUsername = username.getText().toString();
+                setStrUsername(strUsername);
                 strName = String.valueOf(name.getText().toString());
                 strVname = String.valueOf(vname.getText().toString());
                 strEmail = String.valueOf(email.getText().toString());
                 strPassword = password.getText().toString();
+                setStrPassword(strPassword);
                 strpasswordRepeat = passwordRepeat.getText().toString();
+                setStrpasswordRepeat(strpasswordRepeat);
 
                 if(db.checkPushUser(getStrUsername(), getStrPassword(), getStrpasswordRepeat()) == false){
                     Toast.makeText(

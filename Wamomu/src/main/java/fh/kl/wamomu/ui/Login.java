@@ -58,7 +58,6 @@ public class Login extends Activity {
                     e.printStackTrace();
                 }
 
-                System.out.println(  "Teseghwqzhwzghhjrfdbnw    kut" +  et_login.getText().toString() + et_password.getText().toString()  );
                 if(db.getJsonResult() == null){
                     Toast.makeText(Login.this, "Databaseconnection is NULL. Check if MySQL Server is running, change IP,  or go home and cry...just cry!", Toast.LENGTH_LONG).show();
                 }

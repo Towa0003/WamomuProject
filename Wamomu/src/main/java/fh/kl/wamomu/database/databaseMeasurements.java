@@ -125,6 +125,7 @@ public class databaseMeasurements extends Activity {
             System.out.println("JSONObject= " + jsonResponse.toString());
             JSONArray jsonMainNode = jsonResponse.optJSONArray("measurements");
             System.out.println("jsonResponse.optJSONArray= " + jsonMainNode.toString());
+            measurements.clear();
 
             for (int i = 0; i < jsonMainNode.length(); i++) {
                 JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);

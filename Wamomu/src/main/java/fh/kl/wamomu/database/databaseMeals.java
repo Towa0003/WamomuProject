@@ -134,6 +134,7 @@ public class databaseMeals extends Activity {
                 System.out.println("Users_ID=  " + usersid);
 
                 if(currentID == Integer.parseInt(usersid)){
+                    System.out.println("eingeloggter User=  " + currentID + " geprüfter User: " + usersid);
                     int mealID = jsonChildNode.optInt("meal_id");
                     String mealkind = jsonChildNode.optString("mealkind");
                     String meal = jsonChildNode.optString("meal");
