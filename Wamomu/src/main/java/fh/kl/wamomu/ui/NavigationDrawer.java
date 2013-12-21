@@ -15,6 +15,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -134,7 +135,10 @@ public class NavigationDrawer extends Activity {
         drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 
         drawerListView.setOnItemClickListener(new DrawerItemClickListener());
-
+        // on first time display view for first nav item
+        if (savedInstanceState == null) {
+            new DrawerItemClickListener().displayView(0);
+        }
     }
 
 
@@ -176,7 +180,7 @@ public class NavigationDrawer extends Activity {
         actionBarDrawerToggle.onConfigurationChanged(newConfig);
     }
 
-    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+    protected class DrawerItemClickListener implements ListView.OnItemClickListener {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -216,8 +220,6 @@ public class NavigationDrawer extends Activity {
             drawerListView.setItemChecked(position,true);
             drawerListView.setSelection(position);
         }
-
-
     }
 
     @Override
