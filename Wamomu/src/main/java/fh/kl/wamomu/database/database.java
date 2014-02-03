@@ -20,23 +20,22 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.sql.SQLOutput;
 
 import fh.kl.wamomu.R;
 
 public class database extends Activity {
     protected static int usersID; //192.168.178.48
 
-    static String ip = "192.168.1.5";
+    static String ip = "192.168.1.5"; //Tobi
+//    static String ip = "192.168.1.5"; //Max
+//    static String ip = "192.168.1.5"; // Chris
 
     public String getJsonResult() {
         return jsonResult;
     }
 
-    //    private String url = "http://cpriyankara.coolpage.biz/employee_details.php";
     private String jsonResult;
-//    private String url = "http://192.168.1.5/wamomusql/users_details.php";
-private String url = "http://"+ip+"/wamomusql/users_details.php";
+    private String url = "http://" + ip + "/wamomusql/users_details.php";
     private ListView listView;
 
     @Override
@@ -125,18 +124,17 @@ private String url = "http://"+ip+"/wamomusql/users_details.php";
                 String password = jsonChildNode.optString("password");
                 System.out.println("Password: " + password);
 
-                System.out.println("CHECK THIS OUT:" + userpassword + "" + userPasswordRepeat );
+                System.out.println("CHECK THIS OUT:" + userpassword + "" + userPasswordRepeat);
                 System.out.println("PW STIMMEN NICHT ÜBEREIN " + !userpassword.equals(userPasswordRepeat));
                 if (useruser.equals(user)) {
                     System.out.println("DATAFALSEE!!!!!!!!!!!!!!lllllllllllllllllllllllllllllllllllllllllllllll");
                     datatrue = false;
                     break;
-                }
-                else if(!userpassword.equals(userPasswordRepeat)){
+                } else if (!userpassword.equals(userPasswordRepeat)) {
                     System.out.println("DATAFALSEE!!!!!!!!!!!!!!lllllllllllllllllllllllllllllllllllllllllllllll");
                     datatrue = false;
                     break;
-                }else{
+                } else {
                     System.out.println("DATATRUE!!!!!!!!!!!!!!22222222222222222222222222222222");
                     datatrue = true;
                 }
@@ -147,6 +145,7 @@ private String url = "http://"+ip+"/wamomusql/users_details.php";
 
         return datatrue;
     }
+
     // Async Task to access the web
     private class JsonReadTask extends AsyncTask<String, Void, String> {
         @Override
