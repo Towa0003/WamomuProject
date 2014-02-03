@@ -170,9 +170,9 @@ public class StatistikFragment extends Fragment {
     private XYMultipleSeriesRenderer createRenderer() {
         XYMultipleSeriesRenderer renderer = new XYMultipleSeriesRenderer();
 
-        XYSeriesRenderer xySeriesRenderer0 = new XYSeriesRenderer();
-        XYSeriesRenderer xySeriesRenderer1 = new XYSeriesRenderer();
-        XYSeriesRenderer xySeriesRenderer2 = new XYSeriesRenderer();
+        XYSeriesRenderer xySeriesRenderer0 = new XYSeriesRenderer();    // Deklarieren der blauen Linie
+        XYSeriesRenderer xySeriesRenderer1 = new XYSeriesRenderer();    // Deklarieren des Objektes für rote Punkte, für schlechte Messwerte
+        XYSeriesRenderer xySeriesRenderer2 = new XYSeriesRenderer();    // Deklarieren des Objektes für grüne Punkte, für gute Messwerte
 
         renderer.setAntialiasing(true);
         renderer.setClickEnabled(true);         // clickable machen
@@ -183,11 +183,11 @@ public class StatistikFragment extends Fragment {
 
         // Achsen
         renderer.setAxisTitleTextSize(50);              // Schriftgröße Titel an Achsen
-        renderer.setLabelsTextSize(35);                 // Schriftgröße Werte an Achsen
+        renderer.setLabelsTextSize(30);                 // Schriftgröße Werte an Achsen
         renderer.setLabelsColor(Color.BLACK);           // Farbe Achsenwerte
         renderer.setXTitle("\n \n \n Datum/Uhrzeit");   // Überschrift X-Achse
-        renderer.setYTitle("Messwerte");                // Überschrift Y-Achse
-        renderer.setXAxisMax( databaseMeasurements.measurements.size() - 1);// Anzeigebreich maximum Wert X-Achse
+        renderer.setYTitle("Messwerte mg/dl");          // Überschrift Y-Achse
+        renderer.setXAxisMax(databaseMeasurements.measurements.size() - 1); // Anzeigebreich maximum Wert X-Achse
         renderer.setXAxisMin(renderer.getXAxisMax() - 5);                   // Anzeigebreich minimum Wert X-Achse
         renderer.setYAxisMax(10);                                           // Anzeigebereich maximum Wert Y-Achse
         renderer.setYAxisMin(0);                                            // Anzeigebereich minimum Wert Y-Achse
@@ -196,31 +196,32 @@ public class StatistikFragment extends Fragment {
         renderer.setLabelsColor(Color.BLACK);                               // Farbe der Labels Überschriften
         renderer.setPanEnabled(true, false);                                // Scrollen auf X- oder Y-Achse
         renderer.setZoomEnabled(true, false);                               // Zoom auf X- oder Y-Achse
-        double limit[] = {0-0.05,  databaseMeasurements.measurements.size()-0.7, 0, 10}; // Werte zur Limitierung des Scroll- und Zoombereichs; minX, maxX, minY, maxY
+        double limit[] = {0-0.05,  databaseMeasurements.measurements.size()-0.7, renderer.getYAxisMin(), 10}; // Werte zur Limitierung des Scroll- und Zoombereichs; minX, maxX, minY, maxY
         renderer.setPanLimits(limit);                       // Limitierung des Scrollbereichs
         renderer.setZoomLimits(limit);                      // Limitierung des Zooms
+        renderer.setZoomRate(10f);
 
-        renderer.setXLabels(0);                     // Standard X-Labels ausblenden
-//      renderer.setYLabels(0);                     // Standard Y-Labels ausblenden
-        renderer.setXLabelsColor(Color.BLACK);      // Farbe X-Labels
-        renderer.setYLabelsColor(0, Color.BLACK);   // Farbe Y-Label
-        renderer.setXLabelsAngle(0);                // Rotation X-Labels
+        renderer.setXLabels(0);                         // Standard X-Labels ausblenden
+//      renderer.setYLabels(0);                         // Standard Y-Labels ausblenden
+        renderer.setXLabelsColor(Color.BLACK);          // Farbe X-Labels
+        renderer.setYLabelsColor(0, Color.BLACK);       // Farbe Y-Label
+        renderer.setXLabelsAngle(0);                    // Rotation X-Labels
 
         // Legende
-        renderer.setShowLegend(false);              // Anzeigen der Legende
-//        renderer.setLegendTextSize(30);           // Textgröße
-//        renderer.setLegendHeight(10);             // Höhe
+        renderer.setShowLegend(false);                  // Anzeigen der Legende
+//        renderer.setLegendTextSize(30);               // Textgröße
+//        renderer.setLegendHeight(10);                 // Höhe
 
         // Datenbereich
         renderer.setShowGrid(true);                     // Rasterlinie anzeigen
         renderer.setApplyBackgroundColor(true);         // Hintergrundfarbe Datenbereich aktivieren
         renderer.setGridColor(Color.DKGRAY);            // Farbe Rasterlinien
         renderer.setBackgroundColor(Color.WHITE);       // Hintergrundfarbe Datenbereich
-        renderer.setMargins(new int[]{30, 80, 50, 0});  // Abstand von Oben, Links, Unten, Rechts
+        renderer.setMargins(new int[]{20, 115, 40, 0});  // Abstand von Oben, Links, Unten, Rechts
         renderer.setMarginsColor(Color.WHITE);          // Hintergrundfarbe außerhalb Diagramm
 
         // Punkte
-        renderer.setPointSize(25f);                     // Größe der Punkte
+        renderer.setPointSize(15f);                     // Größe der Punkte
 
 //        Linienfarbe zwischen den Messpunkten und Farbfüllung unter den Messwerten
 //        xySeriesRenderer0.setPointStyle(null);
@@ -244,19 +245,26 @@ public class StatistikFragment extends Fragment {
 //        xySeriesRenderer3.setPointStyle(null);
 //        xySeriesRenderer3.setColor(getResources().getColor(R.color.color_good));
 //        xySeriesRenderer3.setLineWidth(5f);
-        // Daten an die Achse schreiben
+
+        // Datum und Zeit von Datenbank holen und an die X-Achse schreiben
         for (int i = 0; i <  databaseMeasurements.measurements.size(); i++) {
-          String strDate = sdfDate.format( databaseMeasurements.measurements.get(i).getDate());
-          String strTime = sdfTime.format( databaseMeasurements.measurements.get(i).getTime());
+            String strDate = sdfDate.format( databaseMeasurements.measurements.get(i).getDate());
+            String strTime = sdfTime.format( databaseMeasurements.measurements.get(i).getTime());
             System.out.println("x-label: " + i);
-            renderer.addXTextLabel(i, String.valueOf(strDate + "\n" + strTime));        // Datum an X-Achse schreiben
+            renderer.addXTextLabel(i, String.valueOf(strDate + "\n" + strTime));        // Datum an X-Achsen Indize schreiben
         }
 
+        // Messpunkte 60-260 an Y-Achse schreiben
         int j = 0;
-        while (j <= 10){
-            System.out.println("y-label: " + j);
-            renderer.addYTextLabel(j, String.valueOf(j));// Werte an Y-Achse schreiben
-            j++;
+        int l = 0;
+        double k = 0;
+        while (l <= 20){
+            System.out.println("y-label: " + j );
+            renderer.addYTextLabel(k, String.valueOf(j));// Werte an Y-Achse schreiben
+            renderer.addYTextLabel(l, " ");// Werte an Y-Achse schreiben
+            j+=10;
+            k+=0.55;
+            l++;
         }
         renderer.addSeriesRenderer(0, xySeriesRenderer0);
         renderer.addSeriesRenderer(1, xySeriesRenderer1);
