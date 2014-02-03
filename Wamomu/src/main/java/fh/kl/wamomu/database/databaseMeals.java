@@ -68,8 +68,6 @@ private String url = "http://"+database.ip+"/wamomusql/meals_details.php";
 
             try {
                 HttpResponse response = httpclient.execute(httppost);
-//                System.out.println("Test#############" + inputStreamToString(
-//                        response.getEntity().getContent()).toString());
                 jsonResult = inputStreamToString(
                         response.getEntity().getContent()).toString();
                 System.out.println("Test DatabaseMeals: " + jsonResult);
@@ -93,7 +91,6 @@ private String url = "http://"+database.ip+"/wamomusql/meals_details.php";
                 }
             } catch (IOException e) {
                 // e.printStackTrace();
-                System.out.println("Error: " + e.toString());
                 Toast.makeText(getApplicationContext(),
                         "Error..." + e.toString(), Toast.LENGTH_LONG).show();
             }
@@ -110,7 +107,6 @@ private String url = "http://"+database.ip+"/wamomusql/meals_details.php";
         JsonReadTask task = new JsonReadTask();
         // passes values for the urls string array
         task.execute(new String[]{url});
-        System.out.println("##########AccessWebService#########= databaseMeals");
     }
 
 
@@ -120,21 +116,14 @@ private String url = "http://"+database.ip+"/wamomusql/meals_details.php";
 
         try {
             JSONObject jsonResponse = new JSONObject(jsonResult);
-            System.out.println("jsonresult= " + jsonResult);
-            System.out.println("JSONObject= " + jsonResponse.toString());
             JSONArray jsonMainNode = jsonResponse.optJSONArray("meals");
-            System.out.println("jsonResponse.optJSONArray= " + jsonMainNode.toString());
 
             meals.clear();
-            System.out.println("MEALS JSONMAINNODE LENGTH: " +jsonMainNode.length());
             for (int i = 0; i < jsonMainNode.length(); i++) {
                 JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
-                System.out.println("Current meal= " + jsonChildNode.toString());
                 String usersid = jsonChildNode.optString("users_id");
-                System.out.println("Users_ID=  " + usersid);
 
                 if(currentID == Integer.parseInt(usersid)){
-                    System.out.println("eingeloggter User=  " + currentID + " geprüfter User: " + usersid);
                     int mealID = jsonChildNode.optInt("meal_id");
                     String mealkind = jsonChildNode.optString("mealkind");
                     String meal = jsonChildNode.optString("meal");
@@ -144,11 +133,9 @@ private String url = "http://"+database.ip+"/wamomusql/meals_details.php";
                     {
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                         Date date = sdf.parse(datestr);
-                        System.out.println("DAAAAAAAAATE:  " + sdf.format(date));
 
                         sdf = new SimpleDateFormat("HH:mm");
                         Date time =  sdf.parse(timestr);
-                        System.out.println("TIIIIIIIIIIIIIIIIIIIME:  " + sdf.format(time));
 
                         System.out.println("MealID: " + mealID
                                 + "Mealkind: " + mealkind
@@ -160,13 +147,11 @@ private String url = "http://"+database.ip+"/wamomusql/meals_details.php";
                         meals.add(new meal(mealID, mealkind, meal, date, time));
                     }
                     catch (ParseException pe){
-                        System.out.println("PARSEEXCEPTION: " + pe);
                     }
 
                 }
             }
         } catch (JSONException e) {
-            System.out.println(e.toString());
         }
 
         return datatrue;

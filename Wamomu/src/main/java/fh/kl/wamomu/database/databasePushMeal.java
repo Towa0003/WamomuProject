@@ -49,17 +49,13 @@ private String url = "http://" +  database.ip + "/wamomusql/addmeal.php";
     private class JsonReadTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
-            System.out.println("injsonReadTask rly?" + params[0]);
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost(params[0]);
 
             try {
                 HttpResponse response = httpclient.execute(httppost);
-//                System.out.println("Test#############" + inputStreamToString(
-//                        response.getEntity().getContent()).toString());
                 jsonResult = inputStreamToString(
                         response.getEntity().getContent()).toString();
-                System.out.println("Test######### DATABASE PUSHMEAL: " + jsonResult);
 
             } catch (ClientProtocolException e) {
                 e.printStackTrace();
@@ -80,7 +76,6 @@ private String url = "http://" +  database.ip + "/wamomusql/addmeal.php";
                 }
             } catch (IOException e) {
                 // e.printStackTrace();
-                System.out.println("Error: " + e.toString());
                 Toast.makeText(getApplicationContext(),
                         "Error..." + e.toString(), Toast.LENGTH_LONG).show();
             }
@@ -94,7 +89,6 @@ private String url = "http://" +  database.ip + "/wamomusql/addmeal.php";
         task.execute(new String[]{url + "?essenszeit=" + MealsFragment.getEssenszeit() + "&essen=" + MealsFragment.getEssen()
                                       + "&datum=" + MealsFragment.getDatumPush() + "&zeit=" + MealsFragment.getZeit()
                                       + "&userid=" + MealsFragment.getUserid()});
-        System.out.println("##########AccessWebService######### DATABASEPUSH MEAL");
 
     }
 }

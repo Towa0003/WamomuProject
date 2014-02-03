@@ -63,18 +63,13 @@ private String url = "http://" + database.ip + "/wamomusql/measurements_details.
     private class JsonReadTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
-            System.out.println("injsonReadTask rly?" + params[0]);
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost(params[0]);
 
             try {
                 HttpResponse response = httpclient.execute(httppost);
-//                System.out.println("Test#############" + inputStreamToString(
-//                        response.getEntity().getContent()).toString());
                 jsonResult = inputStreamToString(
                         response.getEntity().getContent()).toString();
-                System.out.println("Test DatabaseMeasurements" + jsonResult);
-
             } catch (ClientProtocolException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -94,7 +89,6 @@ private String url = "http://" + database.ip + "/wamomusql/measurements_details.
                 }
             } catch (IOException e) {
                 // e.printStackTrace();
-                System.out.println("Error: " + e.toString());
                 Toast.makeText(getApplicationContext(),
                         "Error..." + e.toString(), Toast.LENGTH_LONG).show();
             }
@@ -111,7 +105,6 @@ private String url = "http://" + database.ip + "/wamomusql/measurements_details.
         JsonReadTask task = new JsonReadTask();
         // passes values for the urls string array
         task.execute(new String[]{url});
-        System.out.println("##########AccessWebService#########= databaseMeasurements");
 
     }
 
@@ -121,17 +114,12 @@ private String url = "http://" + database.ip + "/wamomusql/measurements_details.
 
         try {
             JSONObject jsonResponse = new JSONObject(jsonResult);
-            System.out.println("jsonresult= " + jsonResult);
-            System.out.println("JSONObject= " + jsonResponse.toString());
             JSONArray jsonMainNode = jsonResponse.optJSONArray("measurements");
-            System.out.println("jsonResponse.optJSONArray= " + jsonMainNode.toString());
             measurements.clear();
 
             for (int i = 0; i < jsonMainNode.length(); i++) {
                 JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
-                System.out.println("Current measurement= " + jsonChildNode.toString());
                 String usersid = jsonChildNode.optString("users_id");
-                System.out.println("Users_ID=  " + usersid);
                 // Dem jeweiligen user die entsprechenden Daten zuweisen
                 if(currentID == Integer.parseInt(usersid)){
                     int measurementID = jsonChildNode.optInt("measurement_id");
@@ -143,11 +131,9 @@ private String url = "http://" + database.ip + "/wamomusql/measurements_details.
                     {
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                         Date date = sdf.parse(datestr);
-                        System.out.println("DAAAAAAAAATE:  " + sdf.format(date));
 
                         sdf = new SimpleDateFormat("HH:mm:ss");
                         Date time =  sdf.parse(timestr);
-                        System.out.println("TIIIIIIIIIIIIIIIIIIIME:  " + sdf.format(time));
 
                         System.out.println("MeasurementID: " + measurementID
                                 + "Measurement: " + mvalue
@@ -158,13 +144,11 @@ private String url = "http://" + database.ip + "/wamomusql/measurements_details.
                         measurements.add(new measurement(measurementID, mvalue, date, time));
                     }
                     catch (ParseException pe){
-                        System.out.println("PARSEEXCEPTION: " + pe);
                     }
 
                 }
             }
         } catch (JSONException e) {
-            System.out.println(e.toString());
         }
 
         return datatrue;

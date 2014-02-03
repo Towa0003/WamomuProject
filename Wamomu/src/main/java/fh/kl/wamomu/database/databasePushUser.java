@@ -57,7 +57,6 @@ private String url = "http://" + database.ip + "/wamomusql/adduser.php";
     private class JsonReadTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
-            System.out.println("injsonReadTask rly?" + params[0]);
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost(params[0]);
 
@@ -65,7 +64,6 @@ private String url = "http://" + database.ip + "/wamomusql/adduser.php";
                 HttpResponse response = httpclient.execute(httppost);
                 jsonResult = inputStreamToString(
                         response.getEntity().getContent()).toString();
-                System.out.println("Test#########" + jsonResult);
 
             } catch (ClientProtocolException e) {
                 e.printStackTrace();
@@ -86,7 +84,6 @@ private String url = "http://" + database.ip + "/wamomusql/adduser.php";
                 }
             } catch (IOException e) {
                 // e.printStackTrace();
-                System.out.println("Error: " + e.toString());
                 Toast.makeText(getApplicationContext(),
                         "Error..." + e.toString(), Toast.LENGTH_LONG).show();
             }
@@ -98,7 +95,5 @@ private String url = "http://" + database.ip + "/wamomusql/adduser.php";
         JsonReadTask task = new JsonReadTask();
         // passes values for the urls string array
         task.execute(new String[]{url + "?benutzername=" + Register.getStrUsername() + "&passwort=" + Register.getStrPassword() + "&passwortrepeat=" + Register.getStrpasswordRepeat()});
-        System.out.println("##########AccessWebService#########= databasepushuser");
-
     }
 }

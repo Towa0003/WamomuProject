@@ -49,7 +49,6 @@ public class databasePushMeasurement extends Activity {
     private class JsonReadTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
-            System.out.println("injsonReadTask rly?" + params[0]);
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost(params[0]);
 
@@ -59,7 +58,6 @@ public class databasePushMeasurement extends Activity {
 //                        response.getEntity().getContent()).toString());
                 jsonResult = inputStreamToString(
                         response.getEntity().getContent()).toString();
-                System.out.println("Test######### DATABASE PUSHMEAL: " + jsonResult);
 
             } catch (ClientProtocolException e) {
                 e.printStackTrace();
@@ -80,7 +78,6 @@ public class databasePushMeasurement extends Activity {
                 }
             } catch (IOException e) {
                 // e.printStackTrace();
-                System.out.println("Error: " + e.toString());
                 Toast.makeText(getApplicationContext(),
                         "Error..." + e.toString(), Toast.LENGTH_LONG).show();
             }
@@ -93,7 +90,6 @@ public class databasePushMeasurement extends Activity {
         // passes values for the urls string array
         task.execute(new String[]{url + "?messwert=" + MeasurementFragment.getMesswert() + "&datum=" + MeasurementFragment.getDatumPush()
                                       + "&zeit=" + MeasurementFragment.getZeit() + "&userid=" + MeasurementFragment.getUserid()});
-        System.out.println("##########AccessWebService######### DATABASEPUSH MEASUREMENT ");
 
     }
 }
