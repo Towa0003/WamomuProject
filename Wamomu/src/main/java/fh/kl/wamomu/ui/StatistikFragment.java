@@ -1,7 +1,9 @@
 package fh.kl.wamomu.ui;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -146,6 +148,7 @@ public class StatistikFragment extends Fragment {
 
 
         return view;
+
     }
 
 
@@ -173,67 +176,70 @@ public class StatistikFragment extends Fragment {
 
         renderer.setAntialiasing(true);
         renderer.setClickEnabled(true);         // clickable machen
-        renderer.setSelectableBuffer(30);       // clickable area der punkte
+        renderer.setSelectableBuffer(30);       // clickable bereich der punkte
         // title
         // renderer.setChartTitleTextSize(14);     // Titel Größe
         // renderer.setChartTitle(getText(R.string.activity_line_chart_charttitle).toString()); // Titel setzen
 
         // Achsen
-        renderer.setAxisTitleTextSize(50);                      // Schriftgröße Titel an Achsen
-        renderer.setLabelsColor(Color.BLACK);                   // Farbe Achsenwerte
-        renderer.setLabelsTextSize(35);                         // Schriftgröße Werte an Achsen
-        renderer.setXTitle("\n \n \n Datum/Uhrzeit");
-        renderer.setYTitle("Messwerte");
-        renderer.setXAxisMax( databaseMeasurements.measurements.size() - 1);
-        renderer.setXAxisMin(renderer.getXAxisMax() - 5);
-        renderer.setYAxisMax(10);
-        renderer.setYAxisMin(0);
-        renderer.setYLabelsAlign(Paint.Align.RIGHT);
-        renderer.setAxesColor(Color.BLACK);
-        renderer.setLabelsColor(Color.BLACK);
-        renderer.setPanEnabled(true, false);
-        renderer.setZoomEnabled(true, false);
-        double limit[] = {0-0.01,  databaseMeasurements.measurements.size()-0.99, 0, 10}; // minX, maxX, minY, maxY
-        renderer.setPanLimits(limit);
-        renderer.setZoomLimits(limit);
+        renderer.setAxisTitleTextSize(50);              // Schriftgröße Titel an Achsen
+        renderer.setLabelsTextSize(35);                 // Schriftgröße Werte an Achsen
+        renderer.setLabelsColor(Color.BLACK);           // Farbe Achsenwerte
+        renderer.setXTitle("\n \n \n Datum/Uhrzeit");   // Überschrift X-Achse
+        renderer.setYTitle("Messwerte");                // Überschrift Y-Achse
+        renderer.setXAxisMax( databaseMeasurements.measurements.size() - 1);// Anzeigebreich maximum Wert X-Achse
+        renderer.setXAxisMin(renderer.getXAxisMax() - 5);                   // Anzeigebreich minimum Wert X-Achse
+        renderer.setYAxisMax(10);                                           // Anzeigebereich maximum Wert Y-Achse
+        renderer.setYAxisMin(0);                                            // Anzeigebereich minimum Wert Y-Achse
+        renderer.setYLabelsAlign(Paint.Align.RIGHT);                        // Ausrichtung Y-Achsenbezeichnung
+        renderer.setAxesColor(Color.BLACK);                                 // Farbe der X- und Y-Achsen
+        renderer.setLabelsColor(Color.BLACK);                               // Farbe der Labels Überschriften
+        renderer.setPanEnabled(true, false);                                // Scrollen auf X- oder Y-Achse
+        renderer.setZoomEnabled(true, false);                               // Zoom auf X- oder Y-Achse
+        double limit[] = {0-0.05,  databaseMeasurements.measurements.size()-0.7, 0, 10}; // Werte zur Limitierung des Scroll- und Zoombereichs; minX, maxX, minY, maxY
+        renderer.setPanLimits(limit);                       // Limitierung des Scrollbereichs
+        renderer.setZoomLimits(limit);                      // Limitierung des Zooms
 
-        renderer.setXLabels(0);             // Standard X-Labels ausblenden
-//      renderer.setYLabels(0);             // Standard Y-Labels ausblenden
+        renderer.setXLabels(0);                     // Standard X-Labels ausblenden
+//      renderer.setYLabels(0);                     // Standard Y-Labels ausblenden
         renderer.setXLabelsColor(Color.BLACK);      // Farbe X-Labels
         renderer.setYLabelsColor(0, Color.BLACK);   // Farbe Y-Label
         renderer.setXLabelsAngle(0);                // Rotation X-Labels
 
         // Legende
-        renderer.setLegendTextSize(30);
-        renderer.setLegendHeight(100);
-        renderer.setShowLegend(false);
+        renderer.setShowLegend(false);              // Anzeigen der Legende
+//        renderer.setLegendTextSize(30);           // Textgröße
+//        renderer.setLegendHeight(10);             // Höhe
+
+        // Datenbereich
+        renderer.setShowGrid(true);                     // Rasterlinie anzeigen
+        renderer.setApplyBackgroundColor(true);         // Hintergrundfarbe Datenbereich aktivieren
+        renderer.setGridColor(Color.DKGRAY);            // Farbe Rasterlinien
+        renderer.setBackgroundColor(Color.WHITE);       // Hintergrundfarbe Datenbereich
+        renderer.setMargins(new int[]{30, 80, 50, 0});  // Abstand von Oben, Links, Unten, Rechts
+        renderer.setMarginsColor(Color.WHITE);          // Hintergrundfarbe außerhalb Diagramm
+
         // Punkte
-        renderer.setPointSize(25f);
-        // data area
-        renderer.setShowGrid(true);
-        renderer.setApplyBackgroundColor(true);
-        renderer.setGridColor(Color.DKGRAY);        // Farbe Rasterlinien
-        renderer.setBackgroundColor(Color.WHITE);
-        renderer.setMargins(new int[]{60, 80, 100, 0});     // Abstand
-        renderer.setMarginsColor(Color.WHITE);      // Hintergrundfarbe außerhalb Diagramm
+        renderer.setPointSize(25f);                     // Größe der Punkte
 
+//        Linienfarbe zwischen den Messpunkten und Farbfüllung unter den Messwerten
 //        xySeriesRenderer0.setPointStyle(null);
-        xySeriesRenderer0.setColor(getResources().getColor(R.color.color_line));
-        xySeriesRenderer0.setLineWidth(5f);
-        xySeriesRenderer0.setFillBelowLine(true);
-        xySeriesRenderer0.setFillBelowLineColor(getResources().getColor(R.color.color_belowLine));
+        xySeriesRenderer0.setColor(getResources().getColor(R.color.color_line));                    // Farbe der Linie
+        xySeriesRenderer0.setLineWidth(5f);                                                         // Dicke der Linie
+        xySeriesRenderer0.setFillBelowLine(true);                                                   // Füllung des Bereiches unter der zu sehenden Linie
+        xySeriesRenderer0.setFillBelowLineColor(getResources().getColor(R.color.color_belowLine));  // Farbe der Füllung
 
-        xySeriesRenderer1.setPointStyle(PointStyle.CIRCLE);
-        xySeriesRenderer1.setColor(getResources().getColor(R.color.color_bad));
-        xySeriesRenderer1.setStroke(BasicStroke.DASHED);
-//        xySeriesRenderer1.setLineWidth(5f);
-        xySeriesRenderer1.setFillPoints(true);
+        xySeriesRenderer1.setPointStyle(PointStyle.CIRCLE);                     // Darstellungsart der messpunkte (Kreis)
+        xySeriesRenderer1.setColor(getResources().getColor(R.color.color_bad)); // Farbe der Linie und Punkte
+        xySeriesRenderer1.setStroke(BasicStroke.DOTTED);                        // Linienart (gepunktet)
+        xySeriesRenderer1.setLineWidth(0.00000000000000000000001f);             // Liniendicke zwischen Werte muss so niedrig sein, da sie sonst nur zwischen den positiven Werten sichtbar wären
+        xySeriesRenderer1.setFillPoints(true);                                  // Kreis gefüllt
 
-        xySeriesRenderer2.setPointStyle(PointStyle.CIRCLE);
-        xySeriesRenderer2.setColor(getResources().getColor(R.color.color_good));
-        xySeriesRenderer2.setStroke(BasicStroke.DASHED);
-//        xySeriesRenderer2.setLineWidth(5f);
-        xySeriesRenderer2.setFillPoints(true);
+        xySeriesRenderer2.setPointStyle(PointStyle.CIRCLE);                     // Darstellungsart der Messpunkte (Kreis)
+        xySeriesRenderer2.setColor(getResources().getColor(R.color.color_good));// Farbe der Linie und Punkte
+        xySeriesRenderer2.setStroke(BasicStroke.DOTTED);                        // Linienart (gepunktet)
+        xySeriesRenderer2.setLineWidth(0.00000000000000000000001f);             // Liniendicke zwischen Werte muss so niedrig sein, da sie sonst nur zwischen den negativen Werten sichtbar wären
+        xySeriesRenderer2.setFillPoints(true);                                  // Kreis gefüllt
 
 //        xySeriesRenderer3.setPointStyle(null);
 //        xySeriesRenderer3.setColor(getResources().getColor(R.color.color_good));

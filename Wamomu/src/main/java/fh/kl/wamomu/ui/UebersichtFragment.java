@@ -6,6 +6,7 @@ package fh.kl.wamomu.ui;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;

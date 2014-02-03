@@ -205,7 +205,7 @@ public class StatistikTESTFragment extends Fragment {
         renderer.setXAxisMin(0);
         renderer.setXAxisMax(5);
         renderer.setYAxisMin(0);
-        renderer.setYAxisMax(10);
+        renderer.setYAxisMax(30);
         renderer.setYLabelsAlign(Paint.Align.RIGHT);
         renderer.setAxesColor(Color.BLACK);
         renderer.setLabelsColor(Color.BLACK);
@@ -274,7 +274,7 @@ public class StatistikTESTFragment extends Fragment {
             double x = i;                                       // Wert X-Achse
             double y = databaseMeasurements.measurements.get(i).getmvalue();    // Wert Y-Achse
 
-            series.add(x, y);
+            series.add(y,x);
         }
         dataSet.addSeries(series);
 
