@@ -84,17 +84,11 @@ public class NavigationDrawer extends Activity {
 
         navDrawerItems = new ArrayList<NavigationDrawerItem>();
         // adding nav drawer items to array
-        // Home
         navDrawerItems.add(new NavigationDrawerItem(drawerListViewItems[0], navMenuIcons.getResourceId(0, -1)));
-        // Find People
         navDrawerItems.add(new NavigationDrawerItem(drawerListViewItems[1], navMenuIcons.getResourceId(1, -1)));
-        // Photos
         navDrawerItems.add(new NavigationDrawerItem(drawerListViewItems[2], navMenuIcons.getResourceId(2, -1)));
-        // Communities, Will add a counter here
         navDrawerItems.add(new NavigationDrawerItem(drawerListViewItems[3], navMenuIcons.getResourceId(3, -1)));
-        // Pages
         navDrawerItems.add(new NavigationDrawerItem(drawerListViewItems[4], navMenuIcons.getResourceId(4, -1)));
-        // What's hot, We  will add a counter here
         navDrawerItems.add(new NavigationDrawerItem(drawerListViewItems[5], navMenuIcons.getResourceId(5, -1)));
 
         navMenuIcons.recycle();
@@ -231,8 +225,6 @@ public class NavigationDrawer extends Activity {
     }
 
     private void add() {
-        System.out.println("add");
-        final Context test = getApplication();
         android.app.AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Hinzufügen").setItems(items, new DialogInterface.OnClickListener() {
 

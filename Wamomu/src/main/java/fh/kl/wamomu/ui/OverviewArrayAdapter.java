@@ -4,6 +4,7 @@ package fh.kl.wamomu.ui;
  * Created by Thundernator on 04.11.13.
  */
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,11 @@ public class OverviewArrayAdapter extends ArrayAdapter<String> {
         art.setText(values_art[position]);
         gericht.setText(values_gericht[position]);
         date.setText(values_date[position]);
+
+        if(position%2 == 0){
+            rowView.setBackgroundColor(Color.GRAY);
+        }
+
 
         return rowView;
     }
