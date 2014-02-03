@@ -42,6 +42,7 @@ public class OverviewArrayAdapter extends ArrayAdapter<String> {
 
         if(position%2 == 0){
             rowView.setBackgroundColor(Color.GRAY);
+
         }
 
 
