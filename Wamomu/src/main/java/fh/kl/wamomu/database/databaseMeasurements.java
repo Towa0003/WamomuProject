@@ -40,7 +40,8 @@ public class databaseMeasurements extends Activity {
     private String jsonResult;
 //    private String url = "http://cpriyankara.coolpage.biz/employee_details.php";
 
-    private String url = "http://192.168.1.5/wamomusql/measurements_details.php";
+//    private String url = "http://192.168.1.5/wamomusql/measurements_details.php";
+private String url = "http://" + database.ip + "/wamomusql/measurements_details.php";
     private ListView listView;
     public static List<measurement> measurements = new ArrayList<measurement>();
 

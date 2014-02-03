@@ -35,7 +35,8 @@ public class databasePushUser extends Activity {
 //    private String url = "http://cpriyankara.coolpage.biz/employee_details.php";
 
     protected int usersID; //192.168.178.48
-    private String url = "http://192.168.1.5/wamomusql/adduser.php";
+//    private String url = "http://192.168.1.5/wamomusql/adduser.php";
+private String url = "http://" + database.ip + "/wamomusql/adduser.php";
     private ListView listView;
 
     @Override

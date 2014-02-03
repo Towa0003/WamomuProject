@@ -27,13 +27,16 @@ import fh.kl.wamomu.R;
 public class database extends Activity {
     protected static int usersID; //192.168.178.48
 
+    static String ip = "192.168.1.5";
+
     public String getJsonResult() {
         return jsonResult;
     }
 
     //    private String url = "http://cpriyankara.coolpage.biz/employee_details.php";
     private String jsonResult;
-    private String url = "http://192.168.1.5/wamomusql/users_details.php";
+//    private String url = "http://192.168.1.5/wamomusql/users_details.php";
+private String url = "http://"+ip+"/wamomusql/users_details.php";
     private ListView listView;
 
     @Override

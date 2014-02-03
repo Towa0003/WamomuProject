@@ -41,8 +41,7 @@ public class OverviewArrayAdapter extends ArrayAdapter<String> {
         date.setText(values_date[position]);
 
         if(position%2 == 0){
-            rowView.setBackgroundColor(Color.GRAY);
-
+            rowView.setBackgroundColor(Color.argb(255,230,230,230));
         }
 
 
