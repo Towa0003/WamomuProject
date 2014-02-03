@@ -45,17 +45,17 @@ public class MeasurementFragment extends Fragment {
     private static String messwert;
     private static String datumPush;
     private static String zeit;
-    private static String userid;
+        private static String userid;
 
-    public ListView overview_listview;
-    public int sfItem = 0;
-    Fragment msf;
-    SimpleDateFormat sdfDate = new SimpleDateFormat("dd.MM");
-    SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
-    OverviewArrayAdapter adapter;
-    private Button btnSave;
-    private EditText timepicker, datepicker, measurementedit;
-    private Spinner spMeasureGroup;
+        public ListView overview_listview;
+        public int sfItem = 0;
+        Fragment msf;
+        SimpleDateFormat sdfDate = new SimpleDateFormat("dd.MM");
+        SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
+        OverviewArrayAdapter adapter;
+        private Button btnSave;
+        private EditText timepicker, datepicker, measurementedit;
+        private Spinner spMeasureGroup;
 
     public static String getMesswert() {
         return messwert;

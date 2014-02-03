@@ -27,7 +27,7 @@ public class databasePushMeal extends Activity {
 //    private String url = "http://cpriyankara.coolpage.biz/employee_details.php";
 
     protected int usersID; //192.168.178.48
-    private String url = "http://192.168.178.36/wamomusql/addmeal.php";
+    private String url = "http://192.168.1.5/wamomusql/addmeal.php";
     private ListView listView;
 
     @Override

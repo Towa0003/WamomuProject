@@ -59,7 +59,7 @@ public class Login extends Activity {
                 }
 
                 if(db.getJsonResult() == null){
-                    Toast.makeText(Login.this, "Databaseconnection is NULL. Check if MySQL Server is running, change IP,  or go home and cry...just cry!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Login.this, "Databaseconnection is NULL. Check if MySQL Server is running, change IP!", Toast.LENGTH_LONG).show();
                 }
                 else if (db.checkUser(et_login.getText().toString(), et_password.getText().toString())) {
                     int currentUserID = db.getUsersID();

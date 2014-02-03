@@ -27,7 +27,7 @@ public class databasePushMeasurement extends Activity {
 //    private String url = "http://cpriyankara.coolpage.biz/employee_details.php";
 
     protected int usersID;
-    private String url = "http://192.168.178.36/wamomusql/addmeasurement.php";
+    private String url = "http://192.168.1.5/wamomusql/addmeasurement.php";
     private ListView listView;
 
     @Override

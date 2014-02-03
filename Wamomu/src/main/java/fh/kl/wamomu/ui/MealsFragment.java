@@ -259,7 +259,7 @@ public class MealsFragment extends Fragment {
                     dbPushMeals.accessWebService();             // Meal Daten Pushen
                     dbMeals.accessWebService();
 
-                    // halbe Sek delay, da sonst Nullpointerexcpetopn, wahrsch. wegen access WebService aber ka genau
+                    // halbe Sek delay, da sonst Nullpointerexcpetopn, wahrsch. wegen access WebService
                     try {
                         Thread.sleep(500);
                     } catch (InterruptedException e) {

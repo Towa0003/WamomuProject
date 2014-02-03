@@ -33,7 +33,7 @@ public class database extends Activity {
 
     //    private String url = "http://cpriyankara.coolpage.biz/employee_details.php";
     private String jsonResult;
-    private String url = "http://192.168.178.36/wamomusql/users_details.php";
+    private String url = "http://192.168.1.5/wamomusql/users_details.php";
     private ListView listView;
 
     @Override

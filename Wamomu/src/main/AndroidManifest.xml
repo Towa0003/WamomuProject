@@ -38,14 +38,6 @@
             android:screenOrientation="portrait"></activity>
 
         <activity
-            android:name=".database.test2"
-            android:screenOrientation="portrait"></activity>
-
-        <activity
-            android:name=".database.MainActivity"
-            android:screenOrientation="portrait"></activity>
-
-        <activity
         android:name=".database.database"
         android:screenOrientation="portrait"></activity>
 
