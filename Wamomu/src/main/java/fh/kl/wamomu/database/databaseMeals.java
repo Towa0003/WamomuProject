@@ -37,7 +37,6 @@ import fh.kl.wamomu.meta.meal;
 
 public class databaseMeals extends Activity {
     private String jsonResult;
-//    private String url = "http://cpriyankara.coolpage.biz/employee_details.php";
 
 //    private String url = "http://192.168.1.5/wamomusql/meals_details.php";
 private String url = "http://"+database.ip+"/wamomusql/meals_details.php";

@@ -24,7 +24,6 @@ import fh.kl.wamomu.ui.MeasurementFragment;
 
 public class databasePushMeasurement extends Activity {
     private String jsonResult;
-//    private String url = "http://cpriyankara.coolpage.biz/employee_details.php";
 
     protected int usersID;
 //    private String url = "http://192.168.1.5/wamomusql/addmeasurement.php";
