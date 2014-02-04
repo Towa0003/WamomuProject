@@ -20,21 +20,18 @@ import java.io.InputStreamReader;
 
 import fh.kl.wamomu.R;
 import fh.kl.wamomu.ui.MealsFragment;
-import fh.kl.wamomu.ui.Register;
 
 public class databasePushMeal extends Activity {
     private String jsonResult;
 
     protected int usersID; //192.168.178.48
-//    private String url = "http://192.168.1.5/wamomusql/addmeal.php";
-private String url = "http://" +  database.ip + "/wamomusql/addmeal.php";
-    private ListView listView;
+    //    private String url = "http://192.168.1.5/wamomusql/addmeal.php";
+    private String url = "http://" + database.ip + "/wamomusql/addmeal.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        listView = (ListView) findViewById(R.id.listView1);
         accessWebService();
     }
 
@@ -66,7 +63,7 @@ private String url = "http://" +  database.ip + "/wamomusql/addmeal.php";
         }
 
         private StringBuilder inputStreamToString(InputStream is) {
-            String rLine = "";
+            String rLine;
             StringBuilder answer = new StringBuilder();
             BufferedReader rd = new BufferedReader(new InputStreamReader(is));
 
@@ -87,8 +84,8 @@ private String url = "http://" +  database.ip + "/wamomusql/addmeal.php";
         JsonReadTask task = new JsonReadTask();
         // passes values for the urls string array
         task.execute(new String[]{url + "?essenszeit=" + MealsFragment.getEssenszeit() + "&essen=" + MealsFragment.getEssen()
-                                      + "&datum=" + MealsFragment.getDatumPush() + "&zeit=" + MealsFragment.getZeit()
-                                      + "&userid=" + MealsFragment.getUserid()});
+                + "&datum=" + MealsFragment.getDatumPush() + "&zeit=" + MealsFragment.getZeit()
+                + "&userid=" + MealsFragment.getUserid()});
 
     }
 }

@@ -3,10 +3,8 @@ package fh.kl.wamomu.database;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.format.Time;
 import android.view.Menu;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
@@ -22,33 +20,26 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.sql.Timestamp;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import fh.kl.wamomu.R;
-import fh.kl.wamomu.meta.meal;
 import fh.kl.wamomu.meta.measurement;
 
 public class databaseMeasurements extends Activity {
     private String jsonResult;
 
-//    private String url = "http://192.168.1.5/wamomusql/measurements_details.php";
-private String url = "http://" + database.ip + "/wamomusql/measurements_details.php";
-    private ListView listView;
+    //    private String url = "http://192.168.1.5/wamomusql/measurements_details.php";
+    private String url = "http://" + database.ip + "/wamomusql/measurements_details.php";
     public static List<measurement> measurements = new ArrayList<measurement>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        listView = (ListView) findViewById(R.id.listView1);
         accessWebService();
     }
 
@@ -79,7 +70,7 @@ private String url = "http://" + database.ip + "/wamomusql/measurements_details.
         }
 
         private StringBuilder inputStreamToString(InputStream is) {
-            String rLine = "";
+            String rLine;
             StringBuilder answer = new StringBuilder();
             BufferedReader rd = new BufferedReader(new InputStreamReader(is));
 
@@ -121,19 +112,18 @@ private String url = "http://" + database.ip + "/wamomusql/measurements_details.
                 JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
                 String usersid = jsonChildNode.optString("users_id");
                 // Dem jeweiligen user die entsprechenden Daten zuweisen
-                if(currentID == Integer.parseInt(usersid)){
+                if (currentID == Integer.parseInt(usersid)) {
                     int measurementID = jsonChildNode.optInt("measurement_id");
                     String strMvalue = jsonChildNode.optString("mvalue");
                     Double mvalue = Double.parseDouble(strMvalue);
                     String datestr = jsonChildNode.optString("date");
                     String timestr = jsonChildNode.optString("time");
-                    try
-                    {
+                    try {
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                         Date date = sdf.parse(datestr);
 
                         sdf = new SimpleDateFormat("HH:mm:ss");
-                        Date time =  sdf.parse(timestr);
+                        Date time = sdf.parse(timestr);
 
                         System.out.println("MeasurementID: " + measurementID
                                 + "Measurement: " + mvalue
@@ -142,8 +132,7 @@ private String url = "http://" + database.ip + "/wamomusql/measurements_details.
                                 + " UsersID: " + usersid);
 
                         measurements.add(new measurement(measurementID, mvalue, date, time));
-                    }
-                    catch (ParseException pe){
+                    } catch (ParseException pe) {
                     }
 
                 }

@@ -264,7 +264,7 @@ public class MeasurementFragment extends Fragment {
             btnSave.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     messwert = measurementedit.getText().toString();
-                    userid = String.valueOf(database.getUsersID()).toString();
+                    userid = String.valueOf(database.getUsersID());//.toString();
 
                     System.out.println("SELECTED ITEM: " + messwert + " " + datumPush + " " + zeit + " " + userid);
 

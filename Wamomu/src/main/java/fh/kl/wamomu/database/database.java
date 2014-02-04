@@ -36,13 +36,11 @@ public class database extends Activity {
 
     private String jsonResult;
     private String url = "http://" + ip + "/wamomusql/users_details.php";
-    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        listView = (ListView) findViewById(R.id.listView1);
         accessWebService();
     }
 
@@ -84,7 +82,6 @@ public class database extends Activity {
                     datatrue = true;
                     setUsersID(Integer.parseInt(number));
                     break;
-                } else {
                 }
             }
         } catch (JSONException e) {
@@ -143,7 +140,7 @@ public class database extends Activity {
         }
 
         private StringBuilder inputStreamToString(InputStream is) {
-            String rLine = "";
+            String rLine;
             StringBuilder answer = new StringBuilder();
             BufferedReader rd = new BufferedReader(new InputStreamReader(is));
 

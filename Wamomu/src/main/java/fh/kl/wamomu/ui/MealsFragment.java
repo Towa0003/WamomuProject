@@ -206,6 +206,7 @@ public class MealsFragment extends Fragment {
                 public void onClick(View v) {
                     DatePickerDialog mDatePicker;
                     mDatePicker = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+
                         @Override
                         public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDate) {
                             String strYear = String.valueOf(selectedYear);
@@ -252,7 +253,7 @@ public class MealsFragment extends Fragment {
                 public void onClick(View v) {
                     essenszeit = String.valueOf(spMealGroup.getSelectedItem());
                     essen = mealedit.getText().toString();
-                    userid = String.valueOf(database.getUsersID()).toString();
+                    userid = String.valueOf(database.getUsersID());//.toString();
 
                     System.out.println("SELECTED ITEM: " + essenszeit + " " + essen + " " + datumPush + " " + zeit + " " + userid);
 

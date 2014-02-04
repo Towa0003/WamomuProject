@@ -19,22 +19,19 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import fh.kl.wamomu.R;
-import fh.kl.wamomu.ui.MealsFragment;
 import fh.kl.wamomu.ui.MeasurementFragment;
 
 public class databasePushMeasurement extends Activity {
     private String jsonResult;
 
     protected int usersID;
-//    private String url = "http://192.168.1.5/wamomusql/addmeasurement.php";
+    //    private String url = "http://192.168.1.5/wamomusql/addmeasurement.php";
     private String url = "http://" + database.ip + "/wamomusql/addmeasurement.php";
-    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        listView = (ListView) findViewById(R.id.listView1);
         accessWebService();
     }
 
@@ -68,7 +65,7 @@ public class databasePushMeasurement extends Activity {
         }
 
         private StringBuilder inputStreamToString(InputStream is) {
-            String rLine = "";
+            String rLine;
             StringBuilder answer = new StringBuilder();
             BufferedReader rd = new BufferedReader(new InputStreamReader(is));
 
@@ -89,7 +86,7 @@ public class databasePushMeasurement extends Activity {
         JsonReadTask task = new JsonReadTask();
         // passes values for the urls string array
         task.execute(new String[]{url + "?messwert=" + MeasurementFragment.getMesswert() + "&datum=" + MeasurementFragment.getDatumPush()
-                                      + "&zeit=" + MeasurementFragment.getZeit() + "&userid=" + MeasurementFragment.getUserid()});
+                + "&zeit=" + MeasurementFragment.getZeit() + "&userid=" + MeasurementFragment.getUserid()});
 
     }
 }

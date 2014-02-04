@@ -138,7 +138,6 @@ public class SettingsFragment extends Fragment {
         // List paired devices
         if(btAdapter==null) {
             pairview.append("\nBluetooth NOT supported. Aborting.");
-            return;
         } else {
             if (btAdapter.isEnabled()) {
                 Log.d("Bluetooth is enabled...", "" );

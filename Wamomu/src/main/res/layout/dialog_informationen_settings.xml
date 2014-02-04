@@ -14,7 +14,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/color_0"
-        android:layout_toRightOf="@+id/iv_mealimage"/>/>
+        android:layout_toRightOf="@+id/iv_mealimage"/>
 
     <Button
         android:id="@+id/bt_ok"
