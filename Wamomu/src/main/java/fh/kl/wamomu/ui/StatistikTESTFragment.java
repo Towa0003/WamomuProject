@@ -52,7 +52,7 @@ public class StatistikTESTFragment extends Fragment {
     private double valueY;
     String test;
     SimpleDateFormat sdf;
-    Date date;
+    Date date1;
     Resources res;
     TypedArray menge;
     String legend;
