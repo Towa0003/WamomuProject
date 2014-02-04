@@ -211,12 +211,12 @@ public class MealsFragment extends Fragment {
                             String strYear = String.valueOf(selectedYear);
                             String strMon = String.valueOf(selectedMonth + 1);
                             String strDate = String.valueOf(selectedDate);
-                            if ((selectedMonth < 10) && (selectedDate < 10)) {
+                            if ((selectedMonth < 9) && (selectedDate < 10)) {
                                 strMon = "0" + String.valueOf(selectedMonth + 1);
                                 strDate = "0" + String.valueOf(selectedDate);
                             } else if (selectedDate < 10) {
                                 strDate = "0" + String.valueOf(selectedDate);
-                            } else if (selectedMonth < 10) {
+                            } else if (selectedMonth < 9) {
                                 strMon = "0" + String.valueOf(selectedMonth + 1);
                             }
                             datepicker.setText(strYear + "-" + strMon + "-" + strDate);

@@ -129,7 +129,7 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:text="Essensart"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
 
         <Spinner
             android:id="@+id/sp_MealGroup"
