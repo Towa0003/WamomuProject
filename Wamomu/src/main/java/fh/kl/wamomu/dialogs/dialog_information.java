@@ -19,7 +19,6 @@ public class dialog_information extends Dialog {
     public dialog_information(Context context) {
         super(context);
         setContentView(R.layout.dialog_informationen_settings);
-
         setTitle("Informationen");
          t = (TextView) findViewById(R.id.dia_text);
 

@@ -153,7 +153,7 @@ public class dialog_meals extends Dialog {
         // Spinner
         spMealGroup = (Spinner) findViewById(R.id.sp_MealGroup);
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(
-                getActivity(), R.array.essensart, android.R.layout.simple_spinner_item);
+                getContext(), R.array.essensart, android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spMealGroup.setAdapter(adapter2);
 
