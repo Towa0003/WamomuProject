@@ -102,7 +102,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Informationen"
+            android:text="Information"
             android:id="@+id/tv_info"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"

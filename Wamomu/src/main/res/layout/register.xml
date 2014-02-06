@@ -150,7 +150,7 @@
                     android:layout_weight="1"
                     android:filterTouchesWhenObscured="true"
                     android:maxLines="2"
-                    android:text="Login" />
+                    android:text="Login " />
 
                 <LinearLayout
                     android:id="@+id/ll_rightSpacer_register"

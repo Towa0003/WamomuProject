@@ -72,17 +72,10 @@
             android:id="@+id/tv_addinfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Info: Dieser Kopplungs-Pin dient dazu, um eine Verbindung zu dem GlucoTel aufzubauen"
+            android:text="Info: Dieser Kopplungs-Pin dient dazu, um eine Verbindung zu dem GlucoTel aufzubauen."
             android:padding="10dp"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-
-
-
-
             <requestFocus />
-
-
-
 
     </LinearLayout>
 

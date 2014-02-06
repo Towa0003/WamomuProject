@@ -22,7 +22,7 @@
             android:id="@+id/tv_codetitel"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:text="Code ändern"
+            android:text="Der Code befindet sich bei den Teststreifen"
              />
 
     </LinearLayout>
