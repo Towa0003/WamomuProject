@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"  >
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <ImageView
+        android:layout_gravity="center"
         android:id="@+id/iv_infoimage"
+        android:layout_margin="10dp"
+        android:src="@drawable/einstellung"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="5dp" />
@@ -14,17 +18,42 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/color_0"
-        android:layout_toRightOf="@+id/iv_mealimage"/>
+        android:text="Der Kalibrierungs-Pin befindet sich auf den Teststreife
+   Diese App wurde als Studienprojekt von Tobias Walter, Maximilian Mock, Christian Murlowski erstellt. "
+        android:layout_toRightOf="@+id/iv_mealimage" />
+    <!--
+        <Button
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:id="@+id/bt_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Ok " /> -->
 
-    <Button
-        android:id="@+id/bt_ok"
-        android:layout_width="100px"
-        android:layout_height="wrap_content"
-        android:text=" Ok "
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/iv_mealimage"
-        />
 
-</RelativeLayout>
+    <RelativeLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:layout_marginLeft="4dip"
+            android:layout_marginRight="4dip"
+            android:background="?android:attr/dividerVertical" />
+
+
+        <Button
+            android:id="@+id/bt_ok"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="@android:string/ok"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+
+</LinearLayout>
