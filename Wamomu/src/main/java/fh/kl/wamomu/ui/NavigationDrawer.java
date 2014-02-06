@@ -199,9 +199,6 @@ public class NavigationDrawer extends Activity {
                 case 4:
                     changeFragment = new StatistikFragment();
                     break;
-                case 5:
-                    changeFragment = new StatistikTESTFragment();
-                    break;
                 default:
                     break;
             }
