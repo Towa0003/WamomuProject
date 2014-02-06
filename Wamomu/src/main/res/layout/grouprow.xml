@@ -5,9 +5,7 @@
     android:layout_marginLeft="5dp"
     android:drawableRight="@drawable/add"
     android:gravity="center_vertical"
-    android:text="@string/hello_world"
     android:textColor="#FFFFFF"
     android:padding="10dp"
-    android:textSelectHandleLeft="@string/hello_world"
     android:textSize="14sp"
     android:textStyle="bold" />

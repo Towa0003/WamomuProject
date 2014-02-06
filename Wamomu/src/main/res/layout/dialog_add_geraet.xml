@@ -22,7 +22,7 @@
             android:id="@+id/tv_titletext"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:text="Neues Gerät hinzufügen"
+            android:text="@string/adddevice"
              />
 
     </LinearLayout>
@@ -38,18 +38,18 @@
             android:id="@+id/tv_koppin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kopplungs-PIN: "
+            android:text="@string/kopplungspin"
             android:padding="10dp"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
 
         <EditText
             android:id="@+id/et_pinset"
-            android:layout_width="wrap_content"
+            android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="9676"
+            android:hint="@string/addcode"
             android:padding="10dp" >
 
             <requestFocus />
@@ -72,7 +72,7 @@
             android:id="@+id/tv_addinfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Info: Dieser Kopplungs-Pin dient dazu, um eine Verbindung zu dem GlucoTel aufzubauen."
+            android:text="@string/infopin"
             android:padding="10dp"
             android:textAppearance="?android:attr/textAppearanceMedium" />
             <requestFocus />
@@ -95,7 +95,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Suchen" />
+            android:text="@string/search" />
 
     </LinearLayout>
 

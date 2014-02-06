@@ -29,9 +29,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text=""
-        android:id="@+id/tv_gericht"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true" />
+        android:id="@+id/tv_gericht" />
 
 
 </LinearLayout>

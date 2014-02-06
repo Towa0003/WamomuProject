@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Username :"
+            android:text="@string/user"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
@@ -27,14 +27,14 @@
             android:layout_gravity="center_horizontal"
             android:ems="10"
             android:inputType="textPersonName"
-            android:hint="Username" />
+            android:hint="@string/username" />
 
         <TextView
             android:id="@+id/tv_name_register_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Name :"
+            android:text="@string/name"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
@@ -44,14 +44,14 @@
             android:layout_gravity="center_horizontal"
             android:ems="10"
             android:inputType="textPersonName"
-            android:hint="Nachname" />
+            android:hint="@string/nachname" />
 
         <TextView
             android:id="@+id/tv_vname_register_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Vorname :"
+            android:text="@string/vorname"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
@@ -61,14 +61,14 @@
             android:layout_gravity="center_horizontal"
             android:ems="10"
             android:inputType="textPersonName"
-            android:hint="Vorname" />
+            android:hint="@string/voRname" />
 
         <TextView
             android:id="@+id/tv_email_register_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="E-Mail :"
+            android:text="@string/email"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
@@ -78,14 +78,14 @@
             android:layout_gravity="center_horizontal"
             android:ems="10"
             android:inputType="textEmailAddress"
-            android:hint="E-Mail Adresse"/>
+            android:hint="@string/emailhint"/>
 
         <TextView
             android:id="@+id/tv_password1_register_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Passwort :"
+            android:text="@string/passwort"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
@@ -101,7 +101,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Passwort :"
+            android:text="@string/passwort"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
@@ -150,7 +150,7 @@
                     android:layout_weight="1"
                     android:filterTouchesWhenObscured="true"
                     android:maxLines="2"
-                    android:text="Login " />
+                    android:text="@string/login" />
 
                 <LinearLayout
                     android:id="@+id/ll_rightSpacer_register"

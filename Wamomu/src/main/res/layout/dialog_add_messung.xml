@@ -22,7 +22,7 @@
             android:id="@+id/tv_measuretext"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:text="Messung hinzufügen"
+            android:text="@string/messung"
              />
 
     </LinearLayout>
@@ -38,14 +38,14 @@
             android:id="@+id/tv_timetext_measure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Uhrzeit"
+            android:text="@string/uhrzeit"
             android:padding="10dp"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
 
         <EditText
             android:id="@+id/et_timeedit_measure"
-            android:layout_width="wrap_content"
+            android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
@@ -66,14 +66,14 @@
             android:id="@+id/tv_datetext_measure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Datum"
+            android:text="@string/datum"
             android:padding="10dp"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
 
         <EditText
             android:id="@+id/et_dateedit_measure"
-            android:layout_width="wrap_content"
+            android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
@@ -94,11 +94,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="Wert"
+            android:text="@string/wert"
             android:textAppearance="?android:attr/textAppearanceMedium" />
         <EditText
             android:id="@+id/et_wertedit"
-            android:layout_width="wrap_content"
+            android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
@@ -117,12 +117,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="Maßeinheit"
+            android:text="@string/meseinheit"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <Spinner
             android:id="@+id/sp_MeasureGroup"
-            android:layout_width="wrap_content"
+            android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:layout_weight="1" />
@@ -144,7 +144,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Hinzufügen" />
+            android:text="@string/add" />
 
     </LinearLayout>
 

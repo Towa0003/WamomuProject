@@ -13,7 +13,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Kalibrierungscode ändern"
+            android:text="@string/code"
             android:id="@+id/tv_kalibrierungscode"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Code: 01234"
+        android:text="@string/codenumber"
         android:id="@+id/tv_code"
         />
     <View
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:height="50dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Neues Gerät hinzufügen"
+            android:text="@string/newdevice"
             android:id="@+id/tv_addGeraet"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
@@ -74,7 +74,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Informationen"
+            android:text="@string/info"
             android:id="@+id/tv_info"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
@@ -101,7 +101,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Gekoppelte Geräte"
+            android:text="@string/paireddevices"
             android:id="@+id/tv_paired_devices"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
@@ -109,15 +109,9 @@
             android:clickable="true"
 
             />
-
-
-
-
-
     </RelativeLayout>
 
     <View
-
         android:layout_width="wrap_content"
         android:layout_height="1dip"
         android:background="#FF0000FF"

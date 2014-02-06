@@ -89,7 +89,7 @@ public class NavigationDrawer extends Activity {
         navDrawerItems.add(new NavigationDrawerItem(drawerListViewItems[2], navMenuIcons.getResourceId(2, -1)));
         navDrawerItems.add(new NavigationDrawerItem(drawerListViewItems[3], navMenuIcons.getResourceId(3, -1)));
         navDrawerItems.add(new NavigationDrawerItem(drawerListViewItems[4], navMenuIcons.getResourceId(4, -1)));
-        navDrawerItems.add(new NavigationDrawerItem(drawerListViewItems[5], navMenuIcons.getResourceId(5, -1)));
+
 
         navMenuIcons.recycle();
 

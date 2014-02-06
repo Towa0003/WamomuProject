@@ -26,7 +26,7 @@ import fh.kl.wamomu.dialogs.dialog_information;
  */
 public class SettingsFragment extends Fragment {
 
-    private TextView pairview, infoview, kalview, codeview;
+    private TextView pairview, infoview, kalview, codeview, code;
     private EditText codepin;
     private Button searchButton, codeButton;
     private static final int REQUEST_ENABLE_BT = 1;
@@ -43,6 +43,7 @@ public class SettingsFragment extends Fragment {
         infoview = (TextView) view.findViewById(R.id.tv_info);
         kalview = (TextView) view.findViewById(R.id.tv_addGeraet);
         codeview = (TextView) view.findViewById(R.id.tv_kalibrierungscode);
+        code = (TextView) view.findViewById(R.id.tv_code);
 
         codeview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +61,7 @@ public class SettingsFragment extends Fragment {
                 codeButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                       codeview.setText("Code: " +codepin.getText().toString());
+                       code.setText("Code: " +codepin.getText().toString());
                         dialog3.dismiss();
                     }
                 });

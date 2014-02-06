@@ -17,21 +17,7 @@
         android:layout_centerHorizontal="true">
 
     </FrameLayout>
-   <!-- <Button
-        android:id="@+id/addValue_button"
-        android:text="Wert Hinzufügen"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_below="@+id/chartContainerLineChart_frameLayout"
-        android:layout_alignParentRight="true" />
 
-    <EditText
-        android:id="@+id/valueY_editText"
-        android:hint="Y-Achse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:layout_below="@+id/chartContainerLineChart_frameLayout" /> -->
 
 
 </RelativeLayout>
