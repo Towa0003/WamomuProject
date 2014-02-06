@@ -169,16 +169,13 @@ public class StatistikFragment extends Fragment {
     private XYMultipleSeriesRenderer createRenderer() {
         XYMultipleSeriesRenderer renderer = new XYMultipleSeriesRenderer();
 
-        XYSeriesRenderer xySeriesRenderer0 = new XYSeriesRenderer();    // Deklarieren der blauen Linie
+        XYSeriesRenderer xySeriesRenderer0 = new XYSeriesRenderer();    // Deklarieren der blauen Verbindungslinie ziwschen den Messpunkten
         XYSeriesRenderer xySeriesRenderer1 = new XYSeriesRenderer();    // Deklarieren des Objektes für rote Punkte, für schlechte Messwerte
         XYSeriesRenderer xySeriesRenderer2 = new XYSeriesRenderer();    // Deklarieren des Objektes für grüne Punkte, für gute Messwerte
 
         renderer.setAntialiasing(true);
         renderer.setClickEnabled(true);         // clickable machen
         renderer.setSelectableBuffer(35);       // clickable bereich der punkte - ist größer als der dargestellte Punkt
-        // title
-        // renderer.setChartTitleTextSize(14);     // Titel Größe
-        // renderer.setChartTitle(getText(R.string.activity_line_chart_charttitle).toString()); // Titel setzen
 
         // Achsen
         renderer.setAxisTitleTextSize(50);              // Schriftgröße Titel an Achsen
