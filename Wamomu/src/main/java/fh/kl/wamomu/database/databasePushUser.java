@@ -21,26 +21,13 @@ import java.io.InputStreamReader;
 import fh.kl.wamomu.R;
 import fh.kl.wamomu.ui.Register;
 
-public class databasePushUser extends Activity {
+public class databasePushUser {
     private String jsonResult;
 
     protected int usersID; //192.168.178.48
     //    private String url = "http://192.168.1.5/wamomusql/adduser.php";
     private String url = "http://" + database.ip + "/wamomusql/adduser.php";
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        // accessWebService();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
 
     // Async Task to access the web
     private class JsonReadTask extends AsyncTask<String, Void, String> {
@@ -72,9 +59,7 @@ public class databasePushUser extends Activity {
                     answer.append(rLine);
                 }
             } catch (IOException e) {
-                // e.printStackTrace();
-                Toast.makeText(getApplicationContext(),
-                        "Error..." + e.toString(), Toast.LENGTH_LONG).show();
+                 e.printStackTrace();
             }
             return answer;
         }

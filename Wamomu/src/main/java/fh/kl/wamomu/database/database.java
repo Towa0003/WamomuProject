@@ -23,7 +23,7 @@ import java.io.InputStreamReader;
 
 import fh.kl.wamomu.R;
 
-public class database extends Activity {
+public class database  {
     protected static int usersID; //192.168.178.48
 
     static String ip = "192.168.1.5"; //Tobi
@@ -37,19 +37,7 @@ public class database extends Activity {
     private String jsonResult;
     private String url = "http://" + ip + "/wamomusql/users_details.php";
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        accessWebService();
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
 
     public static int getUsersID() {
         return usersID;
@@ -149,9 +137,7 @@ public class database extends Activity {
                     answer.append(rLine);
                 }
             } catch (IOException e) {
-                // e.printStackTrace();
-                Toast.makeText(getApplicationContext(),
-                        "Error..." + e.toString(), Toast.LENGTH_LONG).show();
+                 e.printStackTrace();
             }
             return answer;
         }
