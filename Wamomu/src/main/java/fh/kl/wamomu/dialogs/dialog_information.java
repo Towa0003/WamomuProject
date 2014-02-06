@@ -22,7 +22,8 @@ public class dialog_information extends Dialog {
 
         setTitle("Informationen");
          t = (TextView) findViewById(R.id.dia_text);
-        t.setText("Diese App wurde von der Superhyperultracoolen Truppe Wamomu für das obergeilste Megafach Ever genannt Studienprojekt gemacht!!!! 65 Wat ");
+        t.setText("Der Kalibrierungs-Pin befindet sich auf den Teststreifen. \n " +
+                "Diese App wurde als Studienprojekt von Tobias Walter, Maximilian Mock, Christian Murlowski erstellt. " );
 
        image = (ImageView) findViewById(R.id.iv_infoimage);
                 image.setImageResource(R.drawable.einstellung);

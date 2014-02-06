@@ -137,18 +137,18 @@ public class SettingsFragment extends Fragment {
         // If it isn't turned on, request to turn it on
         // List paired devices
         if(btAdapter==null) {
-            pairview.append("\nBluetooth NOT supported. Aborting.");
+            pairview.append("\nBluetooth wird nicht unterstützt.");
         } else {
             if (btAdapter.isEnabled()) {
-                Log.d("Bluetooth is enabled...", "" );
+                Log.d("Bluetooth ist eingeschaltet...", "" );
                 pairview.setText("");
 
                 // Listing paired devices
-                pairview.append("\nPaired Devices are:");
+                pairview.append("\nGekoppelte Geräte sind:");
                 Set<BluetoothDevice> devices = btAdapter.getBondedDevices();
                 for (BluetoothDevice device : devices) {
 
-                    pairview.append("\n  Device: " + device.getName() + ", " + device);
+                    pairview.append("\n  Gerät: " + device.getName() + ", " + device);
                 }
             } else {
                 //Prompt user to turn on Bluetooth

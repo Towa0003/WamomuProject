@@ -78,7 +78,7 @@
             android:layout_gravity="center_horizontal"
             android:ems="10"
             android:inputType="textEmailAddress"
-            android:hint="blaa@blaa.blaah"/>
+            android:hint="E-Mail Adresse"/>
 
         <TextView
             android:id="@+id/tv_password1_register_text"

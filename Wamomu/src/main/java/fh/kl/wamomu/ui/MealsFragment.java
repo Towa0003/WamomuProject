@@ -220,6 +220,7 @@ public class MealsFragment extends Fragment {
                             } else if (selectedMonth < 9) {
                                 strMon = "0" + String.valueOf(selectedMonth + 1);
                             }
+
                             datepicker.setText(strYear + "-" + strMon + "-" + strDate);
 
                             datumPush = (strYear + strMon + strDate);

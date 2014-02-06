@@ -29,8 +29,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Code: 01234"
         android:id="@+id/tv_code"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true" />
+        />
     <View
 
         android:layout_width="fill_parent"
@@ -81,6 +80,7 @@
             android:layout_alignParentLeft="true"
             android:gravity="center"
             android:clickable="true"
+            android:height="50dp"
             />
 
 
