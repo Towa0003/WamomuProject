@@ -61,7 +61,6 @@ public class StatistikFragment extends Fragment {
     ZoomListener listener;
 
         /*
-            (todo # Messpunkte momentan nur über den X-Wert clickable, wenns probleme gibt evtl. ändern)
             todo # xy Labels ändern
             todo # Wenn man reinzoomt -> Tage; rauszoomen -> Wochen; weiter Rauszoomen -> Monate auf X-Achse
         */
@@ -176,7 +175,7 @@ public class StatistikFragment extends Fragment {
 
         renderer.setAntialiasing(true);
         renderer.setClickEnabled(true);         // clickable machen
-        renderer.setSelectableBuffer(30);       // clickable bereich der punkte
+        renderer.setSelectableBuffer(35);       // clickable bereich der punkte - ist größer als der dargestellte Punkt
         // title
         // renderer.setChartTitleTextSize(14);     // Titel Größe
         // renderer.setChartTitle(getText(R.string.activity_line_chart_charttitle).toString()); // Titel setzen
@@ -221,7 +220,7 @@ public class StatistikFragment extends Fragment {
         renderer.setMarginsColor(Color.WHITE);          // Hintergrundfarbe außerhalb Diagramm
 
         // Punkte
-        renderer.setPointSize(15f);                     // Größe der Punkte
+        renderer.setPointSize(25f);                     // Größe der Punkte
 
 //        Linienfarbe zwischen den Messpunkten und Farbfüllung unter den Messwerten
 //        xySeriesRenderer0.setPointStyle(null);
@@ -254,12 +253,11 @@ public class StatistikFragment extends Fragment {
             renderer.addXTextLabel(i, String.valueOf(strDate + "\n" + strTime));        // Datum an X-Achsen Indize schreiben
         }
 
-        // Messpunkte 60-260 an Y-Achse schreiben
+        // Messpunkte 0-180 an Y-Achse schreiben
         int j = 0;
         int l = 0;
         double k = 0;
         while (l <= 20){
-            System.out.println("y-label: " + j );
             renderer.addYTextLabel(k, String.valueOf(j));// Werte an Y-Achse schreiben
             renderer.addYTextLabel(l, " ");// Werte an Y-Achse schreiben
             j+=10;
@@ -282,13 +280,14 @@ public class StatistikFragment extends Fragment {
         for (int i = 0; i <  databaseMeasurements.measurements.size(); i++) {
             x = i;                                       // Wert X-Achse
             y =  databaseMeasurements.measurements.get(i).getmvalue();    // Wert Y-Achse
-            if(4.5<= databaseMeasurements.measurements.get(i).getmvalue()){
-                series3.add(x, y);
+            y /= 18.02;
+            if(y <= 6.1){
+                series3.add(x, y); //positiv
             }
             else{
-                series2.add(x,y);
+                series2.add(x,y); // negativ
             }
-            series.add(x,y);
+            series.add(x,y); // alle werte für die verbindungslinien
         }
 
         dataSet.addSeries(0,series);
