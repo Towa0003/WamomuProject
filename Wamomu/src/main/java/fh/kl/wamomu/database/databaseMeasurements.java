@@ -29,26 +29,13 @@ import java.util.List;
 import fh.kl.wamomu.R;
 import fh.kl.wamomu.meta.measurement;
 
-public class databaseMeasurements extends Activity {
+public class databaseMeasurements {
     private String jsonResult;
 
     //    private String url = "http://192.168.1.5/wamomusql/measurements_details.php";
     private String url = "http://" + database.ip + "/wamomusql/measurements_details.php";
     public static List<measurement> measurements = new ArrayList<measurement>();
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        accessWebService();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
 
     // Async Task to access the web
     private class JsonReadTask extends AsyncTask<String, Void, String> {
@@ -79,9 +66,7 @@ public class databaseMeasurements extends Activity {
                     answer.append(rLine);
                 }
             } catch (IOException e) {
-                // e.printStackTrace();
-                Toast.makeText(getApplicationContext(),
-                        "Error..." + e.toString(), Toast.LENGTH_LONG).show();
+                 e.printStackTrace();
             }
             return answer;
         }
