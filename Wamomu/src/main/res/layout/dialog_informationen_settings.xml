@@ -5,30 +5,20 @@
     android:orientation="vertical">
 
     <ImageView
-        android:layout_gravity="center"
+
         android:id="@+id/iv_infoimage"
         android:layout_margin="10dp"
         android:src="@drawable/einstellung"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_marginRight="5dp" />
 
     <TextView
         android:id="@+id/dia_text"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/color_0"
-        android:text="Der Kalibrierungs-Pin befindet sich auf den Teststreife
-   Diese App wurde als Studienprojekt von Tobias Walter, Maximilian Mock, Christian Murlowski erstellt. "
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:text="Diese App wurde als Studienprojekt von Tobias Walter, Maximilian Mock, Christian Murlowski erstellt. "
         android:layout_toRightOf="@+id/iv_mealimage" />
-    <!--
-        <Button
-            android:layout_marginTop="20dp"
-            android:layout_gravity="center"
-            android:id="@+id/bt_ok"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" Ok " /> -->
 
 
     <RelativeLayout
