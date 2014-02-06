@@ -36,30 +36,6 @@
         <activity
             android:name=".ui.NavigationDrawer"
             android:screenOrientation="portrait"></activity>
-
-        <activity
-        android:name=".database.database"
-        android:screenOrientation="portrait"></activity>
-
-        <activity
-            android:name=".database.databaseMeals"
-            android:screenOrientation="portrait"></activity>
-
-        <activity
-            android:name=".database.databaseMeasurements"
-            android:screenOrientation="portrait"></activity>
-
-        <activity
-            android:name=".database.databasePushMeal"
-            android:screenOrientation="portrait"></activity>
-
-        <activity
-            android:name=".database.databasePushMeasurement"
-            android:screenOrientation="portrait"></activity>
-        <activity
-            android:name=".database.databasePushUser"
-            android:screenOrientation="portrait"></activity>
-
     </application>
 
 </manifest>

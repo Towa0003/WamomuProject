@@ -79,7 +79,7 @@ public class NavigationDrawer extends Activity {
         // Layout of Drawer
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        // get ListView defined in activity_main.xml
+        // get ListView
         drawerListView = (ListView) findViewById(R.id.left_drawer);
 
         navDrawerItems = new ArrayList<NavigationDrawerItem>();
