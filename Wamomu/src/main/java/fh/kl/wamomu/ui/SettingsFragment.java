@@ -98,10 +98,10 @@ public class SettingsFragment extends Fragment {
         pairview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                btAdapter = BluetoothAdapter.getDefaultAdapter();
-//                Log.d("\nAdapter: ", "" + btAdapter);
-//
-//                CheckBluetoothState();
+                btAdapter = BluetoothAdapter.getDefaultAdapter();
+                Log.d("\nAdapter: ", "" + btAdapter);
+
+                CheckBluetoothState();
 
                 System.out.println("Userdaten -------->" + Login.activeUser.getName() + Login.activeUser.getPassword());
             }
