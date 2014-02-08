@@ -6,9 +6,9 @@
     </string-array>
 
     <string-array name="essensart">
-        <item >Vormittag</item>
-        <item >Mittag</item>
-        <item >Abend</item>
+        <item >Frühstück</item>
+        <item >Mittagessen</item>
+        <item >Abendessen</item>
         <item >Sonstiges</item>
     </string-array>
 
