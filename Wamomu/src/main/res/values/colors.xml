@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="color_0">#A1A359</color>
-    <color name="color_good">#01DF01</color>
-    <color name="color_bad">#DF0101</color>
     <color name="color_line">#009DFF</color>
     <color name="color_belowLine">#9FD9FC</color>
 

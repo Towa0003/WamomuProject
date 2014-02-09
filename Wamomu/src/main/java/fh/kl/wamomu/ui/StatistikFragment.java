@@ -47,23 +47,12 @@ import fh.kl.wamomu.meta.measurement;
 public class StatistikFragment extends Fragment {
 
 
-    private GraphicalView chart;
-    private FrameLayout fl_chartContainer;
     MeasurementFragment mf = new MeasurementFragment();
-
     SimpleDateFormat sdfDate = new SimpleDateFormat("MM-dd");
     SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
-
-    TimeSeries series;
-    TimeSeries series2;
-    XYSeries series3;
-    Zoom zoomV;
-    ZoomListener listener;
-
-        /*
-            todo # xy Labels ändern
-            todo # Wenn man reinzoomt -> Tage; rauszoomen -> Wochen; weiter Rauszoomen -> Monate auf X-Achse
-        */
+    XYSeries series;
+    private GraphicalView chart;
+    private FrameLayout fl_chartContainer;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -74,29 +63,13 @@ public class StatistikFragment extends Fragment {
 
         fl_chartContainer = (FrameLayout) view.findViewById(R.id.chartContainerLineChart_frameLayout);
 
-        series = new TimeSeries("random");
-        series2 = new TimeSeries("random2");
-        series3 = new XYSeries("random3");
-
-        System.out.println("MEEEEALS: " + databaseMeals.meals.size());
-        for (int i = 0; i < databaseMeals.meals.size(); i++){
-            System.out.println("MEEEEALS DATE: " + databaseMeals.meals.get(i).getDate());
-            System.out.println("MEEEEALS TIME: " + databaseMeals.meals.get(i).getTime());
-        }
-
-        System.out.println("MEASUREMEEEEENTS: " + databaseMeasurements.measurements.size());
-        for(int i = 0; i <  databaseMeasurements.measurements.size(); i++){
-            System.out.println("MEASUREMEEEEENTS DATE: " +  databaseMeasurements.measurements.get(i).getDate());
-            System.out.println("MEASUREMEEEEENTS TIME: " +  databaseMeasurements.measurements.get(i).getTime());
-        }
+        series = new XYSeries("random");
 
         System.out.println("ON CREATE VIEW");
         if (chart == null) {
             chart = ChartFactory.getLineChartView(getActivity(), createDataSet(), createRenderer());
             fl_chartContainer.addView(chart);
             System.out.println("chart PAINTED");
-
-
         } else {
             System.out.println("chart REPAINTED");
             chart.repaint();
@@ -105,18 +78,10 @@ public class StatistikFragment extends Fragment {
         chart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SeriesSelection  seriesSelection = chart.getCurrentSeriesAndPoint();     // initialisierung clickable area
+                SeriesSelection seriesSelection = chart.getCurrentSeriesAndPoint();     // initialisierung clickable area
                 if (seriesSelection == null) {
                 } else {
-                    // display information of the clicked point
-//                    Toast.makeText(
-//                            getActivity(),
-//                            "Data point index " + seriesSelection.getPointIndex()+ " was clicked" + "\n"
-//                                    + "value X=" + seriesSelection.getXValue() + "\n"
-//                                    + "value Y=" + seriesSelection.getValue() + " ", Toast.LENGTH_SHORT).show();
-
-//                    mf.overview_listview.smoothScrollToPosition((int)seriesSelection.getXValue());
-                    System.out.println( "Data point index " + seriesSelection.getPointIndex()+ " was clicked"
+                    System.out.println("Data point index " + seriesSelection.getPointIndex() + " was clicked"
                             + " value X= " + seriesSelection.getXValue()
                             + " value Y= " + seriesSelection.getValue() + " ");
                     FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -129,49 +94,14 @@ public class StatistikFragment extends Fragment {
 
             }
         });
-        chart.addZoomListener(new ZoomListener()
-        { SeriesSelection  seriesSelection = chart.getCurrentSeriesAndPoint();     // initialisierung clickable area
-            @Override
-            public void zoomApplied(ZoomEvent ze)
-            {
-                System.out.println("Zoom rate " + ze.getZoomRate());
-            }
-
-
-            @Override
-            public void zoomReset() {
-                System.out.println("Reset");
-            }
-
-        },true, true);
-
-
         return view;
 
     }
 
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        System.out.println("ON PAUSE");
-//        meals.clear();
-//        measurements.clear();
-
-    }
-
     private XYMultipleSeriesRenderer createRenderer() {
-        XYMultipleSeriesRenderer renderer = new XYMultipleSeriesRenderer();
+        XYMultipleSeriesRenderer renderer = new XYMultipleSeriesRenderer(); // Objekt zur bearbeitung und verwaltung des Koordinatensystems
 
-        XYSeriesRenderer xySeriesRenderer0 = new XYSeriesRenderer();    // Deklarieren der blauen Verbindungslinie ziwschen den Messpunkten
-        XYSeriesRenderer xySeriesRenderer1 = new XYSeriesRenderer();    // Deklarieren des Objektes für rote Punkte, für schlechte Messwerte
-        XYSeriesRenderer xySeriesRenderer2 = new XYSeriesRenderer();    // Deklarieren des Objektes für grüne Punkte, für gute Messwerte
+        XYSeriesRenderer xySeriesRenderer0 = new XYSeriesRenderer();        // Initialisierung zur bearbeitung der Verbindungslinien und -punkte
 
         renderer.setAntialiasing(true);
         renderer.setClickEnabled(true);         // clickable machen
@@ -192,7 +122,7 @@ public class StatistikFragment extends Fragment {
         renderer.setLabelsColor(Color.BLACK);                               // Farbe der Labels Überschriften
         renderer.setPanEnabled(true, false);                                // Scrollen auf X- oder Y-Achse
         renderer.setZoomEnabled(true, false);                               // Zoom auf X- oder Y-Achse
-        double limit[] = {0-0.05,  databaseMeasurements.measurements.size()-0.7, renderer.getYAxisMin(), 10}; // Werte zur Limitierung des Scroll- und Zoombereichs; minX, maxX, minY, maxY
+        double limit[] = {0 - 0.05, databaseMeasurements.measurements.size() - 0.7, renderer.getYAxisMin(), 10}; // Werte zur Limitierung des Scroll- und Zoombereichs; minX, maxX, minY, maxY
         renderer.setPanLimits(limit);                       // Limitierung des Scrollbereichs
         renderer.setZoomLimits(limit);                      // Limitierung des Zooms
         renderer.setZoomRate(10f);
@@ -220,50 +150,33 @@ public class StatistikFragment extends Fragment {
         renderer.setPointSize(25f);                     // Größe der Punkte
 
 //        Linienfarbe zwischen den Messpunkten und Farbfüllung unter den Messwerten
-//        xySeriesRenderer0.setPointStyle(null);
+        xySeriesRenderer0.setPointStyle(PointStyle.CIRCLE);                                         // Darstellungsart des Punktes der Messwerte als
+        xySeriesRenderer0.setFillPoints(true);                                                      // Füllung des Kreises am Messwert
         xySeriesRenderer0.setColor(getResources().getColor(R.color.color_line));                    // Farbe der Linie
         xySeriesRenderer0.setLineWidth(5f);                                                         // Dicke der Linie
         xySeriesRenderer0.setFillBelowLine(true);                                                   // Füllung des Bereiches unter der zu sehenden Linie
         xySeriesRenderer0.setFillBelowLineColor(getResources().getColor(R.color.color_belowLine));  // Farbe der Füllung
 
-        xySeriesRenderer1.setPointStyle(PointStyle.CIRCLE);                     // Darstellungsart der messpunkte (Kreis)
-        xySeriesRenderer1.setColor(getResources().getColor(R.color.color_bad)); // Farbe der Linie und Punkte
-        xySeriesRenderer1.setStroke(BasicStroke.DOTTED);                        // Linienart (gepunktet)
-        xySeriesRenderer1.setLineWidth(0.00000000000000000000001f);             // Liniendicke zwischen Werte muss so niedrig sein, da sie sonst nur zwischen den positiven Werten sichtbar wären
-        xySeriesRenderer1.setFillPoints(true);                                  // Kreis gefüllt
-
-        xySeriesRenderer2.setPointStyle(PointStyle.CIRCLE);                     // Darstellungsart der Messpunkte (Kreis)
-        xySeriesRenderer2.setColor(getResources().getColor(R.color.color_good));// Farbe der Linie und Punkte
-        xySeriesRenderer2.setStroke(BasicStroke.DOTTED);                        // Linienart (gepunktet)
-        xySeriesRenderer2.setLineWidth(0.00000000000000000000001f);             // Liniendicke zwischen Werte muss so niedrig sein, da sie sonst nur zwischen den negativen Werten sichtbar wären
-        xySeriesRenderer2.setFillPoints(true);                                  // Kreis gefüllt
-
-//        xySeriesRenderer3.setPointStyle(null);
-//        xySeriesRenderer3.setColor(getResources().getColor(R.color.color_good));
-//        xySeriesRenderer3.setLineWidth(5f);
 
         // Datum und Zeit von Datenbank holen und an die X-Achse schreiben
-        for (int i = 0; i <  databaseMeasurements.measurements.size(); i++) {
-            String strDate = sdfDate.format( databaseMeasurements.measurements.get(i).getDate());
-            String strTime = sdfTime.format( databaseMeasurements.measurements.get(i).getTime());
-            System.out.println("x-label: " + i);
-            renderer.addXTextLabel(i, String.valueOf(strDate + "\n" + strTime));        // Datum an X-Achsen Indize schreiben
+        for (int i = 0; i < databaseMeasurements.measurements.size(); i++) {
+            String strDate = sdfDate.format(databaseMeasurements.measurements.get(i).getDate());
+            String strTime = sdfTime.format(databaseMeasurements.measurements.get(i).getTime());
+            renderer.addXTextLabel(i, String.valueOf(strDate + "\n" + strTime));        // Datum an X-Achsen Indizes schreiben
         }
 
         // Messpunkte 0-180 an Y-Achse schreiben
         int j = 0;
         int l = 0;
         double k = 0;
-        while (l <= 20){
+        while (l <= 20) {
             renderer.addYTextLabel(k, String.valueOf(j));// Werte an Y-Achse schreiben
             renderer.addYTextLabel(l, " ");// Werte an Y-Achse schreiben
-            j+=10;
-            k+=0.55;
+            j += 10;
+            k += 0.55;
             l++;
         }
         renderer.addSeriesRenderer(0, xySeriesRenderer0);
-        renderer.addSeriesRenderer(1, xySeriesRenderer1);
-        renderer.addSeriesRenderer(2, xySeriesRenderer2);
         return renderer;
     }
 
@@ -274,25 +187,16 @@ public class StatistikFragment extends Fragment {
         double x;
         double y;
 
-        for (int i = 0; i <  databaseMeasurements.measurements.size(); i++) {
+        for (int i = 0; i < databaseMeasurements.measurements.size(); i++) {
             x = i;                                       // Wert X-Achse
-            y =  databaseMeasurements.measurements.get(i).getmvalue();    // Wert Y-Achse
+            y = databaseMeasurements.measurements.get(i).getmvalue();    // Wert Y-Achse
             y /= 18.02;
-            if(y <= 6.1){
-                series3.add(x, y); //positiv
-            }
-            else{
-                series2.add(x,y); // negativ
-            }
-            series.add(x,y); // alle werte für die verbindungslinien
+
+            series.add(x, y); // alle werte werden in den Graphen gesetzt
         }
 
-        dataSet.addSeries(0,series);
-        dataSet.addSeries(1,series2);
-        dataSet.addSeries(2,series3);
+        dataSet.addSeries(0, series);
 
         return dataSet;
     }
 }
-
-
