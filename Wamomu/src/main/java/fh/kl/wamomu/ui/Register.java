@@ -7,11 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import fh.kl.wamomu.R;
 import fh.kl.wamomu.database.database;
 import fh.kl.wamomu.database.databasePushUser;
-import fh.kl.wamomu.meta.user;
 
 /**
  * Created by Thundernator on 04.11.13.

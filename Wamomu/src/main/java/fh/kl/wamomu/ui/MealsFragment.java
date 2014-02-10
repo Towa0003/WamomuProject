@@ -1,6 +1,6 @@
 package fh.kl.wamomu.ui;
 
-import android.app.Activity;
+
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.Fragment;
@@ -8,7 +8,6 @@ import android.app.FragmentTransaction;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,10 +24,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
 import fh.kl.wamomu.R;
 import fh.kl.wamomu.database.database;
 import fh.kl.wamomu.database.databaseMeals;

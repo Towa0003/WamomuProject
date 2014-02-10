@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
@@ -15,21 +14,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import fh.kl.wamomu.R;
-import fh.kl.wamomu.database.database;
-import fh.kl.wamomu.database.databaseMeals;
-import fh.kl.wamomu.meta.user;
 
 /**
  * Created by Thundernator on 04.11.13.

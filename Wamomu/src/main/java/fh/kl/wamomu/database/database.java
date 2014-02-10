@@ -1,11 +1,8 @@
 package fh.kl.wamomu.database;
 
-import android.app.Activity;
+
 import android.os.AsyncTask;
-import android.os.Bundle;
-import android.view.Menu;
-import android.widget.ListView;
-import android.widget.Toast;
+
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -21,14 +18,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import fh.kl.wamomu.R;
 
 public class database  {
     protected static int usersID; //192.168.178.48
 
 //    static String ip = "192.168.1.5"; //Tobi
-//    static String ip = "192.168.2.102"; //Max
-    static String ip = "192.168.178.36"; // Chris
+    static String ip = "192.168.2.102"; //Max
+  //  static String ip = "192.168.178.36"; // Chris
 
     public String getJsonResult() {
         return jsonResult;

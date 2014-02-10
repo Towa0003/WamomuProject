@@ -6,23 +6,28 @@ package fh.kl.wamomu.ui;
 
 import android.app.Fragment;
 import android.content.Context;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-
 import java.text.SimpleDateFormat;
-
 import fh.kl.wamomu.R;
-import fh.kl.wamomu.database.database;
 import fh.kl.wamomu.database.databaseMeals;
 import fh.kl.wamomu.database.databaseMeasurements;
 
 public class UebersichtFragment extends Fragment {
 
     private ListView overview_listview;
+    int size = (databaseMeals.meals.size() + databaseMeasurements.measurements.size());
+
+    String[] art = new String[size];
+    String[] gericht =  new String[size];
+    String[] datum = new String[size];
+    SimpleDateFormat sdfDate = new SimpleDateFormat("dd.MM");
+    SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
+    int countermeals = 0;
+    int countermeas = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,15 +35,7 @@ public class UebersichtFragment extends Fragment {
         View view = inflater.inflate(R.layout.overview,
                 container, false);
         getActivity().setTitle("Übersicht");
-        int size = (databaseMeals.meals.size() + databaseMeasurements.measurements.size());
         System.out.println("SIZRE: " + size);
-        String[] art = new String[size];
-        String[] gericht =  new String[size];
-        String[] datum = new String[size];
-        SimpleDateFormat sdfDate = new SimpleDateFormat("dd.MM");
-        SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
-        int countermeals = 0;
-        int countermeas = 0;
 
         for (int i = 0; i < art.length; i++){
             if (i == 0)

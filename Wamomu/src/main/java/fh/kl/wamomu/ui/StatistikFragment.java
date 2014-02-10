@@ -1,45 +1,27 @@
 package fh.kl.wamomu.ui;
 
-import android.app.Activity;
+
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import org.achartengine.ChartFactory;
 import org.achartengine.GraphicalView;
 import org.achartengine.chart.PointStyle;
 import org.achartengine.model.SeriesSelection;
-import org.achartengine.model.TimeSeries;
 import org.achartengine.model.XYMultipleSeriesDataset;
 import org.achartengine.model.XYSeries;
-import org.achartengine.renderer.BasicStroke;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
-import org.achartengine.tools.PanListener;
-import org.achartengine.tools.Zoom;
-import org.achartengine.tools.ZoomEvent;
-import org.achartengine.tools.ZoomListener;
-
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import fh.kl.wamomu.R;
-import fh.kl.wamomu.database.databaseMeals;
 import fh.kl.wamomu.database.databaseMeasurements;
-import fh.kl.wamomu.meta.meal;
-import fh.kl.wamomu.meta.measurement;
 
 /**
  * Created by Thundernator on 04.11.13.

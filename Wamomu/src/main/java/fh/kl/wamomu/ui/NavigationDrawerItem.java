@@ -10,19 +10,14 @@ public class NavigationDrawerItem {
     // boolean to set visiblity of the counter
     private boolean isCounterVisible = false;
 
-    public NavigationDrawerItem(){}
+
 
     public NavigationDrawerItem(String title, int icon){
         this.title = title;
         this.icon = icon;
     }
 
-    public NavigationDrawerItem(String title, int icon, boolean isCounterVisible, String count){
-        this.title = title;
-        this.icon = icon;
-        this.isCounterVisible = isCounterVisible;
-        this.count = count;
-    }
+
 
     public String getTitle(){
         return this.title;

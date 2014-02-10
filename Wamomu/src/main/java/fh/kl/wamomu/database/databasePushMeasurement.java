@@ -24,8 +24,6 @@ import fh.kl.wamomu.ui.MeasurementFragment;
 public class databasePushMeasurement {
     private String jsonResult;
 
-    protected int usersID;
-    //    private String url = "http://192.168.1.5/wamomusql/addmeasurement.php";
     private String url = "http://" + database.ip + "/wamomusql/addmeasurement.php";
 
 
@@ -38,8 +36,6 @@ public class databasePushMeasurement {
 
             try {
                 HttpResponse response = httpclient.execute(httppost);
-//                System.out.println("Test#############" + inputStreamToString(
-//                        response.getEntity().getContent()).toString());
                 jsonResult = inputStreamToString(
                         response.getEntity().getContent()).toString();
 

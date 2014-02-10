@@ -1,12 +1,7 @@
 package fh.kl.wamomu.database;
 
-import android.app.Activity;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.view.Menu;
-import android.widget.ListView;
-import android.widget.Toast;
 
+import android.os.AsyncTask;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -15,7 +10,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,14 +19,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import fh.kl.wamomu.R;
 import fh.kl.wamomu.meta.meal;
 
 public class databaseMeals {
     private String jsonResult;
 
-    //    private String url = "http://192.168.1.5/wamomusql/meals_details.php";
     private String url = "http://" + database.ip + "/wamomusql/meals_details.php";
     public static List<meal> meals = new ArrayList<meal>();
 

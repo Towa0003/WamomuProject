@@ -8,11 +8,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import java.util.ArrayList;
-
 import fh.kl.wamomu.R;
-import fh.kl.wamomu.ui.NavigationDrawerItem;
 
 /**
  * Created by Christian on 21.12.13.

@@ -1,31 +1,21 @@
 package fh.kl.wamomu.database;
 
-import android.app.Activity;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.view.Menu;
-import android.widget.ListView;
-import android.widget.Toast;
 
+import android.os.AsyncTask;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
-import fh.kl.wamomu.R;
 import fh.kl.wamomu.ui.Register;
 
 public class databasePushUser {
     private String jsonResult;
 
-    protected int usersID; //192.168.178.48
-    //    private String url = "http://192.168.1.5/wamomusql/adduser.php";
     private String url = "http://" + database.ip + "/wamomusql/adduser.php";
 
 
