@@ -23,33 +23,17 @@ public class meal {
         this.time = time;
     }
 
-    public int getMealID() {
-        return mealID;
-    }
-
-    public void setMealID(int mealID) {this.mealID = mealID;}
 
     public String getFoodkind() {return foodkind;}
 
-    public void setFoodkind(String foodkind) {this.foodkind = foodkind;}
-
     public String getFood() {return food;}
-
-    public void setFood(String food) {this.food = food;}
 
     public Date getDate() {
         return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public Date getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
-        this.time = time;
-    }
 }

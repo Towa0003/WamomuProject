@@ -20,35 +20,17 @@ public class measurement {
         this.time = time;
     }
 
-    public int getMeasurementID() {
-        return measurementID;
-    }
-
-    public void setMeasurementID(int measurementID) {
-        this.measurementID = measurementID;
-    }
 
     public double getmvalue() {
         return mvalue;
-    }
-
-    public void setmvalue(double mvalue) {
-        this.mvalue = mvalue;
     }
 
     public Date getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
     public Date getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
-        this.time = time;
-    }
 }

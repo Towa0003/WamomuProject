@@ -59,33 +59,18 @@ public class MeasurementFragment extends Fragment {
         return messwert;
     }
 
-    public static void setMesswert(String messwert) {
-        MeasurementFragment.messwert = messwert;
-    }
-
     public static String getDatumPush() {
         return datumPush;
-    }
-
-    public static void setDatumPush(String datumPush) {
-        MeasurementFragment.datumPush = datumPush;
     }
 
     public static String getZeit() {
         return zeit;
     }
 
-    public static void setZeit(String zeit) {
-        MeasurementFragment.zeit = zeit;
-    }
-
     public static String getUserid() {
         return userid;
     }
 
-    public static void setUserid(String userid) {
-        MeasurementFragment.userid = userid;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

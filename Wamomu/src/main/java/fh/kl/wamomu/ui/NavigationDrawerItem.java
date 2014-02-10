@@ -35,19 +35,4 @@ public class NavigationDrawerItem {
         return this.isCounterVisible;
     }
 
-    public void setTitle(String title){
-        this.title = title;
-    }
-
-    public void setIcon(int icon){
-        this.icon = icon;
-    }
-
-    public void setCount(String count){
-        this.count = count;
-    }
-
-    public void setCounterVisibility(boolean isCounterVisible){
-        this.isCounterVisible = isCounterVisible;
-    }
 }

@@ -60,41 +60,24 @@ public class MealsFragment extends Fragment {
         return essen;
     }
 
-    public static void setEssen(String essen) {
-        MealsFragment.essen = essen;
-    }
 
     public static String getDatumPush() {
         return datumPush;
     }
 
-    public static void setDatumPush(String datumPush) {
-        MealsFragment.datumPush = datumPush;
-    }
 
     public static String getZeit() {
         return zeit;
-    }
-
-    public static void setZeit(String zeit) {
-        MealsFragment.zeit = zeit;
     }
 
     public static String getUserid() {
         return userid;
     }
 
-    public static void setUserid(String userid) {
-        MealsFragment.userid = userid;
-    }
-
     public static String getEssenszeit() {
         return essenszeit;
     }
 
-    public static void setEssenszeit(String essenszeit) {
-        MealsFragment.essenszeit = essenszeit;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

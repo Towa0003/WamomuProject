@@ -101,30 +101,6 @@ public class Register extends Activity {
         this.strUsername = strUsername;
     }
 
-    public String getStrName() {
-        return strName;
-    }
-
-    public void setStrName(String strName) {
-        this.strName = strName;
-    }
-
-    public String getStrVname() {
-        return strVname;
-    }
-
-    public void setStrVname(String strVname) {
-        this.strVname = strVname;
-    }
-
-    public String getStrEmail() {
-        return strEmail;
-    }
-
-    public void setStrEmail(String strEmail) {
-        this.strEmail = strEmail;
-    }
-
     public static String getStrPassword() {return strPassword;}
 
     public void setStrPassword(String strPassword) {

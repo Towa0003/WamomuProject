@@ -27,32 +27,4 @@ public class user {
     public String getPassword() {
         return password;
     }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public List<meal> getMeals() {
-        return meals;
-    }
-
-    public void setMeals(List<meal> meals) {
-        this.meals = meals;
-    }
-
-    public List<measurement> getMeasurements() {
-        return measurements;
-    }
-
-    public void setMeasurements(List<measurement> measurements) {
-        this.measurements = measurements;
-    }
-
-    public void addMeasurement(measurement ms){
-        measurements.add(ms);
-    }
-
-    public void addMeal(meal me) {
-        meals.add(me);
-    }
 }
