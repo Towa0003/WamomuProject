@@ -60,11 +60,9 @@ public class MealsFragment extends Fragment {
         return essen;
     }
 
-
     public static String getDatumPush() {
         return datumPush;
     }
-
 
     public static String getZeit() {
         return zeit;

@@ -19,10 +19,8 @@ import fh.kl.wamomu.meta.user;
  */
 public class Login extends Activity {
 
-    private Button b_login;
-    private Button b_register;
-    private EditText et_login;
-    private EditText et_password;
+    private Button b_login, b_register;
+    private EditText et_login, et_password;
 
     public static database db;
     public static databaseMeals dbMeals;

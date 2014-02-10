@@ -106,6 +106,7 @@ public class Register extends Activity {
     public void setStrPassword(String strPassword) {
         this.strPassword = strPassword;
     }
+
     public static String getStrpasswordRepeat() {
         return strpasswordRepeat;
     }
