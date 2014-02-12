@@ -31,8 +31,8 @@ public class database  {
         return jsonResult;
     }
 
-    private String jsonResult;
-    private String url = "http://" + ip + "/wamomusql/users_details.php";
+    private String jsonResult; // enthält den JSON String, der von dem php script zurück kommt
+    private String url = "http://" + ip + "/wamomusql/users_details.php"; //Url für das php script
 
 
 
@@ -44,12 +44,14 @@ public class database  {
         this.usersID = usersID;
     }
 
+    //startet die AsycTask, die den JSON String von der url parsed
     public void accessWebService() {
         JsonReadTask task = new JsonReadTask();
         // passes values for the urls string array
         task.execute(new String[]{url});
     }
 
+    //überprüft ob der username und das passwort übereinstimmen
     public boolean checkUser(String useruser, String userpassword) {
         boolean datatrue = false;
 
@@ -75,6 +77,7 @@ public class database  {
         return datatrue;
     }
 
+    //überprüft ob der user schon exisitiert, wenn nicht wird ein neuer angelegt
     public boolean checkPushUser(String useruser, String userpassword, String userPasswordRepeat) {
         boolean datatrue = false;
         Log.d("database", "User pushed");
@@ -104,7 +107,7 @@ public class database  {
         return datatrue;
     }
 
-    // Async Task to access the web
+    // Async Task to download the json string
     private class JsonReadTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
