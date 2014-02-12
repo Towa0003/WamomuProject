@@ -261,6 +261,7 @@ public class MeasurementFragment extends Fragment {
                     dbMeasurements.checkMeasurment(database.getUsersID());  // Daten aus database anzeigen
 
                     Toast.makeText(getActivity(), "Measurement added", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Measurement added", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                     dia = 0;
                 }

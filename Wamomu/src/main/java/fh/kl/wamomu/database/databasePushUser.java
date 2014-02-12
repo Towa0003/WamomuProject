@@ -58,6 +58,6 @@ public class databasePushUser {
     public void accessWebService() {
         JsonReadTask task = new JsonReadTask();
         // passes values for the urls string array
-        task.execute(new String[]{url + "?benutzername=" + Register.getStrUsername() + "&passwort=" + Register.getStrPassword() + "&passwortrepeat=" + Register.getStrpasswordRepeat()});
+        task.execute(new String[]{url + "?vname=" + Register.getStrVname() + "&nname=" + Register.getStrName() + "&benutzername=" + Register.getStrUsername() + "&passwort=" + Register.getStrPassword() + "&passwortrepeat=" + Register.getStrpasswordRepeat()});
     }
 }

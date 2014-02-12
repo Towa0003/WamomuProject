@@ -22,13 +22,10 @@ public class Register extends Activity {
     private static String strUsername;
 
     private EditText name;
-    private String strName;
+    private static String strName;
 
     private EditText vname;
-    private String strVname;
-
-    private EditText email;
-    private String strEmail;
+    private static String strVname;
 
     private EditText password;
     private static String strPassword;
@@ -52,7 +49,6 @@ public class Register extends Activity {
         username = (EditText) findViewById(R.id.et_username_register_edit);
         name = (EditText) findViewById(R.id.et_name_register_edit);
         vname = (EditText) findViewById(R.id.et_vname_register_edit);
-        email = (EditText) findViewById(R.id.et_email_register_edit);
         password = (EditText) findViewById(R.id.et_password1_register_edit);
         passwordRepeat = (EditText) findViewById(R.id.et_password2_register_edit);
 
@@ -61,9 +57,10 @@ public class Register extends Activity {
             public void onClick(View v) {
                 strUsername = username.getText().toString();
                 setStrUsername(strUsername);
-                strName = String.valueOf(name.getText().toString());
-                strVname = String.valueOf(vname.getText().toString());
-                strEmail = String.valueOf(email.getText().toString());
+                strName = name.getText().toString();
+                setStrName(strName);
+                strVname = vname.getText().toString();
+                setStrVname(strVname);
                 strPassword = password.getText().toString();
                 setStrPassword(strPassword);
                 strpasswordRepeat = passwordRepeat.getText().toString();
@@ -74,13 +71,17 @@ public class Register extends Activity {
                             Register.this,
                             "User already exists or pw is not equal" + "\n"
                                     + "Please check your input data",
-                            Toast.LENGTH_SHORT).show();
+                            Toast.LENGTH_LONG).show();
                 }
                 else
                 {
                     dbPushUser.accessWebService();
-
-                    Intent i = new Intent(Register.this,NavigationDrawer.class);
+                    Toast.makeText(
+                            Register.this,
+                            "User erfolgreich registriert" + "\n"
+                                    + "Bitte einloggen",
+                            Toast.LENGTH_LONG).show();
+                    Intent i = new Intent(Register.this,Login.class);
                     startActivity(i);
                 }
             }
@@ -93,13 +94,18 @@ public class Register extends Activity {
         db.accessWebService();
     }
 
-    public static String getStrUsername() {
-        return strUsername;
-    }
+    public static String getStrUsername() {return strUsername;}
 
-    public void setStrUsername(String strUsername) {
-        this.strUsername = strUsername;
-    }
+    public void setStrUsername(String strUsername) {this.strUsername = strUsername;}
+
+    public static String getStrName() {return strName;}
+
+    public void setStrName(String strName) {this.strName = strName;}
+
+    public static String getStrVname() {return strVname;}
+
+    public void setStrVname(String strVname) {this.strVname = strVname;}
+
 
     public static String getStrPassword() {return strPassword;}
 

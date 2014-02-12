@@ -57,7 +57,7 @@ public class MealsFragment extends Fragment {
     private Button btnadd;
     private EditText timepicker, datepicker, mealedit;
     private Spinner spMealGroup;
-    Context context = getActivity();
+
 
     //getter für die Daten aus der Datenbank
     public static String getEssen() {
@@ -107,6 +107,7 @@ public class MealsFragment extends Fragment {
 
         //ListView wird befüllt
         overview_listview = (ListView) view.findViewById(R.id.lv_meals);
+        Context context = getActivity();
         OverviewArrayAdapter adapter = new OverviewArrayAdapter(context, art, gericht, datum);
         overview_listview.setAdapter(adapter);
 
