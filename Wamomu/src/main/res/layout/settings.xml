@@ -107,7 +107,7 @@
             android:id="@+id/tv_paired_devices"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:height="50dp"
+            android:minHeight="50dp"
             android:gravity="center"
             android:clickable="true"
 
