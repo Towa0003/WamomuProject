@@ -115,8 +115,8 @@ public class MeasurementFragment extends Fragment {
                 Toast.makeText(
                         getActivity(),
                         "Selected Value: " + position, Toast.LENGTH_SHORT).show();
-                System.out.println("POSITION ITEM :  " + position);
-                System.out.println("ID ITEM :  " + id);
+                Log.d("MeasurementFragment: ", "POSITION ITEM :  " + position);
+                Log.d("MeasurementFragment: ", "ID ITEM :  " + id);
                 overview_listview.smoothScrollToPosition(getSfItem());
             }
         });
@@ -136,7 +136,7 @@ public class MeasurementFragment extends Fragment {
             });
 
             TextView text = (TextView) dialog.findViewById(R.id.tv_measuretext);
-            text.setText("Hello, this is a custom dialog!");
+            text.setText("Messung hinzufügen!");
             ImageView image = (ImageView) dialog.findViewById(R.id.iv_measureimage);
             image.setImageResource(R.drawable.messung);
 
@@ -235,7 +235,7 @@ public class MeasurementFragment extends Fragment {
                 public void onItemSelected(AdapterView<?> parent, View arg1,
                                            int arg2, long arg3) {
                     String selItem = parent.getSelectedItem().toString();
-                    System.out.println("SELECTED ITEM: " + selItem);
+                    Log.d("MeasurementFragment", "SELECTED ITEM: " + selItem);
                 }
 
                 public void onNothingSelected(AdapterView<?> arg0) {
@@ -249,7 +249,8 @@ public class MeasurementFragment extends Fragment {
                     messwert = measurementedit.getText().toString();
                     userid = String.valueOf(database.getUsersID());//.toString();
 
-                    System.out.println("SELECTED ITEM: " + messwert + " " + datumPush + " " + zeit + " " + userid);
+                    Log.d("MeasurementFragment", "SELECTED ITEM: " + messwert + " " + datumPush + " " + zeit + " " + userid);
+
 
                     dbPushMeasurements.accessWebService();
                     dbMeasurements.accessWebService();

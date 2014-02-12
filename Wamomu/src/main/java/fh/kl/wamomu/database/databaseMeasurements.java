@@ -3,6 +3,7 @@ package fh.kl.wamomu.database;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -110,11 +111,11 @@ public class databaseMeasurements {
                         sdf = new SimpleDateFormat("HH:mm:ss");
                         Date time = sdf.parse(timestr);
 
-                        System.out.println("MeasurementID: " + measurementID
-                                + "Measurement: " + mvalue
-                                + " Datum: " + date
-                                + " Zeit: " + time
-                                + " UsersID: " + usersid);
+                        Log.d("databaseMeasurements", "MeasurementID: " + measurementID
+                               + "Measurement: " + mvalue
+                               + " Datum: " + date
+                               + " Zeit: " + time
+                               + " UsersID: " + usersid);
 
                         measurements.add(new measurement(measurementID, mvalue, date, time));
                     } catch (ParseException pe) {

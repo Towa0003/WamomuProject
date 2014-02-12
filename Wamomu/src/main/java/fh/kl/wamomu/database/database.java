@@ -2,6 +2,7 @@ package fh.kl.wamomu.database;
 
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 
 import org.apache.http.HttpResponse;
@@ -76,7 +77,7 @@ public class database  {
 
     public boolean checkPushUser(String useruser, String userpassword, String userPasswordRepeat) {
         boolean datatrue = false;
-        System.out.println("°--------------------------------,,-------------------------------°");
+        Log.d("database", "User pushed");
         try {
             JSONObject jsonResponse = new JSONObject(jsonResult);
             JSONArray jsonMainNode = jsonResponse.optJSONArray("users");

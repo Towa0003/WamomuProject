@@ -2,6 +2,8 @@ package fh.kl.wamomu.database;
 
 
 import android.os.AsyncTask;
+import android.util.Log;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -32,7 +34,7 @@ public class databaseMeals {
     private class JsonReadTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
-            System.out.println("injsonReadTask rly?" + params[0]);
+            Log.d("JsonReadTask in BackGround", " " + params[0]);
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost(params[0]);
 
@@ -40,7 +42,7 @@ public class databaseMeals {
                 HttpResponse response = httpclient.execute(httppost);
                 jsonResult = inputStreamToString(
                         response.getEntity().getContent()).toString();
-                System.out.println("Test DatabaseMeals: " + jsonResult);
+                Log.d("DatabaseMeals: ", "JsonResult: " + jsonResult);
 
             } catch (ClientProtocolException e) {
                 e.printStackTrace();

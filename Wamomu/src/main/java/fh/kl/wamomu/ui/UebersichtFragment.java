@@ -7,6 +7,7 @@ package fh.kl.wamomu.ui;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,7 @@ public class UebersichtFragment extends Fragment {
         View view = inflater.inflate(R.layout.overview,
                 container, false);
         getActivity().setTitle("Übersicht");
-        System.out.println("SIZRE: " + size);
+        Log.d("UebersichtFragment", "SIZE: " + size);
 
         for (int i = 0; i < art.length; i++){
             if (i == 0)

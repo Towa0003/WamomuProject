@@ -220,7 +220,7 @@ public class MealsFragment extends Fragment {
                 public void onItemSelected(AdapterView<?> parent, View arg1,
                                            int arg2, long arg3) {
                     String selItem = parent.getSelectedItem().toString();
-                    System.out.println("SELECTED ITEM: " + selItem);
+                    Log.d("MealsFragment: ", "SELECTED ITEM: " + selItem);
                 }
 
                 public void onNothingSelected(AdapterView<?> arg0) {
@@ -234,7 +234,7 @@ public class MealsFragment extends Fragment {
                     essen = mealedit.getText().toString();
                     userid = String.valueOf(database.getUsersID());//.toString();
 
-                    System.out.println("SELECTED ITEM: " + essenszeit + " " + essen + " " + datumPush + " " + zeit + " " + userid);
+                    Log.d("MealsFragment: ", "SELECTED ITEM: " + essenszeit + " " + essen + " " + datumPush + " " + zeit + " " + userid);
 
                     dbPushMeals.accessWebService();             // Meal Daten Pushen
                     dbMeals.accessWebService();

@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,7 +64,7 @@ public class StatistikFragment extends Fragment {
                 SeriesSelection seriesSelection = chart.getCurrentSeriesAndPoint();     // initialisierung clickable area
                 if (seriesSelection == null) {
                 } else {
-                    System.out.println("Data point index " + seriesSelection.getPointIndex() + " was clicked"
+                    Log.d("StatistikFragment", "Data point index " + seriesSelection.getPointIndex() + " was clicked"
                             + " value X= " + seriesSelection.getXValue()
                             + " value Y= " + seriesSelection.getValue() + " ");
                     FragmentTransaction ft = getFragmentManager().beginTransaction();
