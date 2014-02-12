@@ -54,6 +54,7 @@
     <string name="email">E-Mail :</string>
     <string name="emailhint">E-Mail Adresse</string>
     <string name="passwort">Passwort :</string>
+    <string name="passwortrepeat">Passwort wiederholen:</string>
     <string name="meal">Mahlzeiten</string>
     <string name="usernamelogin">Username :</string>
     <string name="register">Register</string>

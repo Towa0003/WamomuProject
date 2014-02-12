@@ -101,7 +101,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="@string/passwort"
+            android:text="@string/passwortrepeat"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
