@@ -23,8 +23,8 @@ import java.io.InputStreamReader;
 public class database  {
     protected static int usersID; //192.168.178.48
 
-//    static String ip = "192.168.1.5"; //Tobi
-    static String ip = "192.168.2.102"; //Max
+    static String ip = "192.168.1.5"; //Tobi
+//    static String ip = "192.168.2.102"; //Max
   //  static String ip = "192.168.178.36"; // Chris
 
     public String getJsonResult() {
