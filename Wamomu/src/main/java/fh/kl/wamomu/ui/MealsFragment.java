@@ -35,27 +35,31 @@ import fh.kl.wamomu.database.databasePushMeal;
  * Created by Thundernator on 04.11.13.
  */
 public class MealsFragment extends Fragment {
-
+    //Erstellen des Formates des Datums
     SimpleDateFormat sdfDate = new SimpleDateFormat("dd.MM");
     SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
-    static public int meals = 0;
+
 
     public static databaseMeals dbMeals;
     public static databasePushMeal dbPushMeals;
 
+    //Instanzvariablen
     private static String essenszeit;
     private static String essen;
     private static String datumPush;
     private static String zeit;
     private static String userid;
+    static public int meals = 0;
 
+    //Layout-Elemente
     Fragment mf;
-
     private ListView overview_listview;
     private Button btnadd;
     private EditText timepicker, datepicker, mealedit;
     private Spinner spMealGroup;
+    Context context = getActivity();
 
+    //getter für die Daten aus der Datenbank
     public static String getEssen() {
         return essen;
     }
@@ -89,23 +93,26 @@ public class MealsFragment extends Fragment {
 
         mf = new MealsFragment();
 
-
+        //Arrays für art, gericht und datum
         String[] art = new String[databaseMeals.meals.size()];
         String[] gericht = new String[databaseMeals.meals.size()];
         String[] datum = new String[databaseMeals.meals.size()];
 
+        //Datensätze aus der Datenbank werden in die ArrayListe gepushed
         for (int i = 0; i < databaseMeals.meals.size(); i++) {
             art[i] = databaseMeals.meals.get(i).getFoodkind();
             gericht[i] = databaseMeals.meals.get(i).getFood();
             datum[i] = sdfDate.format(databaseMeals.meals.get(i).getDate()) + "/" + sdfTime.format(databaseMeals.meals.get(i).getTime());
         }
 
+        //ListView wird befüllt
         overview_listview = (ListView) view.findViewById(R.id.lv_meals);
-        Context context = getActivity();
         OverviewArrayAdapter adapter = new OverviewArrayAdapter(context, art, gericht, datum);
         overview_listview.setAdapter(adapter);
 
+
         if (meals == 1) {
+            //Dialog zum erstellen einer Mahlzeit
             final Dialog dialog = new Dialog(getActivity());
 
             dialog.setContentView(R.layout.dialog_add_mahlzeit);
@@ -128,6 +135,8 @@ public class MealsFragment extends Fragment {
 
             btnadd = (Button) dialog.findViewById(R.id.bt_add);
             timepicker = (EditText) dialog.findViewById(R.id.et_timeedit);
+
+            //Kalender für den DatePicker
             Calendar mcurrentTime = Calendar.getInstance();
 
             final int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
@@ -145,7 +154,7 @@ public class MealsFragment extends Fragment {
             timepicker.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    //Dialog für den TimePicker
                     TimePickerDialog mTimePicker;
                     mTimePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
                         @Override
@@ -182,6 +191,7 @@ public class MealsFragment extends Fragment {
             datepicker.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    //Picker für das Datum
                     DatePickerDialog mDatePicker;
                     mDatePicker = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
 
@@ -208,7 +218,7 @@ public class MealsFragment extends Fragment {
                     mDatePicker.show();
                 }
             });
-            // Spinner
+            // Spinner für die Auswahl der Mahlzeit
             spMealGroup = (Spinner) dialog.findViewById(R.id.sp_MealGroup);
             ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(
                     getActivity(), R.array.essensart, android.R.layout.simple_spinner_item);

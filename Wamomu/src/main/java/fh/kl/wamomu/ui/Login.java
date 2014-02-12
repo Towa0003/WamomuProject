@@ -18,10 +18,11 @@ import fh.kl.wamomu.meta.user;
  * Created by Thundernator on 04.11.13.
  */
 public class Login extends Activity {
-
+    //LayoutVariablen
     private Button b_login, b_register;
     private EditText et_login, et_password;
 
+    //Instanzvariablen
     public static database db;
     public static databaseMeals dbMeals;
     public static databaseMeasurements dbMeasurements;
@@ -34,14 +35,17 @@ public class Login extends Activity {
         setContentView(R.layout.login);
         setTitle("Login");
 
+        //Verbindung zur Datenbank wird hergestellt
         db = new database();
         dbMeals = new databaseMeals();
         dbMeasurements = new databaseMeasurements();
-
+        //EditText und Buttons werden initialisiert
         et_login = (EditText) findViewById(R.id.et_username_edit);
         et_password = (EditText) findViewById(R.id.et_password_edit);
 
         b_login = (Button) findViewById(R.id.bt_login);
+
+        //OnClickListener zum herstellen der Verbindung zur Datenbank mir Überprüfung, ob der eingegebene User vorhanden ist.
         b_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,6 +77,7 @@ public class Login extends Activity {
                 }
             }
         });
+        //Register Button wird initialisiert, mit der Funktion zum Wechsen der Activity
         b_register = (Button) findViewById(R.id.bt_register);
         b_register.setOnClickListener(new View.OnClickListener() {
             @Override
