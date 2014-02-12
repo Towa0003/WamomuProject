@@ -112,9 +112,6 @@ public class MeasurementFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 setSfItem(position);
-                Toast.makeText(
-                        getActivity(),
-                        "Selected Value: " + position, Toast.LENGTH_SHORT).show();
                 Log.d("MeasurementFragment: ", "POSITION ITEM :  " + position);
                 Log.d("MeasurementFragment: ", "ID ITEM :  " + id);
                 overview_listview.smoothScrollToPosition(getSfItem());

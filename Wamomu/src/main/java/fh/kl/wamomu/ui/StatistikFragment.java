@@ -110,6 +110,7 @@ public class StatistikFragment extends Fragment {
         renderer.setZoomLimits(limit);                      // Limitierung des Zooms
         renderer.setZoomRate(10f);
 
+//       Rasterlinien
         renderer.setXLabels(0);                         // Standard X-Labels ausblenden
 //      renderer.setYLabels(0);                         // Standard Y-Labels ausblenden
         renderer.setXLabelsColor(Color.BLACK);          // Farbe X-Labels
@@ -118,8 +119,6 @@ public class StatistikFragment extends Fragment {
 
         // Legende
         renderer.setShowLegend(false);                  // Anzeigen der Legende
-//        renderer.setLegendTextSize(30);               // Textgröße
-//        renderer.setLegendHeight(10);                 // Höhe
 
         // Datenbereich
         renderer.setShowGrid(true);                     // Rasterlinie anzeigen
