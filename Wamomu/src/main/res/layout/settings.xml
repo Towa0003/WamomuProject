@@ -27,6 +27,8 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/codenumber"
         android:id="@+id/tv_code"
+        android:height="50dp"
+        android:layout_gravity="center"
         />
     <View
 
@@ -105,6 +107,7 @@
             android:id="@+id/tv_paired_devices"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
+            android:height="50dp"
             android:gravity="center"
             android:clickable="true"
 
