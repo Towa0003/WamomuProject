@@ -77,8 +77,9 @@
             android:layout_weight="1"
             android:editable="false"
             android:ems="10"
-            android:padding="10dp">
-
+            android:padding="10dp"
+            android:textAlignment="center"
+            >
             <requestFocus />
         </EditText>
 
