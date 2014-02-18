@@ -33,16 +33,25 @@ public class database  {
     private String url = "http://" + ip + "/wamomusql/users_details.php"; //Url für das php script
 
 
-
+/**
+ * Gibt die User-Id zurück, die zu dem Usernamen passt.
+ * @return usersID
+ * */
     public static int getUsersID() {
         return usersID;
     }
 
+    /**
+     * Weist UsersId einen neuen Wert zu
+     * @param usersID
+     */
     public void setUsersID(int usersID) {
         this.usersID = usersID;
     }
 
-    //startet die AsycTask, die den JSON String von der url parsed
+    /**
+     * startet die AsycTask, die den JSON String von der url parsed
+     */
     public void accessWebService() {
         JsonReadTask task = new JsonReadTask();
         // passes values for the urls string array
@@ -50,6 +59,13 @@ public class database  {
     }
 
     //überprüft ob der username und das passwort übereinstimmen
+    /**
+     * Überprüft ob der username und das Passwort übereinstimmen
+     * Dazu geht die for-Schleife jeden einzelnen User aus dem JSON String durch
+     * sobald der Username und das Passwort übereinstimmen, setzt er datatrue auf true, also ist die aktuelle Kombination gültig.
+     * @param useruser
+     * @param  userpassword
+     */
     public boolean checkUser(String useruser, String userpassword) {
         boolean datatrue = false;
 
@@ -75,7 +91,14 @@ public class database  {
         return datatrue;
     }
 
-    //überprüft ob der user schon exisitiert, wenn nicht wird ein neuer angelegt
+    /**
+     * überprüft ob der user schon exisitiert, wenn nicht wird ein neuer angelegt (Wird bspw. von "Register" aufgerufen)
+     * Dazu wird wieder das json objekt gelooped und sobald festgestellt wird,
+     * dass der Nutzer schon existiert oder das Passwort nicht richtig wiederholt wurde, wird datatrue auf false gesetzt und die Schleife beendet
+     * @param userpassword
+     * @param useruser
+     * @param userPasswordRepeat
+     */
     public boolean checkPushUser(String useruser, String userpassword, String userPasswordRepeat) {
         boolean datatrue = false;
         Log.d("database", "User pushed");
@@ -105,7 +128,10 @@ public class database  {
         return datatrue;
     }
 
-    // Async Task to download the json string
+
+    /**
+     * Async Task die via HTTP Post den JSON String herunterläd
+     */
     private class JsonReadTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
@@ -135,9 +161,9 @@ public class database  {
                     answer.append(rLine);
                 }
             } catch (IOException e) {
-                 e.printStackTrace();
+                e.printStackTrace();
             }
             return answer;
         }
-    }// end async task
+    }
 }
