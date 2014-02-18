@@ -38,6 +38,7 @@ public class UebersichtFragment extends Fragment {
         getActivity().setTitle("Übersicht");
         Log.d("UebersichtFragment", "SIZE: " + size);
 
+        //Die Datenbankelemente werden durchlaufen und in die TextViews gefüllt
         for (int i = 0; i < art.length; i++){
             if (i == 0)
             {

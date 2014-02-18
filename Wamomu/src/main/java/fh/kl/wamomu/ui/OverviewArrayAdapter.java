@@ -18,7 +18,13 @@ public class OverviewArrayAdapter extends ArrayAdapter<String> {
     private final String[] values_gericht;
     private final String[] values_date;
 
-
+    /**
+     * Konstruktor für OverviewArrayAdapter
+     * @param context
+     * @param values_art
+     * @param values_date
+     * @param values_gericht
+     */
     public OverviewArrayAdapter(Context context, String[] values_art, String[] values_gericht, String[] values_date) {
         super(context, R.layout.overview_row, values_art);
         this.context = context;
@@ -27,6 +33,13 @@ public class OverviewArrayAdapter extends ArrayAdapter<String> {
         this.values_date = values_date;
     }
 
+    /**
+     * View für das ÜbersichtsFragment
+     * @param position
+     * @param convertView
+     * @param parent
+     * @return rowView
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context
@@ -38,7 +51,7 @@ public class OverviewArrayAdapter extends ArrayAdapter<String> {
         art.setText(values_art[position]);
         gericht.setText(values_gericht[position]);
         date.setText(values_date[position]);
-
+        //Hintergrund jedes zweiten Elements wird geändert
         if(position%2 == 0){
             rowView.setBackgroundColor(Color.argb(255,230,230,230));
         }

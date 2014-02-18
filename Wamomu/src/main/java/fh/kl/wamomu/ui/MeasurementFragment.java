@@ -51,9 +51,19 @@ public class MeasurementFragment extends Fragment {
     SimpleDateFormat sdfDate = new SimpleDateFormat("dd.MM");
     SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
     OverviewArrayAdapter adapter;
+
+    //Layout-Elemente
     private Button btnSave;
     private EditText timepicker, datepicker, measurementedit;
     private Spinner spMeasureGroup;
+
+    /**
+     * Getter für Messwert, Datum, Zeit und UserID
+     * @return messwert
+     * @return  datumPush
+     * @return zeit
+     * @return userid
+     */
 
     public static String getMesswert() {
         return messwert;
@@ -79,27 +89,32 @@ public class MeasurementFragment extends Fragment {
                 container, false);
         getActivity().setTitle("Messungen");
 
+        //Verbindung zur Datenbank wird hergestellt
         dbMeasurements = new databaseMeasurements();
         dbPushMeasurements = new databasePushMeasurement();
 
         msf = new MeasurementFragment();
 
+        //Array zur Anzeige der Daten der Messung
         String[] art = new String[databaseMeasurements.measurements.size()];
         String[] value = new String[databaseMeasurements.measurements.size()];
         String[] datum = new String[databaseMeasurements.measurements.size()];
 
+        //Durclaufen aller Messungs-Elemente
         for (int i = 0; i < databaseMeasurements.measurements.size(); i++) {
             art[i] = "Messung";
             value[i] = databaseMeasurements.measurements.get(i).getmvalue() + " mmol/l";
             datum[i] = sdfDate.format(databaseMeasurements.measurements.get(i).getDate()) + "/" + sdfTime.format(databaseMeasurements.measurements.get(i).getTime());
         }
         overview_listview = (ListView) view.findViewById(R.id.lv_measurement);
+
         Context context = getActivity();
+
         adapter = new OverviewArrayAdapter(context, art, value, datum);
         overview_listview.setAdapter(adapter);
         overview_listview.setItemsCanFocus(true);
 
-        // delay, da sonst der smoothscroll nicht funzt, wenn man von der Statistik drauf zugreift
+        // Verzögerung, da sonst der Smoothscroll nicht funktioniert, wenn man von der Statistik darauf zugreift
         overview_listview.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -118,7 +133,10 @@ public class MeasurementFragment extends Fragment {
             }
         });
 
+        //If Bedingung dient dazu, herauszufinden ob das Fragment mit oder ohne Dialog gestartet werden soll
+        //wenn Fragment mit Dialog gestartet werden soll
         if (dia == 1) {
+            //Dialog wird erstellt mit Titel, Text und Buttons
             final Dialog dialog = new Dialog(getActivity());
 
             dialog.setContentView(R.layout.dialog_add_messung);
@@ -138,11 +156,11 @@ public class MeasurementFragment extends Fragment {
             image.setImageResource(R.drawable.messung);
 
             measurementedit = (EditText) dialog.findViewById(R.id.et_wertedit);
-
             btnSave = (Button) dialog.findViewById(R.id.bt_add_measure);
             timepicker = (EditText) dialog.findViewById(R.id.et_timeedit_measure);
-            Calendar mcurrentTime = Calendar.getInstance();
 
+            //Kalender für die Anzeige des Datums
+            Calendar mcurrentTime = Calendar.getInstance();
 
             final int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
             final int minute = mcurrentTime.get(Calendar.MINUTE);
@@ -156,6 +174,7 @@ public class MeasurementFragment extends Fragment {
             SimpleDateFormat sdfT2 = new SimpleDateFormat("HHmm");
             zeit = sdfT2.format(mcurrentTime.getTime()) + "00";
 
+            //Ein Picker für die aktuelle Zeit
             timepicker.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -190,6 +209,7 @@ public class MeasurementFragment extends Fragment {
             SimpleDateFormat sdfD1 = new SimpleDateFormat("yyyy-MM-dd");
             datepicker.setText(sdfD1.format(mcurrentTime.getTime()));//date + "." + month + "." + year
 
+            //Datum zum Pushen in die  Datenbank
             SimpleDateFormat sdfD2 = new SimpleDateFormat("yyyyMMdd");
             datumPush = sdfD2.format(mcurrentTime.getTime());
 
@@ -220,7 +240,7 @@ public class MeasurementFragment extends Fragment {
                     mDatePicker.show();
                 }
             });
-            // Spinner
+            // Spinner der mit dem Array der möglichen Einheiten befüllt wird
             spMeasureGroup = (Spinner) dialog.findViewById(R.id.sp_MeasureGroup);
             ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(
                     getActivity(), R.array.zuckereinheit, android.R.layout.simple_spinner_item);
@@ -239,7 +259,7 @@ public class MeasurementFragment extends Fragment {
 
                 }
             });
-//            Hinzufügen Button in Dialog
+            //Hinzufügen Button in Dialog
 
             btnSave.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
@@ -284,10 +304,18 @@ public class MeasurementFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Gibt aktuelles Fragment zurück
+     * @return sfItem
+     */
     public int getSfItem() {
         return sfItem;
     }
 
+    /**
+     * Setzt aktuelles Fragment
+     * @param sfItem
+     */
     public void setSfItem(int sfItem) {
         this.sfItem = sfItem;
     }

@@ -65,7 +65,7 @@ public class Register extends Activity {
                 setStrPassword(strPassword);
                 strpasswordRepeat = passwordRepeat.getText().toString();
                 setStrpasswordRepeat(strpasswordRepeat);
-
+                //Es wird überprüft, ob ein user schon vorhanden ist
                 if(db.checkPushUser(getStrUsername(), getStrPassword(), getStrpasswordRepeat()) == false){
                     Toast.makeText(
                             Register.this,
@@ -94,6 +94,9 @@ public class Register extends Activity {
         db.accessWebService();
     }
 
+    /**
+     * Getter und Setter für Username, Vorname, Nachname, Passwort und wiederholtes Passwort
+     */
     public static String getStrUsername() {return strUsername;}
 
     public void setStrUsername(String strUsername) {this.strUsername = strUsername;}
@@ -105,7 +108,6 @@ public class Register extends Activity {
     public static String getStrVname() {return strVname;}
 
     public void setStrVname(String strVname) {this.strVname = strVname;}
-
 
     public static String getStrPassword() {return strPassword;}
 

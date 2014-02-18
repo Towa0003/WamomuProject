@@ -100,7 +100,7 @@ public class SettingsFragment extends Fragment {
 
                 CheckBluetoothState();
 
-                System.out.println("Userdaten -------->" + Login.activeUser.getName() + Login.activeUser.getPassword());
+               Log.d("SettingsFragment" ,"Userdaten -------->" + Login.activeUser.getName() + Login.activeUser.getPassword());
             }
         });
 
@@ -118,6 +118,7 @@ public class SettingsFragment extends Fragment {
 
         return view;
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -129,6 +130,7 @@ public class SettingsFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
     }
+
     private void CheckBluetoothState() {
         // Checks for the Bluetooth support and then makes sure it is turned on
         // If it isn't turned on, request to turn it on

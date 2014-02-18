@@ -114,7 +114,7 @@ public class NavigationDrawer extends Activity {
         // Set actionBarDrawerToggle as the DrawerListener
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
 
-        // just styling option
+        // styling option
         drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 
         drawerListView.setOnItemClickListener(new DrawerItemClickListener());
@@ -170,6 +170,7 @@ public class NavigationDrawer extends Activity {
             drawerLayout.closeDrawer(drawerListView);
             displayView(position);
         }
+        //Beim Klick auf ein Elemtn, wird das zugehörige Fragment geöffnet
         private void displayView(int position) {
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             switch(position) {
@@ -209,7 +210,8 @@ public class NavigationDrawer extends Activity {
         inflater.inflate(R.menu.main_activity_actions, menu);
         return super.onCreateOptionsMenu(menu);
     }
-
+    //wenn in der ActionBar das "+" gedrückt wird, öffnet sich ein Dialog mit der Auswahlmöglichkeit,
+    //ob man eine Messung oder Mahlzeit hinzufügen möchte
     private void add() {
         android.app.AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Hinzufügen").setItems(items, new DialogInterface.OnClickListener() {

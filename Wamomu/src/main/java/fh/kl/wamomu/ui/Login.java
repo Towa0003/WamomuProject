@@ -18,16 +18,19 @@ import fh.kl.wamomu.meta.user;
  * Created by Thundernator on 04.11.13.
  */
 public class Login extends Activity {
-    //LayoutVariablen
+    /**
+     * Layoutvariablen
+     */
     private Button b_login, b_register;
     private EditText et_login, et_password;
 
-    //Instanzvariablen
+    /**
+     * Instanzvariablen für die Datenbank und den aktiven User
+     */
     public static database db;
     public static databaseMeals dbMeals;
     public static databaseMeasurements dbMeasurements;
     public static user activeUser;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +42,10 @@ public class Login extends Activity {
         db = new database();
         dbMeals = new databaseMeals();
         dbMeasurements = new databaseMeasurements();
+
         //EditText und Buttons werden initialisiert
         et_login = (EditText) findViewById(R.id.et_username_edit);
         et_password = (EditText) findViewById(R.id.et_password_edit);
-
         b_login = (Button) findViewById(R.id.bt_login);
 
         //OnClickListener zum herstellen der Verbindung zur Datenbank mir Überprüfung, ob der eingegebene User vorhanden ist.

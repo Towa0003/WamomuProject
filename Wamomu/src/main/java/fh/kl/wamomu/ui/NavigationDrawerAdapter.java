@@ -22,22 +22,37 @@ public class NavigationDrawerAdapter extends BaseAdapter {
         this.context = context;
         this.navDrawerItems = navDrawerItems;
     }
-
+    /**
+     * Gibt die Position zurück die gedrückt wurde
+     * @return navDrawerItems.size()
+     */
     @Override
     public int getCount() {
         return navDrawerItems.size();
     }
 
+    /**
+     * Gibt das aktuele Fragment zurück
+     * @return navDrawerItems.get(position)
+     */
     @Override
     public Object getItem(int position) {
         return navDrawerItems.get(position);
     }
 
+    /**
+     * Gibt die Position zurück an der das Element steht
+     * @return position
+     */
     @Override
     public long getItemId(int position) {
         return position;
     }
 
+    /**
+     * Darstellung der NavigationDrawer Items
+     * @return convertView
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {

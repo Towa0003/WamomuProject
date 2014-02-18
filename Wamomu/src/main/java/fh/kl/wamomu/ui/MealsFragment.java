@@ -175,7 +175,7 @@ public class MealsFragment extends Fragment {
 
                             zeit = (strHour + strMin + "00");
                         }
-                    }, hour, minute, true);//Yes 24 hour time
+                    }, hour, minute, true);//Yes für 24 Stunden
                     mTimePicker.setTitle("Select Time");
                     mTimePicker.show();
                 }
@@ -186,6 +186,7 @@ public class MealsFragment extends Fragment {
             SimpleDateFormat sdfD1 = new SimpleDateFormat("yyyy-MM-dd");
             datepicker.setText(sdfD1.format(mcurrentTime.getTime()));//date + "." + month + "." + year
 
+            //Zeitpunkt der in die Datenbank gepushed wird
             SimpleDateFormat sdfD2 = new SimpleDateFormat("yyyyMMdd");
             datumPush = sdfD2.format(mcurrentTime.getTime());
 
@@ -212,6 +213,7 @@ public class MealsFragment extends Fragment {
 
                             datepicker.setText(strYear + "-" + strMon + "-" + strDate);
 
+                            //Datum das in die Datenbank gepushed wird
                             datumPush = (strYear + strMon + strDate);
                         }
                     }, date, month, year);
@@ -238,7 +240,7 @@ public class MealsFragment extends Fragment {
 
                 }
             });
-//            Hinzufügen Button in Dialog
+            //Hinzufügen Button in Dialog
             btnadd.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     essenszeit = String.valueOf(spMealGroup.getSelectedItem());
@@ -250,7 +252,7 @@ public class MealsFragment extends Fragment {
                     dbPushMeals.accessWebService();             // Meal Daten Pushen
                     dbMeals.accessWebService();
 
-                    // halbe Sek delay, da sonst Nullpointerexcpetopn, wahrsch. wegen access WebService
+                    // Halbe Sekunde Delay, da sonst NullPointerException beim accessWebService
                     try {
                         Thread.sleep(500);
                     } catch (InterruptedException e) {
