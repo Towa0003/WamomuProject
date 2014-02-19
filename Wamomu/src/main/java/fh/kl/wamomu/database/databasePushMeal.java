@@ -18,7 +18,9 @@ public class databasePushMeal {
 
     private String url = "http://" + database.ip + "/wamomusql/addmeal.php";
 
-
+    /**
+     * Async Task die via HTTP Post den JSON String herunterlädt
+     */
     private class JsonReadTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
@@ -54,7 +56,10 @@ public class databasePushMeal {
         }
     }// end async task
 
-
+    /**
+     * startet die AsycTask, die den JSON String von der url parsed, die Angaben der PHP-File übergibt und
+     * in die Datenbank hinzufügt
+     */
     public void accessWebService() {
         JsonReadTask task = new JsonReadTask();
         // passes values for the urls string array

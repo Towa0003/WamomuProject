@@ -10,8 +10,8 @@ import java.util.Date;
 public class meal {
 
     int mealID;
-    String foodkind; //Frühstück,Mittagessen,Abendessen
-    String food; //Schinken
+    String foodkind;
+    String food;
     Date date;
     Date time;
 

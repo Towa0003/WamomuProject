@@ -31,7 +31,7 @@ public class NavigationDrawerItem {
     }
 
     /**
-     * Gibt den Icon zurück
+     * Gibt das Icon zurück
      * @return icon
      */
     public int getIcon(){

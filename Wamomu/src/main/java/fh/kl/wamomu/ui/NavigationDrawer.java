@@ -170,7 +170,7 @@ public class NavigationDrawer extends Activity {
             drawerLayout.closeDrawer(drawerListView);
             displayView(position);
         }
-        //Beim Klick auf ein Elemtn, wird das zugehörige Fragment geöffnet
+        //Beim Klick auf ein Element, wird das zugehörige Fragment geöffnet
         private void displayView(int position) {
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             switch(position) {

@@ -76,7 +76,8 @@ public class databaseMeasurements {
     }// end async task
 
     /**
-     * startet die AsycTask, die den JSON String von der url parsed
+     * startet die AsycTask, die den JSON String von der url parsed und die Daten aus der Datenbank
+     * in eine Arraylist speichert
      */
     public void accessWebService() {
         JsonReadTask task = new JsonReadTask();
@@ -85,6 +86,11 @@ public class databaseMeasurements {
 
     }
 
+    /**
+     * Gibt die Daten der Messwerte von der übergebenen UserID aus und speichert diese in eine Arraylist,
+     * um die Daten in der App anzeigen zu können
+     * @param currentUserID
+     */
     public boolean checkMeasurment(int currentUserID) {
         boolean datatrue = false;
         int currentID = currentUserID;
