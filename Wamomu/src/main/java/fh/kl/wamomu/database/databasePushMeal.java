@@ -18,7 +18,7 @@ public class databasePushMeal {
 
     private String url = "http://" + database.ip + "/wamomusql/addmeal.php";
 
-    // Async Task to access the web
+
     private class JsonReadTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
@@ -53,6 +53,7 @@ public class databasePushMeal {
             return answer;
         }
     }// end async task
+
 
     public void accessWebService() {
         JsonReadTask task = new JsonReadTask();

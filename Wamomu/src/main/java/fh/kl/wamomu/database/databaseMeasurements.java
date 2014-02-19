@@ -38,7 +38,9 @@ public class databaseMeasurements {
     public static List<measurement> measurements = new ArrayList<measurement>();
 
 
-    // Async Task to access the web
+    /**
+     * Async Task die via HTTP Post den JSON String herunterlädt
+     */
     private class JsonReadTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
@@ -71,13 +73,11 @@ public class databaseMeasurements {
             }
             return answer;
         }
-
-        @Override
-        protected void onPostExecute(String result) {
-//            ListDrwaer();
-        }
     }// end async task
 
+    /**
+     * startet die AsycTask, die den JSON String von der url parsed
+     */
     public void accessWebService() {
         JsonReadTask task = new JsonReadTask();
         // passes values for the urls string array

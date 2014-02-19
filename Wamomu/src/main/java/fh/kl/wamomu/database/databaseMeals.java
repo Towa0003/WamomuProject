@@ -30,7 +30,9 @@ public class databaseMeals {
     public static List<meal> meals = new ArrayList<meal>();
 
 
-    // Async Task to access the web
+    /**
+     * Async Task die via HTTP Post den JSON String herunterlädt
+     */
     private class JsonReadTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
@@ -66,13 +68,11 @@ public class databaseMeals {
             }
             return answer;
         }
-
-        @Override
-        protected void onPostExecute(String result) {
-//            ListDrwaer();
-        }
     }// end async task
 
+    /**
+     * startet die AsycTask, die den JSON String von der url parsed
+     */
     public void accessWebService() {
         JsonReadTask task = new JsonReadTask();
         // passes values for the urls string array

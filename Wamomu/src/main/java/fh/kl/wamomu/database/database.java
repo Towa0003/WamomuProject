@@ -130,7 +130,7 @@ public class database  {
 
 
     /**
-     * Async Task die via HTTP Post den JSON String herunterläd
+     * Async Task die via HTTP Post den JSON String herunterlädt
      */
     private class JsonReadTask extends AsyncTask<String, Void, String> {
         @Override
