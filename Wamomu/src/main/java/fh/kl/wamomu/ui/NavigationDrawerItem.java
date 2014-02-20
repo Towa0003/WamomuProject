@@ -1,8 +1,5 @@
 package fh.kl.wamomu.ui;
 
-/**
- * Created by Christian on 21.12.13.
- */
 public class NavigationDrawerItem {
     private String title;
     private int icon;

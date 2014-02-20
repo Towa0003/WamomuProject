@@ -24,9 +24,6 @@ import java.text.SimpleDateFormat;
 import fh.kl.wamomu.R;
 import fh.kl.wamomu.database.databaseMeasurements;
 
-/**
- * Created by Thundernator on 04.11.13.
- */
 public class StatistikFragment extends Fragment {
 
 

@@ -1,8 +1,5 @@
 package fh.kl.wamomu.ui;
 
-/**
- * Created by Thundernator on 04.11.13.
- */
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;

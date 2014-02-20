@@ -14,9 +14,6 @@ import fh.kl.wamomu.database.databaseMeals;
 import fh.kl.wamomu.database.databaseMeasurements;
 import fh.kl.wamomu.meta.user;
 
-/**
- * Created by Thundernator on 04.11.13.
- */
 public class Login extends Activity {
     /**
      * Layoutvariablen
@@ -80,7 +77,7 @@ public class Login extends Activity {
                 }
             }
         });
-        //Register Button wird initialisiert, mit der Funktion zum Wechsen der Activity
+        //Register Button wird initialisiert, mit der Funktion zum Wechseln der Activity
         b_register = (Button) findViewById(R.id.bt_register);
         b_register.setOnClickListener(new View.OnClickListener() {
             @Override

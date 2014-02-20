@@ -31,9 +31,6 @@ import fh.kl.wamomu.database.database;
 import fh.kl.wamomu.database.databaseMeals;
 import fh.kl.wamomu.database.databasePushMeal;
 
-/**
- * Created by Thundernator on 04.11.13.
- */
 public class MealsFragment extends Fragment {
     //Erstellen des Formates des Datums
     SimpleDateFormat sdfDate = new SimpleDateFormat("dd.MM");

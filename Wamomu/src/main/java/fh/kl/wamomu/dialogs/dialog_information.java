@@ -10,6 +10,10 @@ import android.widget.TextView;
 
 import fh.kl.wamomu.R;
 
+/**
+ * Ausgelagerter Dialog, um die Übersichtlichkeit im Code zu steigern
+ * Inhalt steht größtenteils in der XML, hier wird nur ein onClickListener festgeleget
+ */
 public class dialog_information extends Dialog {
 
     TextView t;

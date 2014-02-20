@@ -11,9 +11,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import fh.kl.wamomu.R;
 
-/**
- * Created by Christian on 21.12.13.
- */
 public class NavigationDrawerAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<NavigationDrawerItem> navDrawerItems;

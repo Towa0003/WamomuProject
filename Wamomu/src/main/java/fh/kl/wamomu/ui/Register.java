@@ -11,9 +11,6 @@ import fh.kl.wamomu.R;
 import fh.kl.wamomu.database.database;
 import fh.kl.wamomu.database.databasePushUser;
 
-/**
- * Created by Thundernator on 04.11.13.
- */
 public class Register extends Activity {
 
     private Button login;

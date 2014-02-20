@@ -30,9 +30,6 @@ import fh.kl.wamomu.database.database;
 import fh.kl.wamomu.database.databaseMeasurements;
 import fh.kl.wamomu.database.databasePushMeasurement;
 
-/**
- * Created by Thundernator on 04.11.13.
- */
 public class MeasurementFragment extends Fragment {
 
     static public int dia = 0;

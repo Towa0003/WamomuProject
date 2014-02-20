@@ -20,9 +20,6 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import fh.kl.wamomu.R;
 
-/**
- * Created by Thundernator on 04.11.13.
- */
 public class NavigationDrawer extends Activity {
 
     private DrawerLayout drawerLayout;

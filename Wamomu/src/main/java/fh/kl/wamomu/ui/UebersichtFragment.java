@@ -1,8 +1,5 @@
 package fh.kl.wamomu.ui;
 
-/**
- * Created by Thundernator on 04.11.13.
- */
 
 import android.app.Fragment;
 import android.content.Context;

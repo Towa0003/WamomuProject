@@ -2,6 +2,10 @@ package fh.kl.wamomu.meta;
 
 import java.util.List;
 
+/**
+ * Meta Klasse, in dem alle Daten zum Benutzer gespeichert werden
+ */
+
 public class user {
 
     String name;
@@ -9,6 +13,13 @@ public class user {
     List<meal> meals;
     List<measurement> measurements;
 
+    /**
+     * Konstruktor
+     * @param name
+     * @param password
+     * @param meals
+     * @param measurements
+     */
     public user(String name, String password, List<meal> meals, List<measurement> measurements) {
         this.name = name;
         this.password = password;

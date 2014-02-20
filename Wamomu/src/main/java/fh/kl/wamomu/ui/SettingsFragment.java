@@ -17,9 +17,6 @@ import java.util.Set;
 import fh.kl.wamomu.R;
 import fh.kl.wamomu.dialogs.dialog_information;
 
-/**
- * Created by Thundernator on 04.11.13.
- */
 public class SettingsFragment extends Fragment {
 
     private TextView pairview, infoview, kalview, codeview, code;

@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by T on 13.11.13.
+ * Meta Klasse, in der alle Daten für eine Mahlzeit gespeichert werden können.
  */
 public class meal {
 
@@ -15,6 +15,14 @@ public class meal {
     Date date;
     Date time;
 
+    /**
+     * Konstruktor
+     * @param mealID
+     * @param foodkind
+     * @param food
+     * @param date
+     * @param time
+     */
     public meal(int mealID, String foodkind, String food, Date date, Date time) {
         this.mealID = mealID;
         this.foodkind = foodkind;
