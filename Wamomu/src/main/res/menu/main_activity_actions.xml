@@ -1,23 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:hmkcode="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/user_id_label"
-        android:title="HbA1c : "
-        hmkcode:showAsAction="always|withText"
-        />
-
-    <item
-        android:id="@+id/action_add"
+    <item android:id="@+id/action_add"
         android:icon="@drawable/add"
-        hmkcode:showAsAction="always"
-
-        />
-
-    <item android:id="@+id/action_logoff"
-        android:icon="@drawable/logout"
-        hmkcode:showAsAction="always"/>
+        android:title="@string/action_add"
+        android:showAsAction="ifRoom" />
 
 </menu>

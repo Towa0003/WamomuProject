@@ -2,15 +2,11 @@ package fh.kl.wamomu.ui;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
 import fh.kl.wamomu.R;
 
 public class OverviewArrayAdapter extends ArrayAdapter<String> {
@@ -18,7 +14,6 @@ public class OverviewArrayAdapter extends ArrayAdapter<String> {
     private final String[] values_art;
     private final String[] values_gericht;
     private final String[] values_date;
-    public static int mSelectedItem = -1;
 
     /**
      * Konstruktor für OverviewArrayAdapter
@@ -53,35 +48,8 @@ public class OverviewArrayAdapter extends ArrayAdapter<String> {
         art.setText(values_art[position]);
         gericht.setText(values_gericht[position]);
         date.setText(values_date[position]);
-        double testdouble = 0;
-        if(Character.isDigit(values_gericht[position].charAt(0))) {
-            String numberOne = values_gericht[position].substring(0, 4);
-
-            testdouble = Double.parseDouble(numberOne);
-            Log.e("TESTINT", " " + testdouble);
-        }
         //Hintergrund jedes zweiten Elements wird geändert
-
-        if(position == mSelectedItem){
-            rowView.setBackgroundColor(Color.argb(120, 90,157,0));
-            Log.e("POSITION", " " + mSelectedItem);
-            Animation anim = new AlphaAnimation(0.1f, 1.0f);
-            anim.setDuration(500);
-            anim.setStartOffset(20);
-            anim.setRepeatMode(Animation.REVERSE);
-            anim.setRepeatCount(5);
-            rowView.startAnimation(anim);
-            mSelectedItem = -1;
-
-        }else if(testdouble >= NavigationDrawer.highvalue){
-            Log.d("SETCOLORHIGHVALUE", "" + testdouble);
-            rowView.setBackgroundColor(NavigationDrawer.highcolor);
-            rowView.getBackground().setAlpha(100);
-        }else if(testdouble <= NavigationDrawer.lowvalue && testdouble != 0.0){
-            Log.e("DOUBLE", " " + testdouble);
-            rowView.setBackgroundColor(NavigationDrawer.lowColor);
-            rowView.getBackground().setAlpha(100);
-        }else if(position%2 == 0){
+        if(position%2 == 0){
             rowView.setBackgroundColor(Color.argb(255,230,230,230));
         }
 

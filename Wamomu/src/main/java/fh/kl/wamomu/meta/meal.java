@@ -1,5 +1,7 @@
 package fh.kl.wamomu.meta;
 
+import android.text.format.Time;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -7,7 +9,7 @@ import java.util.Date;
  */
 public class meal {
 
-    Long mealID;
+    int mealID;
     String foodkind;
     String food;
     Date date;
@@ -21,7 +23,7 @@ public class meal {
      * @param date
      * @param time
      */
-    public meal(Long mealID, String foodkind, String food, Date date, Date time) {
+    public meal(int mealID, String foodkind, String food, Date date, Date time) {
         this.mealID = mealID;
         this.foodkind = foodkind;
         this.food = food;
@@ -42,14 +44,4 @@ public class meal {
         return time;
     }
 
-    @Override
-    public String toString() {
-        return "meal{" +
-                "mealID=" + mealID +
-                ", foodkind='" + foodkind + '\'' +
-                ", food='" + food + '\'' +
-                ", date=" + date +
-                ", time=" + time +
-                '}';
-    }
 }

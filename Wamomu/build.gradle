@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.9.+'
+        classpath 'com.android.tools.build:gradle:0.7.+'
     }
 }
 apply plugin: 'android'
@@ -14,30 +14,15 @@ repositories {
 
 android {
     compileSdkVersion 19
-    buildToolsVersion '19.0.2'
+    buildToolsVersion "19.0.0"
 
     defaultConfig {
-        minSdkVersion 8
-        targetSdkVersion 9
-    }
-    packagingOptions {
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/license.txt'
-        exclude 'META-INF/notice.txt'
-        exclude 'META-INF/NOTICE.txt'
+        minSdkVersion 14
+        targetSdkVersion 18
     }
 }
 
 dependencies {
     compile 'com.android.support:support-v4:+'
     compile files('/libs/achartengine-1.1.0.jar')
-    compile 'com.android.support:appcompat-v7:+'
-    compile files('libs/BodyTelDevKit-1.0.2.jar')
-    compile project(':libraries:AmbilWarna')
-    compile files('libs/jackson-all-1.9.11.jar')
-    compile files('libs/joda-time-2.0.jar')
-    compile files('libs/joda-convert-1.5.jar')
-    compile files('libs/simple-xml-2.7.1.jar')
-    compile files('libs/spring-android-core-1.0.1.RELEASE.jar')
-    compile files('libs/spring-android-rest-template-1.0.1.RELEASE.jar')
 }

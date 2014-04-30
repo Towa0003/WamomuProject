@@ -1,240 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/tv_kalibrierungscode"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:height="50dp"
-                android:gravity="center"
-                android:text="@string/code"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        </RelativeLayout>
+    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        >
 
         <TextView
-            android:id="@+id/tv_code"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/code"
+            android:id="@+id/tv_kalibrierungscode"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:gravity="center"
+            android:height="50dp"/>
+
+    </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/codenumber"
+        android:id="@+id/tv_code"
+        android:height="50dp"
+        android:layout_gravity="center"
+        />
+    <View
+
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="#FF0000FF"
+        />
+    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+
+        >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
             android:height="50dp"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <View
-
-            android:layout_width="fill_parent"
-            android:layout_height="1dip"
-            android:background="#FF0000FF" />
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            >
-
-            <TextView
-                android:id="@+id/tv_addGeraet"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:height="50dp"
-                android:gravity="center"
-                android:text="@string/newdevice"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/newdevice"
+            android:id="@+id/tv_addGeraet"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:gravity="center"
+            />
 
 
-        </RelativeLayout>
 
-        <View
+    </RelativeLayout>
+    <View
 
-            android:layout_width="fill_parent"
-            android:layout_height="1dip"
-            android:background="#FF0000FF" />
-
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            >
-
-            <TextView
-                android:id="@+id/tv_info"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:height="50dp"
-                android:gravity="center"
-                android:text="@string/info"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="#FF0000FF"
+        />
 
 
-        </RelativeLayout>
 
-        <View
+    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
 
-            android:layout_width="fill_parent"
-            android:layout_height="1dip"
-            android:background="#FF0000FF" />
+        >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:baselineAligned="false"
-            android:orientation="horizontal"
-
-            >
-
-            <TextView
-                android:id="@+id/tv_values"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:minHeight="50dp"
-                android:padding="10dp"
-                android:text="Einstellen der Höchst- und Tiefstwerte"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-
-                />
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:baselineAligned="false"
-            android:orientation="horizontal"
-            android:padding="10dp">
-
-            <TextView
-                android:id="@+id/tv_color_high"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:layout_weight="0.24"
-                android:background="#ff0000"
-                android:gravity="center"
-                android:padding="5dp"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/info"
+            android:id="@+id/tv_info"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:gravity="center"
+            android:height="50dp"/>
 
 
-            <TextView
-                android:id="@+id/tv_values_high"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:minHeight="50dp"
-                android:text="Höchstwert: "
-                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <EditText
-                android:id="@+id/et_value_high"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:hint=" x mg/dl"
-                android:minHeight="50dp"
-                android:singleLine="true"
-                android:editable="false"
-                android:clickable="false"
-                android:focusable="false"/>
+    </RelativeLayout>
+    <View
 
-        </LinearLayout>
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="#FF0000FF"
+        />
 
-        <LinearLayout
+    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+
+        >
+
+        <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="10dp">
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/paireddevices"
+            android:id="@+id/tv_paired_devices"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:minHeight="50dp"
+            android:gravity="center"
+            android:clickable="true"
 
-            <TextView
-                android:id="@+id/tv_color_low"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:layout_weight="0.24"
-                android:background="#ff8500"
-                android:gravity="center"
-                android:padding="5dp"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+            />
+    </RelativeLayout>
 
-            <TextView
-                android:id="@+id/tv_values_low"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:minHeight="50dp"
-                android:text="Tiefstwert: "
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <EditText
-                android:id="@+id/et_value_low"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:hint=" x mg/dl"
-                android:minHeight="50dp"
-                android:singleLine="true"
-                android:editable="false"
-                android:clickable="false"
-                android:focusable="false"/>
-
-
-        </LinearLayout>
-
-
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="1dip"
-            android:background="#FF0000FF" />
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            >
-
-            <TextView
-                android:id="@+id/tv_paired_devices"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:gravity="center"
-                android:minHeight="50dp"
-                android:text="@string/paireddevices"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-
-                />
-        </RelativeLayout>
-
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="1dip"
-            android:background="#FF0000FF" />
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dip"
+        android:background="#FF0000FF"
+        />
 
 
 
 
-    </LinearLayout>
-</ScrollView>
+</LinearLayout>

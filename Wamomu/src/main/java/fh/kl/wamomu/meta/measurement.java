@@ -7,7 +7,7 @@ import java.util.Date;
  */
 public class measurement {
 
-    long measurementID;
+    int measurementID;
     double mvalue;
     Date date;
     Date time;
@@ -19,7 +19,7 @@ public class measurement {
      * @param date
      * @param time
      */
-    public measurement(long measurementID, double mvalue, Date date, Date time) {
+    public measurement(int measurementID, double mvalue, Date date, Date time) {
         this.measurementID = measurementID;
         this.mvalue = mvalue;
         this.date = date;
@@ -39,13 +39,4 @@ public class measurement {
         return time;
     }
 
-    @Override
-    public String toString() {
-        return "measurement{" +
-                "measurementID=" + measurementID +
-                ", mvalue=" + mvalue +
-                ", date=" + date +
-                ", time=" + time +
-                '}';
-    }
 }

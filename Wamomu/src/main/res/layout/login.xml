@@ -27,7 +27,7 @@
         android:layout_gravity="center_horizontal"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Test"
+        android:text=""
         android:hint="Username"/>
 
     <TextView
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:ems="10"
-        android:text="Testpw"
+        android:text=""
         android:inputType="textPassword" />
 
     <Button
@@ -64,13 +64,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-
+            android:divider="?android:attr/dividerHorizontal"
             android:orientation="vertical"
             android:paddingTop="16dip"
             android:showDividers="beginning">
 
             <LinearLayout
-
+                style="?android:attr/buttonBarStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:measureWithLargestChild="true"
@@ -86,6 +86,7 @@
 
                 <Button
                     android:id="@+id/bt_register"
+                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
@@ -103,10 +104,7 @@
                     android:visibility="gone" />
 
             </LinearLayout>
-
         </LinearLayout>
-
-
 
 
     </RelativeLayout>

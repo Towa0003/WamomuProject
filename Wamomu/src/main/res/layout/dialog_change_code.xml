@@ -15,16 +15,14 @@
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_marginRight="10dp"
-            android:src="@drawable/einstellung"
-            android:layout_gravity="center"/>
+            android:src="@drawable/einstellung" />
 
 
         <TextView
             android:id="@+id/tv_codetitel"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:text="Geben sie den Kalibirierungscode hier ein"
-            android:layout_gravity="center"
+            android:text="Der Code befindet sich bei den Teststreifen"
              />
 
     </LinearLayout>

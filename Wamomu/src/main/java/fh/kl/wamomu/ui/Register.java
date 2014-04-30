@@ -1,20 +1,17 @@
 package fh.kl.wamomu.ui;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-
 import fh.kl.wamomu.R;
-import fh.kl.wamomu.database.CheckUserID;
-import fh.kl.wamomu.database.RestfulUser;
+import fh.kl.wamomu.database.database;
+import fh.kl.wamomu.database.databasePushUser;
 
-public class Register extends Activity implements CheckUserID {
+public class Register extends Activity {
 
     private Button login;
 
@@ -33,21 +30,17 @@ public class Register extends Activity implements CheckUserID {
     private EditText passwordRepeat;
     private static String strpasswordRepeat;
 
-
-    public CheckUserID a;
-    private View view;
-    private boolean isNoUser = false;
-    static Context contextobj;
-
+    public static databasePushUser dbPushUser;
+    public static database db;
 
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
-
-        contextobj = getApplication();
-
+        dbPushUser = new databasePushUser();
+        db = new database();
+        db.accessWebService();
 
         login = (Button) findViewById(R.id.bt_login_register);
         username = (EditText) findViewById(R.id.et_username_register_edit);
@@ -69,10 +62,25 @@ public class Register extends Activity implements CheckUserID {
                 setStrPassword(strPassword);
                 strpasswordRepeat = passwordRepeat.getText().toString();
                 setStrpasswordRepeat(strpasswordRepeat);
-                //db.accessWebService(Register.this, strUsername, strpasswordRepeat);
-
                 //Es wird überprüft, ob ein user schon vorhanden ist
-                checkUserID();
+                if(db.checkPushUser(getStrUsername(), getStrPassword(), getStrpasswordRepeat()) == false){
+                    Toast.makeText(
+                            Register.this,
+                            "User already exists or pw is not equal" + "\n"
+                                    + "Please check your input data",
+                            Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    dbPushUser.accessWebService();
+                    Toast.makeText(
+                            Register.this,
+                            "User erfolgreich registriert" + "\n"
+                                    + "Bitte einloggen",
+                            Toast.LENGTH_LONG).show();
+                    Intent i = new Intent(Register.this,Login.class);
+                    startActivity(i);
+                }
             }
         });
     }
@@ -80,7 +88,7 @@ public class Register extends Activity implements CheckUserID {
     @Override
     protected void onResume() {
         super.onResume();
-        //db.accessWebService(Register.this, strUsername, strpasswordRepeat);
+        db.accessWebService();
     }
 
     /**
@@ -111,35 +119,5 @@ public class Register extends Activity implements CheckUserID {
     public void setStrpasswordRepeat(String strpasswordRepeat) {
         this.strpasswordRepeat = strpasswordRepeat;
     }
-
-    @Override
-    public void  checkUserID(){
-
-
-
-        if(strPassword.equals(strpasswordRepeat)) {
-            RestfulUser.CREATE_USER(view);
-        }
-        else {
-            Toast.makeText(Register.this, "Passwort nicht gleich", Toast.LENGTH_SHORT).show();
-        }
-
-    }
-
-    public static void startactivity(){
-        Toast.makeText(
-                contextobj,
-                "User erfolgreich registriert" + "\n"
-                        + "Bitte einloggen",
-                Toast.LENGTH_LONG).show();
-        Intent i = new Intent(contextobj, Login.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        contextobj.startActivity(i);
-
-    }
-
-
-
-
 
 }

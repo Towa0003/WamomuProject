@@ -1,7 +1,6 @@
 package fh.kl.wamomu.ui;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,13 +9,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import fh.kl.wamomu.R;
-import fh.kl.wamomu.bluetooth.service;
-import fh.kl.wamomu.database.CheckUserID;
-import fh.kl.wamomu.database.MealReady;
-import fh.kl.wamomu.database.MeasurementReady;
-import fh.kl.wamomu.database.RestfulUser;
+import fh.kl.wamomu.database.database;
+import fh.kl.wamomu.database.databaseMeals;
+import fh.kl.wamomu.database.databaseMeasurements;
+import fh.kl.wamomu.meta.user;
 
-public class Login extends Activity implements CheckUserID, MeasurementReady, MealReady {
+public class Login extends Activity {
     /**
      * Layoutvariablen
      */
@@ -26,64 +24,59 @@ public class Login extends Activity implements CheckUserID, MeasurementReady, Me
     /**
      * Instanzvariablen für die Datenbank und den aktiven User
      */
-
-    private static String user;
-    private static String password;
-    private View view;
-    private static ProgressDialog dialog;
-
-    public static String getPassword() {
-        return password;
-    }
-
-    public static void setPassword(String password) {
-        Login.password = password;
-    }
-
-    public static String getUser() {
-        return user;
-    }
-
-    public static void setUser(String user) {
-        Login.user = user;
-    }
-
-    private boolean isMealReady = false, isMeasurementsReady = false;
-
+    public static database db;
+    public static databaseMeals dbMeals;
+    public static databaseMeasurements dbMeasurements;
+    public static user activeUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         setTitle("Login");
-        dialog = new ProgressDialog(Login.this);
 
-        final Intent inte = new Intent(Login.this, service.class );
-        startService(inte);
+        //Verbindung zur Datenbank wird hergestellt
+        db = new database();
+        dbMeals = new databaseMeals();
+        dbMeasurements = new databaseMeasurements();
 
         //EditText und Buttons werden initialisiert
         et_login = (EditText) findViewById(R.id.et_username_edit);
         et_password = (EditText) findViewById(R.id.et_password_edit);
         b_login = (Button) findViewById(R.id.bt_login);
+
+        //OnClickListener zum herstellen der Verbindung zur Datenbank mir Überprüfung, ob der eingegebene User vorhanden ist.
         b_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                checkUserID();
+                db.accessWebService();
+                dbMeals.accessWebService();
+                dbMeasurements.accessWebService();
 
-                setUser(et_login.getText().toString());
-                setPassword(et_password.getText().toString());
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
-                dialog.setTitle("Bitte warten!");
-                dialog.setMessage("Daten werden heruntergeladen");
-                dialog.show();
+                if(db.getJsonResult() == null){
+                    Toast.makeText(Login.this, "Databaseconnection is NULL. Check if MySQL Server is running, change IP!", Toast.LENGTH_LONG).show();
+                }
+                else if (db.checkUser(et_login.getText().toString(), et_password.getText().toString())) {
+                    int currentUserID = db.getUsersID();
+                    dbMeals.checkMeal(database.getUsersID());       // alle Meals des jeweiligen Users ausgeben
+                    dbMeasurements.checkMeasurment(currentUserID);  // alle Measurements des jeweiligen Users ausgeben
+                    activeUser = new user(et_login.getText().toString(), et_password.getText().toString(),null,null);
+                    Intent i = new Intent(Login.this, NavigationDrawer.class);
+                    startActivity(i);
+                    Toast.makeText(Login.this, "Connected", Toast.LENGTH_LONG).show();
 
-
+                } else {
+                    Toast.makeText(Login.this, "User or password wrong", Toast.LENGTH_LONG).show();
+                }
             }
         });
-
-
-
         //Register Button wird initialisiert, mit der Funktion zum Wechseln der Activity
         b_register = (Button) findViewById(R.id.bt_register);
         b_register.setOnClickListener(new View.OnClickListener() {
@@ -95,57 +88,4 @@ public class Login extends Activity implements CheckUserID, MeasurementReady, Me
         });
     }
 
-
-
-    @Override
-    public void onBackPressed(){
-
-    }
-
-    @Override
-    public void checkUserID(){
-
-        RestfulUser.GET_USER(this);
-
-
-    }
-
-
-
-    @Override
-    public void setMeasurementReady(){
-        isMeasurementsReady = true;
-        startIntent();
-    }
-
-    @Override
-    public void setMealReady(){
-        isMealReady = true;
-        startIntent();
-    }
-
-
-
-    private void startIntent(){
-
-                if(isMeasurementsReady && isMealReady) {
-                    Intent i = new Intent(Login.this, NavigationDrawer.class);
-                    startActivity(i);
-                    Toast.makeText(this, "Connected", Toast.LENGTH_LONG).show();
-
-                }
-
-    }
-
-    public static void dismiss(){
-        dialog.dismiss();
-        Login log = new Login();
-        Toast.makeText(log, "user not found", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        dialog.dismiss();
-    }
 }
