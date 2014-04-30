@@ -4,6 +4,9 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
     <ImageView
 
         android:id="@+id/iv_infoimage"
@@ -18,7 +21,10 @@
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:text="@string/infotext"
-        android:layout_toRightOf="@+id/iv_mealimage" />
+
+        android:padding="10dp"/>
+
+    </LinearLayout>
 
 
     <RelativeLayout
@@ -32,7 +38,7 @@
             android:layout_height="1dip"
             android:layout_marginLeft="4dip"
             android:layout_marginRight="4dip"
-            android:background="?android:attr/dividerVertical" />
+            />
 
 
         <Button
@@ -41,7 +47,6 @@
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:background="?android:attr/selectableItemBackground"
             android:text="@android:string/ok"
             android:layout_alignParentBottom="true" />
     </RelativeLayout>

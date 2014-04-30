@@ -2,12 +2,13 @@ package fh.kl.wamomu.ui;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,29 +23,41 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import fh.kl.wamomu.R;
-import fh.kl.wamomu.database.database;
-import fh.kl.wamomu.database.databaseMeasurements;
-import fh.kl.wamomu.database.databasePushMeasurement;
 
-public class MeasurementFragment extends Fragment {
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+import fh.kl.wamomu.R;
+import fh.kl.wamomu.database.CheckUserID;
+import fh.kl.wamomu.database.MeasurementReady;
+import fh.kl.wamomu.database.RestfulMeasure;
+import fh.kl.wamomu.database.RestfulUser;
+
+
+public class MeasurementFragment extends Fragment implements CheckUserID, MeasurementReady {
 
     static public int dia = 0;
 
-    public static databaseMeasurements dbMeasurements;
-    public static databasePushMeasurement dbPushMeasurements;
 
     private static String messwert;
-    private static String datumPush;
-    private static String zeit;
+    private static Date datumPush;
+    private static String datumpushstr;
+    private static Date zeit;
+    private static String time;
     private static String userid;
+    private Context contect;
 
-    public ListView overview_listview;
+    public static ListView overview_listview;
     public int sfItem = 0;
-    Fragment msf;
+    Fragment changeFragment;
     SimpleDateFormat sdfDate = new SimpleDateFormat("dd.MM");
     SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
     OverviewArrayAdapter adapter;
@@ -53,11 +66,38 @@ public class MeasurementFragment extends Fragment {
     private Button btnSave;
     private EditText timepicker, datepicker, measurementedit;
     private Spinner spMeasureGroup;
+    public static int swtch = 0;
+    private boolean uebertrage = true;
+    Date testdate, testtime;
+    FragmentTransaction ft;
+    FragmentManager fm;
+    ScheduledExecutorService scheduleTaskExecutor;
+    private final View view = getView();
+    private CheckUserID  pushsyncmeasure;
+    public static List<Object> combined = new ArrayList<Object>();
+
+
+
+    public static void setMesswert(String messwert) {
+        MeasurementFragment.messwert = messwert;
+    }
+
+    public static void setDatumPush(Date datumPush) {
+        MeasurementFragment.datumPush = datumPush;
+    }
+
+    public static void setZeit(Date zeit) {
+        MeasurementFragment.zeit = zeit;
+    }
+
+    public static void setUserid(String userid) {
+        MeasurementFragment.userid = userid;
+    }
 
     /**
      * Getter für Messwert, Datum, Zeit und UserID
      * @return messwert
-     * @return  datumPush
+     * @return datumPush
      * @return zeit
      * @return userid
      */
@@ -66,11 +106,11 @@ public class MeasurementFragment extends Fragment {
         return messwert;
     }
 
-    public static String getDatumPush() {
+    public static Date getDatumPush() {
         return datumPush;
     }
 
-    public static String getZeit() {
+    public static Date getZeit() {
         return zeit;
     }
 
@@ -79,35 +119,55 @@ public class MeasurementFragment extends Fragment {
     }
 
 
-    @Override
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.measurement,
                 container, false);
         getActivity().setTitle("Messungen");
 
-        //Verbindung zur Datenbank wird hergestellt
-        dbMeasurements = new databaseMeasurements();
-        dbPushMeasurements = new databasePushMeasurement();
 
-        msf = new MeasurementFragment();
+
+        ft = getFragmentManager().beginTransaction();
+        fm = getActivity().getSupportFragmentManager();
+
+        scheduleTaskExecutor = Executors.newScheduledThreadPool(5);
+
+        // This schedule a runnable task every 10 seconds
+        scheduleTaskExecutor.scheduleAtFixedRate(new Runnable() {
+            public void run() {
+                Log.e("RUUUUUUN", "" + swtch);
+                if(swtch == 1) {
+                    refresh();
+                }
+            }
+        }, 5, 10, TimeUnit.SECONDS);
+
+
+
+
+        //msf = new MeasurementFragment();
 
         //Array zur Anzeige der Daten der Messung
-        String[] art = new String[databaseMeasurements.measurements.size()];
-        String[] value = new String[databaseMeasurements.measurements.size()];
-        String[] datum = new String[databaseMeasurements.measurements.size()];
+        String[] art = new String[RestfulMeasure.measurements.size()];
+        String[] value = new String[RestfulMeasure.measurements.size()];
+        String[] datum = new String[RestfulMeasure.measurements.size()];
+
+
+
+
 
         //Durclaufen aller Messungs-Elemente
-        for (int i = 0; i < databaseMeasurements.measurements.size(); i++) {
+        for (int i = 0; i < RestfulMeasure.measurements.size(); i++) {
             art[i] = "Messung";
-            value[i] = databaseMeasurements.measurements.get(i).getmvalue() + " mmol/l";
-            datum[i] = sdfDate.format(databaseMeasurements.measurements.get(i).getDate()) + "/" + sdfTime.format(databaseMeasurements.measurements.get(i).getTime());
+            value[i] = RestfulMeasure.measurements.get(i).getmvalue() + " mg/dl";
+            datum[i] = sdfDate.format(RestfulMeasure.measurements.get(i).getDate()) + "/" + sdfTime.format(RestfulMeasure.measurements.get(i).getTime());
         }
         overview_listview = (ListView) view.findViewById(R.id.lv_measurement);
 
-        Context context = getActivity();
 
-        adapter = new OverviewArrayAdapter(context, art, value, datum);
+
+        adapter = new OverviewArrayAdapter(getActivity(), art, value, datum);
         overview_listview.setAdapter(adapter);
         overview_listview.setItemsCanFocus(true);
 
@@ -142,6 +202,7 @@ public class MeasurementFragment extends Fragment {
             dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 public void onCancel(DialogInterface dialog) {
                     Log.d("dia = 0", "user cancelling authentication");
+                    uebertrage = false;
                     dia = 0;
 
                 }
@@ -168,8 +229,8 @@ public class MeasurementFragment extends Fragment {
             SimpleDateFormat sdfT1 = new SimpleDateFormat("HH:mm");
             timepicker.setText(sdfT1.format(mcurrentTime.getTime()));
 
-            SimpleDateFormat sdfT2 = new SimpleDateFormat("HHmm");
-            zeit = sdfT2.format(mcurrentTime.getTime()) + "00";
+            final SimpleDateFormat sdfT2 = new SimpleDateFormat("HHmm");
+            testtime = mcurrentTime.getTime();
 
             //Ein Picker für die aktuelle Zeit
             timepicker.setOnClickListener(new View.OnClickListener() {
@@ -193,7 +254,12 @@ public class MeasurementFragment extends Fragment {
 
                             timepicker.setText(strHour + ":" + strMin);
 
-                            zeit = (strHour + strMin + "00");
+                            time = (strHour + strMin + "00");
+                            try{
+                                testtime = sdfT2.parse(time);
+                            }catch(ParseException pe){
+                                pe.printStackTrace();
+                            }
                         }
                     }, hour, minute, true);//Yes 24 hour time
                     mTimePicker.setTitle("Select Time");
@@ -207,8 +273,8 @@ public class MeasurementFragment extends Fragment {
             datepicker.setText(sdfD1.format(mcurrentTime.getTime()));//date + "." + month + "." + year
 
             //Datum zum Pushen in die  Datenbank
-            SimpleDateFormat sdfD2 = new SimpleDateFormat("yyyyMMdd");
-            datumPush = sdfD2.format(mcurrentTime.getTime());
+            final SimpleDateFormat sdfD2 = new SimpleDateFormat("yyyyMMdd");
+            testdate = mcurrentTime.getTime();
 
             datepicker.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -230,9 +296,16 @@ public class MeasurementFragment extends Fragment {
                             }
                             datepicker.setText(strYear + "-" + strMon + "-" + strDate);
 
-                            datumPush = (strYear + strMon + strDate);
+                            datumpushstr = (strYear + strMon + strDate);
+                            try{
+                                testdate = sdfD2.parse(datumpushstr);
+                                Log.e("DATUM", " " + datumpushstr);
+                            }catch(ParseException pe){
+                                pe.printStackTrace();
+                            }
+
                         }
-                    }, date, month, year);
+                    }, 2014, 3, 12);
                     mDatePicker.setTitle("Select Date");
                     mDatePicker.show();
                 }
@@ -260,45 +333,45 @@ public class MeasurementFragment extends Fragment {
 
             btnSave.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
+
                     messwert = measurementedit.getText().toString();
-                    userid = String.valueOf(database.getUsersID());//.toString();
+                    setMesswert(messwert);
+                    userid = RestfulUser.activeUser.getId().toString();
+                    setUserid(userid);
+                    setDatumPush(testdate);
+                    setZeit(testtime);
 
-                    Log.d("MeasurementFragment", "SELECTED ITEM: " + messwert + " " + datumPush + " " + zeit + " " + userid);
 
-
-                    dbPushMeasurements.accessWebService();
-                    dbMeasurements.accessWebService();
-
-                    // halbe Sek delay, da sonst Nullpointerexcpetopn, wahrsch. wegen access WebService aber ka genau
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    dbMeasurements.checkMeasurment(database.getUsersID());  // Daten aus database anzeigen
-
-                    Toast.makeText(getActivity(), "Measurement added", Toast.LENGTH_SHORT).show();
-                    Toast.makeText(getActivity(), "Measurement added", Toast.LENGTH_SHORT).show();
+                    checkUserID();
                     dialog.dismiss();
                     dia = 0;
                 }
             });
-            // Fragment updaten um alle values anzuzeigen
-            DialogInterface.OnDismissListener listener = new DialogInterface.OnDismissListener() {
-                @Override
-                public void onDismiss(DialogInterface dialog) {
-                    FragmentTransaction ft = getFragmentManager().beginTransaction();
-                    ft.replace(R.id.fl_content_frame, msf);
-                    ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                    ft.commit();
-                }
-            };
-            dialog.setOnDismissListener(listener);
 
             dialog.show();
         }
 
         return view;
+    }
+
+
+
+
+    public void refresh() {
+
+        Log.e("REFRESH", "OK");
+
+        Log.e("schedulTASK", "" + scheduleTaskExecutor.isShutdown());
+
+
+        changeFragment = new MeasurementFragment();
+        ft.replace(R.id.fl_content_frame, changeFragment);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.commit();
+
+        scheduleTaskExecutor.shutdownNow();
+        swtch = 0;
+
     }
 
     /**
@@ -316,6 +389,34 @@ public class MeasurementFragment extends Fragment {
     public void setSfItem(int sfItem) {
         this.sfItem = sfItem;
     }
+
+
+
+    @Override
+    public void onStop() {
+        super.onPause();
+        Log.e("STOPPED", "LUCKY?");
+        scheduleTaskExecutor.shutdownNow();
+
+    }
+
+    @Override
+    public void checkUserID(){
+
+        RestfulMeasure.PUSH_MEASURE(this);
+
+    }
+
+    @Override
+    public void setMeasurementReady(){
+        Log.d("SETMEASUREMENT", "READY");
+        refresh();
+
+    }
+
+
+
+
 }
 
 

@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/libraries/AmbilWarna/AmbilWarna.iml" filepath="$PROJECT_DIR$/libraries/AmbilWarna/AmbilWarna.iml" />
       <module fileurl="file://$PROJECT_DIR$/Wamomu/Wamomu.iml" filepath="$PROJECT_DIR$/Wamomu/Wamomu.iml" />
-      <module fileurl="file://$PROJECT_DIR$/WamomuProject.iml" filepath="$PROJECT_DIR$/WamomuProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/maexxx_app.iml" filepath="$PROJECT_DIR$/maexxx_app.iml" />
     </modules>
   </component>
 </project>

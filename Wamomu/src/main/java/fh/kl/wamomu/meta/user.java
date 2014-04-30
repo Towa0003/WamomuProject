@@ -10,6 +10,7 @@ public class user {
 
     String name;
     String password;
+    Long id;
     List<meal> meals;
     List<measurement> measurements;
 
@@ -20,11 +21,12 @@ public class user {
      * @param meals
      * @param measurements
      */
-    public user(String name, String password, List<meal> meals, List<measurement> measurements) {
+    public user(String name, String password, List<meal> meals, List<measurement> measurements, Long id) {
         this.name = name;
         this.password = password;
         this.meals = meals;
         this.measurements = measurements;
+        this.id = id;
     }
 
     public String getName() {
@@ -38,4 +40,8 @@ public class user {
     public String getPassword() {
         return password;
     }
+
+    public Long getId(){return id;}
+
+    public void  setId(Long id){this.id = id;}
 }

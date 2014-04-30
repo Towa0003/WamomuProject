@@ -5,8 +5,8 @@
     android:versionName="1.0">
 
     <uses-sdk
-        android:minSdkVersion="14"
-        android:targetSdkVersion="18" />
+        android:minSdkVersion="8"
+        android:targetSdkVersion="9" />
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
@@ -20,6 +20,7 @@
         <activity
             android:name=".ui.Login"
             android:label="@string/app_name"
+            android:theme="@style/Theme.AppCompat.Light"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,14 +29,23 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".ui.Register"
-            android:label="Register"
-            android:screenOrientation="portrait"></activity>
 
         <activity
             android:name=".ui.NavigationDrawer"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light">
+            <meta-data
+                android:name = "android.support.PARENT_ACTIVITY"
+                android:value=".ui.NavigationDrawer"/>
+            </activity>
+
+        <service android:name=".bluetooth.service"
+            android:screenOrientation ="portrait"
+            android:enabled="true"
+            android:theme="@style/Theme.AppCompat.Light"></service>
+        <activity android:name=".ui.Register"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light"></activity>
     </application>
 
 </manifest>

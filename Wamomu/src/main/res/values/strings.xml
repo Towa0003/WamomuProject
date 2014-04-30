@@ -15,11 +15,11 @@
 
     <!-- Nav Drawer Menu Items -->
     <string-array name="nav_drawer_items">
-        <item>Übersicht</item>
-        <item>Messungen</item>
-        <item>Mahlzeiten</item>
-        <item>Einstellungen</item>
-        <item>Statistik</item>
+        <item>\nÜbersicht</item>
+        <item>\nMessungen</item>
+        <item>\nMahlzeiten</item>
+        <item>\nEinstellungen</item>
+        <item>\nStatistik</item>
     </string-array>
 
     <!-- Nav Drawer List Item Icons -->
@@ -40,7 +40,6 @@
 
     <string name="legend_name">Messpunkte</string>
     <string name="code">Kalibrierungscode ändern</string>
-    <string name="codenumber">Code: 01234</string>
     <string name="newdevice">Neues Gerät hinzufügen</string>
     <string name="info">Informationen</string>
     <string name="paireddevices">Gekoppelte Geräte</string>
@@ -59,7 +58,7 @@
     <string name="usernamelogin">Username :</string>
     <string name="register">Registrieren</string>
     <string name="confirm">Bestätigen</string>
-    <string name="infotext">Diese App wurde als Studienprojekt von Tobias Walter, Maximilian Mock, Christian Murlowski erstellt. </string>
+    <string name="infotext">Diese App wurde als Studienprojekt von Tobias Walter, Maximilian Mock, Christian Murlowski erstellt und von Maximilian Mock in der Praxisphase weiterentwickelt. </string>
     <string name="pin">Kopplungs-PIN: </string>
     <string name="changecode">Code ändern</string>
     <string name="messung">Messung hinzufügen</string>
@@ -68,10 +67,10 @@
     <string name="wert">Wert</string>
     <string name="meseinheit">Maßeinheit</string>
     <string name="add">Hinzufügen</string>
-    <string name="addmeal">Mahlzeit hinzufügen</string>
-    <string name="art">Art des Gerichts</string>
-    <string name="essensart">Essensart</string>
-    <string name="adddevice">Neues Gerät hinzufügen</string>
+    <string name="addmeal">Neue Mahlzeit / Zwischenmahlzeit hinzufügen</string>
+    <string name="art">Mahlzeit</string>
+    <string name="essensart">Art des Gerichts</string>
+    <string name="adddevice">Neues GlucoTel - Messgerät hinzufügen</string>
     <string name="kopplungspin">Kopplungs-PIN: </string>
     <string name="addcode">9676</string>
     <string name="infopin">Info: Dieser Kopplungs-Pin dient dazu, um eine Verbindung zu dem GlucoTel aufzubauen.</string>

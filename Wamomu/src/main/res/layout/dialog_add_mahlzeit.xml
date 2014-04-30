@@ -23,6 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:text="@string/addmeal"
+            android:gravity="center"
             />
 
     </LinearLayout>
@@ -51,7 +52,7 @@
             android:ems="10"
             android:editable="false"
             android:padding="10dp"
-            android:inputType="datetime">
+            android:layout_marginLeft="9dp">
 
             <requestFocus />
         </EditText>
@@ -80,8 +81,9 @@
             android:layout_weight="1"
             android:ems="10"
             android:editable="false"
-            android:padding="10dp"
-            android:inputType="date">
+            android:paddingTop="10dp"
+
+            android:layout_marginLeft="14dp">
 
             <requestFocus />
         </EditText>
@@ -100,7 +102,8 @@
             android:layout_height="wrap_content"
             android:text="@string/art"
             android:padding="10dp"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            />
 
 
         <EditText
@@ -110,7 +113,9 @@
             android:layout_weight="1"
             android:ems="10"
             android:padding="10dp"
-            android:inputType="text">
+            android:inputType="text"
+            android:singleLine="true"
+            android:lines="1">
 
             <requestFocus />
         </EditText>
@@ -135,9 +140,11 @@
 
         <Spinner
             android:id="@+id/sp_MealGroup"
-            android:layout_width="wrap_content"
+            android:layout_width="0dip"
             android:layout_height="wrap_content"
-            android:padding="10dp"/>
+            android:ems="10"
+            android:padding="10dp"
+            android:layout_weight="1" />
 
     </LinearLayout>
 

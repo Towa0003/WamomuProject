@@ -23,6 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:text="@string/adddevice"
+            android:gravity="center"
              />
 
     </LinearLayout>
@@ -43,17 +44,17 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
 
-        <EditText
+        <TextView
             android:id="@+id/et_pinset"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="@string/addcode"
+            android:text="@string/addcode"
             android:padding="10dp" >
 
             <requestFocus />
-        </EditText>
+        </TextView>
 
 
 

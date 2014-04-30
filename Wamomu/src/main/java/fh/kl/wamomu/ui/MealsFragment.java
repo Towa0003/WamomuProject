@@ -3,12 +3,12 @@ package fh.kl.wamomu.ui;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,24 +21,27 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import fh.kl.wamomu.R;
-import fh.kl.wamomu.database.database;
-import fh.kl.wamomu.database.databaseMeals;
-import fh.kl.wamomu.database.databasePushMeal;
 
-public class MealsFragment extends Fragment {
+import fh.kl.wamomu.R;
+import fh.kl.wamomu.database.CheckUserID;
+import fh.kl.wamomu.database.MealReady;
+import fh.kl.wamomu.database.RestfulMeal;
+import fh.kl.wamomu.database.RestfulUser;
+
+public class MealsFragment extends Fragment implements CheckUserID, MealReady {
+
     //Erstellen des Formates des Datums
     SimpleDateFormat sdfDate = new SimpleDateFormat("dd.MM");
     SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
 
 
-    public static databaseMeals dbMeals;
-    public static databasePushMeal dbPushMeals;
+
 
     //Instanzvariablen
     private static String essenszeit;
@@ -46,15 +49,42 @@ public class MealsFragment extends Fragment {
     private static String datumPush;
     private static String zeit;
     private static String userid;
+
     static public int meals = 0;
+    FragmentTransaction ft;
+    FragmentManager fm;
 
     //Layout-Elemente
-    Fragment mf;
-    private ListView overview_listview;
+    Fragment changeFragment;
+    public static ListView overview_listview;
     private Button btnadd;
     private EditText timepicker, datepicker, mealedit;
     private Spinner spMealGroup;
 
+    //public static final View view = getView();
+
+    private CheckUserID bsync, measuresync, mealssync, pushsyncmeal;
+    private boolean isMealReady = false;
+
+    public static void setEssenszeit(String essenszeit) {
+        MealsFragment.essenszeit = essenszeit;
+    }
+
+    public static void setEssen(String essen) {
+        MealsFragment.essen = essen;
+    }
+
+    public static void setDatumPush(String datumPush) {
+        MealsFragment.datumPush = datumPush;
+    }
+
+    public static void setZeit(String zeit) {
+        MealsFragment.zeit = zeit;
+    }
+
+    public static void setUserid(String userid) {
+        MealsFragment.userid = userid;
+    }
 
     //getter für die Daten aus der Datenbank
     public static String getEssen() {
@@ -78,34 +108,40 @@ public class MealsFragment extends Fragment {
     }
 
 
-    @Override
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.meals,
                 container, false);
+
         getActivity().setTitle("Mahlzeiten");
 
-        dbMeals = new databaseMeals();
-        dbPushMeals = new databasePushMeal();
+        ft = getFragmentManager().beginTransaction();
+        fm = getActivity().getSupportFragmentManager();
 
-        mf = new MealsFragment();
+        overview_listview = (ListView) view.findViewById(R.id.lv_meals);
+
+
+
 
         //Arrays für art, gericht und datum
-        String[] art = new String[databaseMeals.meals.size()];
-        String[] gericht = new String[databaseMeals.meals.size()];
-        String[] datum = new String[databaseMeals.meals.size()];
+        String[] art = new String[RestfulMeal.mahlzeit.size()];
+        String[] gericht = new String[RestfulMeal.mahlzeit.size()];
+        String[] datum = new String[RestfulMeal.mahlzeit.size()];
+
+
 
         //Datensätze aus der Datenbank werden in die ArrayListe gepushed
-        for (int i = 0; i < databaseMeals.meals.size(); i++) {
-            art[i] = databaseMeals.meals.get(i).getFoodkind();
-            gericht[i] = databaseMeals.meals.get(i).getFood();
-            datum[i] = sdfDate.format(databaseMeals.meals.get(i).getDate()) + "/" + sdfTime.format(databaseMeals.meals.get(i).getTime());
+        for (int i = 0; i < RestfulMeal.mahlzeit.size(); i++) {
+            art[i] = RestfulMeal.mahlzeit.get(i).getFoodkind();
+            gericht[i] = RestfulMeal.mahlzeit.get(i).getFood();
+            datum[i] = sdfDate.format(RestfulMeal.mahlzeit.get(i).getDate()) + "/" + sdfTime.format(RestfulMeal.mahlzeit.get(i).getTime());
         }
 
         //ListView wird befüllt
-        overview_listview = (ListView) view.findViewById(R.id.lv_meals);
-        Context context = getActivity();
-        OverviewArrayAdapter adapter = new OverviewArrayAdapter(context, art, gericht, datum);
+
+
+        OverviewArrayAdapter adapter = new OverviewArrayAdapter(getActivity(), art, gericht, datum);
         overview_listview.setAdapter(adapter);
 
 
@@ -116,6 +152,7 @@ public class MealsFragment extends Fragment {
             dialog.setContentView(R.layout.dialog_add_mahlzeit);
             dialog.setTitle("Mahlzeit");
             dialog.setCancelable(true);
+
             dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 public void onCancel(DialogInterface dialog) {
                     Log.d("meals = 0", "user cancelling authentication");
@@ -124,8 +161,7 @@ public class MealsFragment extends Fragment {
                 }
             });
 
-            TextView text = (TextView) dialog.findViewById(R.id.tv_mealtext);
-            text.setText("Mahlzeit hinzufügen");
+
             ImageView image = (ImageView) dialog.findViewById(R.id.iv_mealimage);
             image.setImageResource(R.drawable.mahlzeit);
 
@@ -154,6 +190,7 @@ public class MealsFragment extends Fragment {
                 public void onClick(View v) {
                     //Dialog für den TimePicker
                     TimePickerDialog mTimePicker;
+
                     mTimePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
                         @Override
                         public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
@@ -187,6 +224,7 @@ public class MealsFragment extends Fragment {
             SimpleDateFormat sdfD2 = new SimpleDateFormat("yyyyMMdd");
             datumPush = sdfD2.format(mcurrentTime.getTime());
 
+
             datepicker.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -213,8 +251,8 @@ public class MealsFragment extends Fragment {
                             //Datum das in die Datenbank gepushed wird
                             datumPush = (strYear + strMon + strDate);
                         }
-                    }, date, month, year);
-                    mDatePicker.setTitle("Select Date");
+                    }, 2014, 3, 12);
+                    mDatePicker.setTitle("Wähle das Datum aus");
                     mDatePicker.show();
                 }
             });
@@ -241,43 +279,54 @@ public class MealsFragment extends Fragment {
             btnadd.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     essenszeit = String.valueOf(spMealGroup.getSelectedItem());
+                    setEssenszeit(essenszeit);
                     essen = mealedit.getText().toString();
-                    userid = String.valueOf(database.getUsersID());//.toString();
+                    setEssen(essen);
+                    userid = String.valueOf(RestfulUser.activeUser.getId());//.toString();
+                    setUserid(userid);
+                    setDatumPush(datumPush);
+                    setZeit(zeit);
 
                     Log.d("MealsFragment: ", "SELECTED ITEM: " + essenszeit + " " + essen + " " + datumPush + " " + zeit + " " + userid);
 
-                    dbPushMeals.accessWebService();             // Meal Daten Pushen
-                    dbMeals.accessWebService();
+                    checkUserID();            // Meal Daten Pushen
 
-                    // Halbe Sekunde Delay, da sonst NullPointerException beim accessWebService
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    dbMeals.checkMeal(database.getUsersID());   // Daten aus database anzeigen
 
                     Toast.makeText(getActivity(), "Meal added", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                     meals = 0;
                 }
             });
-            // Fragment updaten um alle values anzuzeigen
-            DialogInterface.OnDismissListener listener = new DialogInterface.OnDismissListener() {
-                @Override
-                public void onDismiss(DialogInterface dialog) {
-                    FragmentTransaction ft = getFragmentManager().beginTransaction();
-                    ft.replace(R.id.fl_content_frame, mf);
-                    ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                    ft.commit();
-                }
-            };
-            dialog.setOnDismissListener(listener);
 
             dialog.show();
         }
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+
+
+    @Override
+    public void setMealReady(){
+
+        changeFragment = new MealsFragment();
+        ft.replace(R.id.fl_content_frame, changeFragment);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.commit();
+
+    }
+
+
+    @Override
+    public void checkUserID() {
+
+        RestfulMeal.PUSH_MEAL(this);
+
     }
 }
 
